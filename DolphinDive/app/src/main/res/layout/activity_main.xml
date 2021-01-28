@@ -29,4 +29,14 @@
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        tools:layout_editor_absoluteX="155dp"
+        tools:layout_editor_absoluteY="506dp"
+        android:onClick="logout"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
