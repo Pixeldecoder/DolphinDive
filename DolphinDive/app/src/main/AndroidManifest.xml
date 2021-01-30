@@ -11,17 +11,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DolphinDive">
         <activity android:name=".Login" />
-        <activity android:name=".Register">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".Register"/>
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".PreStart">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-
-
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
