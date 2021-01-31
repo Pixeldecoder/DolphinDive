@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel;
 
 import android.util.Patterns;
 
+import com.capstone.dolphindive.R;
 import com.capstone.dolphindive.utility.data.LoginRepository;
 import com.capstone.dolphindive.utility.data.Result;
 import com.capstone.dolphindive.utility.data.model.LoggedInUser;
-import com.capstone.dolphindive.utility.R;
 
 public class LoginViewModel extends ViewModel {
 

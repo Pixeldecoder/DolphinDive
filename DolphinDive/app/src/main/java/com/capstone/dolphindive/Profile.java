@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +32,7 @@ public class Profile extends Fragment implements View.OnClickListener{
         String name="None";
         if (user != null) {
             // Name, email address etc
-            name = user.getDisplayName();
+            name = user.getEmail();
         }
         Button edit= (Button)view.findViewById(R.id.editProfile);
         Button Divelog = (Button)view.findViewById(R.id.DivelogBtn);
@@ -54,6 +55,8 @@ public class Profile extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.editProfile:
+                Intent i = new Intent(getActivity(), ProfileManagement.class);
+                startActivity(i);
                 break;
             case R.id.DivelogBtn:
                 break;

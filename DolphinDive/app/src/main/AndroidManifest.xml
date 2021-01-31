@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.capstone.dolphindive">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,15 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DolphinDive">
+        <activity
+            android:name=".ProfileManagement"
+            android:label="@string/title_activity_profile_management"
+            android:theme="@style/Theme.DolphinDive.NoActionBar"></activity>
         <activity android:name=".Login" />
-        <activity android:name=".Register"/>
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".Register" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".PreStart">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
