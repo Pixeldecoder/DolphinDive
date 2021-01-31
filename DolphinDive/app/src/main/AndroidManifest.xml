@@ -10,15 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DolphinDive">
         <activity android:name=".Login" />
-        <activity android:name=".Register">
+        <activity android:name=".DiveLog_Scu" android:windowSoftInputMode="stateHidden|adjustResize"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".DiveLog_Free"
+            android:windowSoftInputMode="adjustPan|adjustResize"  />
         <activity android:name=".MainActivity" />
-
+        <activity android:name=".PreStart" />
+<!--        <activity android:name=".DiveLog" />-->
 
 
         <meta-data
