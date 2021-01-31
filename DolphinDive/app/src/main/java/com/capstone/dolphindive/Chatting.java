@@ -71,8 +71,12 @@ public class Chatting extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-
-        fuser = FirebaseAuth.getInstance().getCurrentUser();
+        if (FirebaseAuth.getInstance().getCurrentUser() == null){
+            Toast.makeText(getApplicationContext(), "Chat Function requires an account log-in", Toast.LENGTH_LONG).show();
+            return;
+        }else {
+            fuser = FirebaseAuth.getInstance().getCurrentUser();
+        }
         userid="4GxxMO41dBhT379HeJZhO0Dky7i2";
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
