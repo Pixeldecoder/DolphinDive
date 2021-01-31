@@ -73,8 +73,6 @@ public class Chatting extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         if (FirebaseAuth.getInstance().getCurrentUser() == null){
             Toast.makeText(getApplicationContext(), "Chat Function requires an account log-in", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(Chatting.this, MainActivity.class);
-            startActivity(intent);
             finish();
             return;
         }else {
