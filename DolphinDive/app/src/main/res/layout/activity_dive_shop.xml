@@ -57,6 +57,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <ScrollView
         android:layout_width="385dp"
         android:layout_height="298dp"
@@ -362,6 +363,4 @@
             </LinearLayout>
         </LinearLayout>
     </HorizontalScrollView>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
