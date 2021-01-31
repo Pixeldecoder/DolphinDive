@@ -18,6 +18,11 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         </activity>
+        <activity android:name=".DiveLog_Scu" android:windowSoftInputMode="stateHidden|adjustResize"
+            />
+        <activity android:name=".DiveLog_Free"
+            android:windowSoftInputMode="adjustPan|adjustResize"  />
+
         <activity android:name=".Chatting"/>
         <meta-data
             android:name="preloaded_fonts"
