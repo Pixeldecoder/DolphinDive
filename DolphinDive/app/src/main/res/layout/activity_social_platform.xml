@@ -5,10 +5,70 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SocialPlatform">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Community"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="678dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="false">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+
+        <ImageView
+            android:id="@+id/appImg"
+            android:layout_width="62dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/appName"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/appName"
+            android:layout_width="219dp"
+            android:layout_height="54dp"
+            android:src="@drawable/dolphindive"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.218"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageView
+            android:id="@+id/notification_button"
+            android:layout_width="36dp"
+            android:layout_height="37dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="2dp"
+            android:src="@drawable/bell_icon_png"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.562" />
+
+        <ImageView
+            android:id="@+id/chat_button"
+            android:layout_width="39dp"
+            android:layout_height="33dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:src="@drawable/chat"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/notification_button"
+            app:layout_constraintHorizontal_bias="0.761"
+            app:layout_constraintStart_toEndOf="@+id/appName"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </RelativeLayout>
