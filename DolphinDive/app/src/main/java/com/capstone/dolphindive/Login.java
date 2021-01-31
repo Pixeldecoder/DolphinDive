@@ -65,11 +65,13 @@ public class Login extends AppCompatActivity {
                if (TextUtils.isEmpty(email)){
                    logEmail.setError("Email is required");
                    progressBar.setVisibility(View.INVISIBLE);
+                   return;
                }
 
                if (TextUtils.isEmpty(password)){
                    logPassword.setError("Password is required");
                    progressBar.setVisibility(View.INVISIBLE);
+                   return;
                }
 
 
