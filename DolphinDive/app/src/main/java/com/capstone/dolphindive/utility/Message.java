@@ -2,60 +2,50 @@ package com.capstone.dolphindive.utility;
 
 public class Message {
 
-        private String id;
-        private String text;
-        private String name;
-        private String photoUrl;
-        private String imageUrl;
+    private String sender;
+    private String receiver;
+    private String message;
+    private boolean isseen;
 
-        public Message() {
-        }
+    public Message(String sender, String receiver, String message, boolean isseen) {
+        this.sender = sender;
+        this.receiver = receiver;
+        this.message = message;
+        this.isseen = isseen;
+    }
 
-        public  Message(String text, String name, String photoUrl, String imageUrl) {
-            this.text = text;
-            this.name = name;
-            this.photoUrl = photoUrl;
-            this.imageUrl = imageUrl;
-        }
+    public Message() {
+    }
 
-        public String getId() {
-            return id;
-        }
+    public String getSender() {
+        return sender;
+    }
 
-        public void setId(String id) {
-            this.id = id;
-        }
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
 
-        public void setText(String text) {
-            this.text = text;
-        }
+    public String getReceiver() {
+        return receiver;
+    }
 
-        public String getName() {
-            return name;
-        }
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
 
-        public void setName(String name) {
-            this.name = name;
-        }
+    public String getMessage() {
+        return message;
+    }
 
-        public String getPhotoUrl() {
-            return photoUrl;
-        }
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-        public String getText() {
-            return text;
-        }
+    public boolean isIsseen() {
+        return isseen;
+    }
 
-        public void setPhotoUrl(String photoUrl) {
-            this.photoUrl = photoUrl;
-        }
-
-        public String getImageUrl() {
-            return imageUrl;
-        }
-
-        public void setImageUrl(String imageUrl) {
-            this.imageUrl = imageUrl;
-        }
-
+    public void setIsseen(boolean isseen) {
+        this.isseen = isseen;
+    }
 }
