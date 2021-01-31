@@ -1,6 +1,7 @@
 package com.capstone.dolphindive;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -12,11 +13,15 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.nbsp.materialfilepicker.MaterialFilePicker;
+import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 import com.squareup.picasso.Picasso;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +29,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.File;
+import java.util.regex.Pattern;
 
 public class ProfileManagement extends AppCompatActivity {
     private DatabaseReference mDatabaseReference;
@@ -66,7 +74,10 @@ public class ProfileManagement extends AppCompatActivity {
             email.setText(firebaseUser.getEmail());
             name.setText(firebaseUser.getDisplayName());
             phone.setText(firebaseUser.getPhoneNumber());
-            Picasso.get().load(firebaseUser.getPhotoUrl()).into(userImage);
+            Uri photoUrl= firebaseUser.getPhotoUrl();
+            if(firebaseUser.getPhotoUrl()!=null) {
+                Picasso.get().load(firebaseUser.getPhotoUrl()).into(userImage);
+            }
         }else{
             email.setText("test@gmail.com");
             name.setText("Oliver");
@@ -84,12 +95,12 @@ public class ProfileManagement extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
-                chooseFile.setType("image/jpeg");
+                chooseFile.setType("image/jpg");
                 chooseFile = Intent.createChooser(chooseFile, "Choose a file");
                 startActivityForResult(chooseFile, PICKFILE_RESULT_CODE);
 
                 UserProfileChangeRequest picUpdate = new UserProfileChangeRequest.Builder()
-                        .setPhotoUri(Uri.parse(src)).build();
+                        .setPhotoUri(Uri.parse("")).build();
                 FirebaseAuth.getInstance().getCurrentUser().updateProfile(picUpdate);
             }
         });
@@ -124,11 +135,33 @@ public class ProfileManagement extends AppCompatActivity {
     {
         super.onActivityResult(requestCode, resultCode, data);
         // check if the request code is same as what is passed  here it is 2
-        if(requestCode==2)
+        Log.d("result Code",String.valueOf(resultCode));
+        if( resultCode==2)
         {
-            Uri uri = data.getData();
-            String src = uri.getPath();
+            src= data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
+            Log.d("photo scorce",src);
+        }else{
+            Log.d("photo scorce","Failed");
         }
     }
+
+//    public String getPath(Uri uri) {
+//
+//        String path = null;
+//        String[] projection = { MediaStore.Files.FileColumns.DATA };
+//        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+//
+//        if(cursor == null){
+//            path = uri.getPath();
+//        }
+//        else{
+//            cursor.moveToFirst();
+//            int column_index = cursor.getColumnIndexOrThrow(projection[0]);
+//            path = cursor.getString(column_index);
+//            cursor.close();
+//        }
+//
+//        return ((path == null || path.isEmpty()) ? (uri.getPath()) : path);
+//    }
 
 }

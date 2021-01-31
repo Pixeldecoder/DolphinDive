@@ -27,7 +27,7 @@
             android:layout_height="140dp"
             android:layout_weight="4"
             android:visibility="visible"
-            app:srcCompat="@drawable/profile_portrait"
+            android:src="@drawable/profile_portrait"
             tools:visibility="visible" />
 
         <Button
