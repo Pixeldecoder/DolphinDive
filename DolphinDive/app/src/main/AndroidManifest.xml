@@ -13,6 +13,8 @@
             android:name=".ProfileManagement"
             android:label="@string/title_activity_profile_management"
             android:theme="@style/Theme.DolphinDive.NoActionBar"></activity>
+        <activity android:name=".NotifyActivity"></activity>
+        <activity android:name=".PostActivity" />
         <activity android:name=".Login" />
         <activity android:name=".Register" />
         <activity android:name=".MainActivity" />
