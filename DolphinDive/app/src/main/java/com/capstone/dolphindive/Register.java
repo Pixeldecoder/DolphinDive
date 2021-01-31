@@ -106,9 +106,11 @@ public class Register extends AppCompatActivity {
 
                 if (password.contentEquals(confirmPassword)) {
                 } else {
-                    Toast.makeText(getApplicationContext(), "Password does not match",
-                            Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), "Password does not match",
+//                            Toast.LENGTH_LONG).show();
+                    regConfirm.setError("Confirmed password does not match!");
                     progressBar.setVisibility(View.INVISIBLE);
+                    return;
                 }
 
                 //register process

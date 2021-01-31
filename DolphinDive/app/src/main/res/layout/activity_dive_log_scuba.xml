@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="154dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="616dp"
+        android:text="Save"
+        app:backgroundTint="#9400E676"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.14"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scuba_off" />
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="154dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="616dp"
+        android:text="Cancel"
+        app:backgroundTint="#FF8A80"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.87"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scuba_off" />
+
+    <Button
+        android:id="@+id/free_on"
+        android:layout_width="195dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="217dp"
+        android:layout_marginLeft="217dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginRight="22dp"
+        android:text="Free Diving"
+        android:textColor="#0B0A0A"
+        android:textSize="18sp"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/scuba_off"
+        android:layout_width="195dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="24dp"
+        android:text="Scuba Diving"
+        android:textColor="#0B0A0A"
+        android:textSize="18sp"
+        app:backgroundTint="#80D8FF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="415dp"
+        android:layout_height="600dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:fillViewport="true"
+        android:isScrollContainer="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scuba_off">>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/think_content"
+                android:layout_width="365dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="12dp"
+                android:background="@null"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="What's your memory...Tap here to add your thoughts.."
+                android:inputType="textMultiLine"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/thinks"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <EditText
+                android:id="@+id/water_content"
+                android:layout_width="120dp"
+                android:layout_height="65dp"
+                android:layout_marginTop="12dp"
+                android:background="@null"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="Click to enter the water entry condition.."
+                android:inputType="textMultiLine"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/water_entry" />
+
+            <EditText
+                android:id="@+id/scenery_content"
+                android:layout_width="120dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="136dp"
+                android:layout_marginLeft="136dp"
+                android:layout_marginTop="12dp"
+                android:background="@null"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="Click to enter the scenery condition..."
+                android:inputType="textMultiLine"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/scenery" />
+
+            <EditText
+                android:id="@+id/weather_content"
+                android:layout_width="120dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="276dp"
+                android:layout_marginLeft="276dp"
+                android:layout_marginTop="12dp"
+                android:background="@null"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="Click to enter the weather condition..."
+                android:inputType="textMultiLine"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weather" />
+
+            <EditText
+                android:id="@+id/start_time"
+                android:layout_width="108dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="232dp"
+                android:layout_marginRight="232dp"
+                android:background="#FFFFFF"
+                android:ems="10"
+                android:hint="hh:mm:ss"
+                android:inputType="time"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/start_date"
+                app:layout_constraintTop_toBottomOf="@+id/div_date" />
+
+            <EditText
+                android:id="@+id/end_time"
+                android:layout_width="108dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="12dp"
+                android:background="@null"
+                android:ems="10"
+                android:hint="hh:mm:ss"
+                android:inputType="time"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.12"
+                app:layout_constraintStart_toEndOf="@+id/end_title"
+                app:layout_constraintTop_toBottomOf="@+id/div_date" />
+
+            <EditText
+                android:id="@+id/div_date"
+                android:layout_width="360dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="12dp"
+                android:ems="10"
+                android:hint="dd/mm/yy"
+                android:inputType="date"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/diving_time" />
+
+            <EditText
+                android:id="@+id/dive_location"
+                android:layout_width="360dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="12dp"
+                android:ems="10"
+                android:hint="Enter a location"
+                android:inputType="textCapWords"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/diving_site" />
+
+            <TextView
+                android:id="@+id/diving_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Diving Data"
+                android:textColor="#0B0B0B"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/diving_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Diving Time *"
+                android:textColor="#0B0B0B"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/avg_dep_input" />
+
+            <TextView
+                android:id="@+id/thinks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Thinks"
+                android:textColor="#0B0B0B"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dive_location" />
+
+            <TextView
+                android:id="@+id/diving_site"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Diving Site *"
+                android:textColor="#0B0B0B"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/start_time" />
+
+            <TextView
+                android:id="@+id/weights"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Weights"
+                android:textColor="#0B0B0B"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/think_content" />
+
+            <TextView
+                android:id="@+id/condition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Conditions"
+                android:textColor="#0B0B0B"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weight_input" />
+
+            <TextView
+                android:id="@+id/brand_equip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Brand of Equipment"
+                android:textColor="#0B0B0B"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/water_content" />
+
+            <TextView
+                android:id="@+id/no_dive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Number of Dives *"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/diving_data" />
+
+            <TextView
+                android:id="@+id/max_dep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Max Depth *"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/no_input" />
+
+            <TextView
+                android:id="@+id/avg_dep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Avg Depth *"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/max_dep_input" />
+
+            <TextView
+                android:id="@+id/water_entry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Water Entry"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/condition" />
+
+            <TextView
+                android:id="@+id/scenery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="55dp"
+                android:layout_marginLeft="55dp"
+                android:layout_marginTop="12dp"
+                android:text="Scenery"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/water_entry"
+                app:layout_constraintTop_toBottomOf="@id/condition" />
+
+            <TextView
+                android:id="@+id/weather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="55dp"
+                android:layout_marginLeft="55dp"
+                android:layout_marginTop="12dp"
+                android:text="Weather"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.233"
+                app:layout_constraintStart_toEndOf="@+id/scenery"
+                app:layout_constraintTop_toBottomOf="@id/condition" />
+
+            <TextView
+                android:id="@+id/start_date"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginTop="12dp"
+                android:paddingTop="7dp"
+                android:text="Start with"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/div_date" />
+
+            <TextView
+                android:id="@+id/end_title"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginTop="12dp"
+                android:paddingTop="7dp"
+                android:text="End With"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.625"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/div_date" />
+
+            <TextView
+                android:id="@+id/min_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Min Temp *"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.672"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/no_input" />
+
+            <TextView
+                android:id="@+id/avg_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Avg Temp *"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.676"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/min_temp_input" />
+
+            <EditText
+                android:id="@+id/no_input"
+                android:layout_width="365dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="12dp"
+                android:ems="10"
+                android:hint="No."
+                android:inputType="number"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/no_dive" />
+
+            <EditText
+                android:id="@+id/max_dep_input"
+                android:layout_width="167dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="12dp"
+                android:ems="10"
+                android:inputType="number"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/max_dep" />
+
+            <EditText
+                android:id="@+id/avg_dep_input"
+                android:layout_width="167dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="12dp"
+                android:ems="10"
+                android:inputType="number"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/avg_dep" />
+
+            <EditText
+                android:id="@+id/weight_input"
+                android:layout_width="365dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="12dp"
+                android:ems="10"
+                android:inputType="number"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weights" />
+
+            <EditText
+                android:id="@+id/min_temp_input"
+                android:layout_width="167dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="12dp"
+                android:ems="10"
+                android:inputType="numberSigned"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.875"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/max_dep" />
+
+            <EditText
+                android:id="@+id/avg_temp_input"
+                android:layout_width="167dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="12dp"
+                android:ems="10"
+                android:inputType="numberSigned"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.875"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/avg_temp" />
+
+            <TextView
+                android:id="@+id/unit_dis"
+                android:layout_width="18dp"
+                android:layout_height="21dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:text="m"
+                app:layout_constraintEnd_toEndOf="@+id/max_dep_input"
+                app:layout_constraintTop_toBottomOf="@+id/max_dep" />
+
+            <TextView
+                android:id="@+id/unit_weight"
+                android:layout_width="18dp"
+                android:layout_height="21dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:text="kg"
+                app:layout_constraintEnd_toEndOf="@+id/weight_input"
+                app:layout_constraintTop_toBottomOf="@+id/weights" />
+
+            <TextView
+                android:id="@+id/unit_dis2"
+                android:layout_width="18dp"
+                android:layout_height="21dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:text="m"
+                app:layout_constraintEnd_toEndOf="@+id/avg_dep_input"
+                app:layout_constraintTop_toBottomOf="@+id/avg_dep" />
+
+            <TextView
+                android:id="@+id/unit_temp"
+                android:layout_width="18dp"
+                android:layout_height="21dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:text="°C"
+                app:layout_constraintEnd_toEndOf="@+id/min_temp_input"
+                app:layout_constraintTop_toBottomOf="@+id/min_temp" />
+
+            <TextView
+                android:id="@+id/unit_temp2"
+                android:layout_width="18dp"
+                android:layout_height="21dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:text="°C"
+                app:layout_constraintEnd_toEndOf="@+id/avg_temp_input"
+                app:layout_constraintTop_toBottomOf="@+id/avg_temp" />
+
+            <ImageView
+                android:id="@+id/diver"
+                android:layout_width="356dp"
+                android:layout_height="326dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/brand_equip"
+                app:srcCompat="@drawable/diver" />
+
+            <EditText
+                android:id="@+id/BCD_Brand"
+                android:layout_width="91dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="200dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Brand of BCD"
+                android:background="@null"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/brand_equip"
+                app:layout_constraintTop_toBottomOf="@+id/brand_equip" />
+
+            <EditText
+                android:id="@+id/mask_Brand"
+                android:layout_width="91dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="52dp"
+                android:layout_marginLeft="52dp"
+                android:layout_marginTop="308dp"
+                android:background="@null"
+                android:ems="10"
+                android:hint="Brand of Mask"
+                android:inputType="textPersonName"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/brand_equip"
+                app:layout_constraintTop_toBottomOf="@+id/brand_equip" />
+
+            <EditText
+                android:id="@+id/watch_brand"
+                android:layout_width="91dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="184dp"
+                android:layout_marginLeft="184dp"
+                android:layout_marginTop="292dp"
+                android:background="@null"
+                android:ems="10"
+                android:hint="Brand of Watch"
+                android:inputType="textPersonName"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/brand_equip"
+                app:layout_constraintTop_toBottomOf="@+id/brand_equip" />
+
+            <EditText
+                android:id="@+id/wetsuit_brand"
+                android:layout_width="117dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="64dp"
+                android:layout_marginLeft="64dp"
+                android:layout_marginTop="152dp"
+                android:background="@null"
+                android:ems="10"
+                android:hint="Brand of Wetsuit"
+                android:inputType="textPersonName"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/brand_equip"
+                app:layout_constraintTop_toBottomOf="@+id/brand_equip" />
+
+            <EditText
+                android:id="@+id/fin_brand"
+                android:layout_width="117dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="320dp"
+                android:layout_marginLeft="320dp"
+                android:layout_marginTop="7dp"
+                android:background="@null"
+                android:ems="10"
+                android:hint="Brand of Fin"
+                android:inputType="textPersonName"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/brand_equip"
+                app:layout_constraintTop_toBottomOf="@+id/brand_equip" />
+
+            <EditText
+                android:id="@+id/cam_brand"
+                android:layout_width="117dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="268dp"
+                android:layout_marginLeft="268dp"
+                android:layout_marginTop="212dp"
+                android:background="@null"
+                android:ems="10"
+                android:hint="Brand of Camera"
+                android:inputType="textPersonName"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/brand_equip"
+                app:layout_constraintTop_toBottomOf="@+id/brand_equip" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

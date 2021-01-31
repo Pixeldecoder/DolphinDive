@@ -34,9 +34,11 @@
         android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:onClick="logout"
         android:text="Logout"
-        tools:layout_editor_absoluteX="155dp"
-        tools:layout_editor_absoluteY="506dp"
-        android:onClick="logout"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
