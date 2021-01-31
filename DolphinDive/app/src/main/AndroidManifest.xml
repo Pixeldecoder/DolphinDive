@@ -23,6 +23,7 @@
         <activity android:name=".DiveLog_Free"
             android:windowSoftInputMode="adjustPan|adjustResize"  />
 
+        <activity android:name=".Chatting"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
