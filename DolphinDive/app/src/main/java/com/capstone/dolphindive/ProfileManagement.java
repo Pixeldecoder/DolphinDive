@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,6 +38,7 @@ public class ProfileManagement extends AppCompatActivity {
     private Button btnUpdateEmail;
     private Button btnUpdatePhone;
     private Button btnUpdatePassword;
+    private ImageButton btnBack;
     private static final int PICKFILE_RESULT_CODE = 2;
     private String src;
 
@@ -58,6 +60,7 @@ public class ProfileManagement extends AppCompatActivity {
         btnUpdateEmail = (Button)findViewById(R.id.btnUpdateEmail);
         btnUpdatePhone = (Button)findViewById(R.id.btnUpdatePhone);
         btnUpdatePassword = (Button)findViewById(R.id.btnUpdatePwd);
+        btnBack = (ImageButton)findViewById(R.id.profileMag_backbtn);
 
         if(firebaseUser!=null){
             email.setText(firebaseUser.getEmail());
@@ -69,6 +72,13 @@ public class ProfileManagement extends AppCompatActivity {
             name.setText("Oliver");
             phone.setText("0000111");
         }
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         btnUpdateImage.setOnClickListener(new View.OnClickListener() {
             @Override

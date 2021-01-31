@@ -214,5 +214,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
+    <ImageButton
+        android:id="@+id/logoutBtn"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/common_full_open_on_phone"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

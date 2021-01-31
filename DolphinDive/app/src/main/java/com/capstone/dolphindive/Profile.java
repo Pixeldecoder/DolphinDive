@@ -6,11 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,11 +34,12 @@ public class Profile extends Fragment implements View.OnClickListener{
         String name="None";
         if (user != null) {
             // Name, email address etc
-            name = user.getEmail();
+            name = user.getDisplayName();
         }
         Button edit= (Button)view.findViewById(R.id.editProfile);
         Button Divelog = (Button)view.findViewById(R.id.DivelogBtn);
         Button posts = (Button)view.findViewById(R.id.PostsBtn);
+        ImageButton logout =(ImageButton)view.findViewById(R.id.logoutBtn);
         TextView userName = (TextView) view.findViewById(R.id.profile_username);
         TextView numPosts = (TextView) view.findViewById(R.id.profile_numPosts);
         TextView numFollowing = (TextView) view.findViewById(R.id.profile_numFol);
@@ -45,6 +48,7 @@ public class Profile extends Fragment implements View.OnClickListener{
         edit.setOnClickListener((View.OnClickListener) this);
         Divelog.setOnClickListener((View.OnClickListener) this);
         posts.setOnClickListener((View.OnClickListener) this);
+        logout.setOnClickListener((View.OnClickListener) this);
         userName.setText(name);
         numPosts.setText("0");
         numFollowing.setText("0");
@@ -62,6 +66,15 @@ public class Profile extends Fragment implements View.OnClickListener{
                 break;
             case R.id.PostsBtn:
                 break;
+            case R.id.logoutBtn:
+                logout();
+                break;
         }
     }
+
+    public void logout() {
+        FirebaseAuth.getInstance().signOut();
+        Intent regintent = new Intent(getActivity(), Login.class);
+        startActivity(regintent);
+    };
 }
