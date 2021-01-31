@@ -76,33 +76,41 @@ public class Register extends AppCompatActivity {
                 if (TextUtils.isEmpty(userName)) {
                     regUserName.setError("UserName is required");
                     progressBar.setVisibility(View.INVISIBLE);
+                    return;
                 }
 
                 if (TextUtils.isEmpty(email)) {
                     regEmail.setError("Email is required");
                     progressBar.setVisibility(View.INVISIBLE);
+                    return;
                 }
 
                 if (TextUtils.isEmpty(password)) {
                     regPassword.setError("Password is required");
                     progressBar.setVisibility(View.INVISIBLE);
+                    return;
                 }
 
                 if (password.length() < 6) {
                     regPassword.setError("Password need to be at least six characters");
                     progressBar.setVisibility(View.INVISIBLE);
+                    return;
                 }
 
                 if (TextUtils.isEmpty(confirmPassword)) {
                     regConfirm.setError("Confirmed password is required");
                     progressBar.setVisibility(View.INVISIBLE);
+                    return;
                 }
+
 
                 if (password.contentEquals(confirmPassword)) {
                 } else {
-                    Toast.makeText(getApplicationContext(), "Password does not match!",
-                            Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), "Password does not match",
+//                            Toast.LENGTH_LONG).show();
+                    regConfirm.setError("Confirmed password does not match!");
                     progressBar.setVisibility(View.INVISIBLE);
+                    return;
                 }
 
                 //register process
