@@ -39,7 +39,11 @@ public class MainActivity extends AppCompatActivity {
                     selectedFragment = new DiveShop();
                     break;
                 case R.id.nav_profile:
-                    selectedFragment = new Profile();
+                    if(FirebaseAuth.getInstance().getCurrentUser()==null){
+                        selectedFragment = new PreLogin();
+                    }else{
+                        selectedFragment = new Profile();
+                    }
                     break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
