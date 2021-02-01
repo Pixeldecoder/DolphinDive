@@ -63,6 +63,8 @@ public class Profile extends Fragment implements View.OnClickListener{
                 startActivity(i);
                 break;
             case R.id.DivelogBtn:
+                Intent myIntent = new Intent(getActivity(), DiveLog_Scu.class);
+                startActivity(myIntent);
                 break;
             case R.id.PostsBtn:
                 break;

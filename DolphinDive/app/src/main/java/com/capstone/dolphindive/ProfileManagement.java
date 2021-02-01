@@ -2,6 +2,7 @@ package com.capstone.dolphindive;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -47,8 +48,9 @@ public class ProfileManagement extends AppCompatActivity {
     private Button btnUpdatePhone;
     private Button btnUpdatePassword;
     private ImageButton btnBack;
-    private static final int PICKFILE_RESULT_CODE = 2;
-    private String src;
+    private static final int PICKFILE_REQUEST_CODE = 2;
+    private Uri ImageUri;
+    private String ImageSrc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +77,10 @@ public class ProfileManagement extends AppCompatActivity {
             name.setText(firebaseUser.getDisplayName());
             phone.setText(firebaseUser.getPhoneNumber());
             Uri photoUrl= firebaseUser.getPhotoUrl();
-            if(firebaseUser.getPhotoUrl()!=null) {
-                Picasso.get().load(firebaseUser.getPhotoUrl()).into(userImage);
+            if(photoUrl!=null) {
+                Log.d("Url loaded",photoUrl.toString());
+                //userImage.setImageURI(photoUrl);
+                Picasso.get().load(new File(photoUrl.getPath())).into(userImage);
             }
         }else{
             email.setText("test@gmail.com");
@@ -95,13 +99,8 @@ public class ProfileManagement extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
-                chooseFile.setType("image/jpg");
-                chooseFile = Intent.createChooser(chooseFile, "Choose a file");
-                startActivityForResult(chooseFile, PICKFILE_RESULT_CODE);
-
-                UserProfileChangeRequest picUpdate = new UserProfileChangeRequest.Builder()
-                        .setPhotoUri(Uri.parse("")).build();
-                FirebaseAuth.getInstance().getCurrentUser().updateProfile(picUpdate);
+                chooseFile.setType("image/*");;
+                startActivityForResult(chooseFile, PICKFILE_REQUEST_CODE);
             }
         });
 
@@ -136,10 +135,16 @@ public class ProfileManagement extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         // check if the request code is same as what is passed  here it is 2
         Log.d("result Code",String.valueOf(resultCode));
-        if( resultCode==2)
+        if( requestCode==PICKFILE_REQUEST_CODE && resultCode==RESULT_OK)
         {
-            src= data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
-            Log.d("photo scorce",src);
+            ImageUri = data.getData();
+            userImage.setImageURI(ImageUri);
+            ImageSrc= ImageUri.toString();
+            Log.d("Pre-photo scorce",ImageSrc);
+            UserProfileChangeRequest picUpdate = new UserProfileChangeRequest.Builder()
+                    .setPhotoUri(ImageUri).build();
+            FirebaseAuth.getInstance().getCurrentUser().updateProfile(picUpdate);
+            Log.d("photo scorce",ImageSrc);
         }else{
             Log.d("photo scorce","Failed");
         }

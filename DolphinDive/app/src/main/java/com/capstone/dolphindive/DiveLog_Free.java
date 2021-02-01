@@ -10,6 +10,7 @@ import android.widget.Button;
 public class DiveLog_Free extends AppCompatActivity {
 
     Button nav_scu;
+    Button cancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +18,7 @@ public class DiveLog_Free extends AppCompatActivity {
         setContentView(R.layout.activity_dive_log_free);
 
         nav_scu = findViewById(R.id.scuba_off);
+        cancel = findViewById(R.id.cancel_free);
 
         nav_scu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,6 +28,13 @@ public class DiveLog_Free extends AppCompatActivity {
                 startActivity(freeintent);
             }
 
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
         });
 
     }
