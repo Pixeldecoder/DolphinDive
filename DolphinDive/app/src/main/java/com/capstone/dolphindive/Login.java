@@ -59,7 +59,8 @@ public class Login extends AppCompatActivity {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent logintent = new Intent(Login.this, MainActivity.class);
+                startActivity(logintent);
             }
         });
 
