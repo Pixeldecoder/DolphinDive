@@ -51,6 +51,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:17.3.1'
     // Firebase UI
     implementation 'com.firebaseui:firebase-ui-database:7.1.1'
+    implementation 'com.google.firebase:firebase-firestore:22.0.2'
 
     // Testing dependencies
     testImplementation 'junit:junit:4.13.1'
@@ -72,6 +73,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:20.0.2'
     implementation 'com.google.firebase:firebase-storage:19.2.1'
     implementation 'com.google.firebase:firebase-database:19.6.0'
+    implementation 'com.firebaseui:firebase-ui-database:7.1.1'
     implementation 'androidx.navigation:navigation-fragment:2.3.3'
     implementation 'androidx.navigation:navigation-ui:2.3.3'
     implementation 'androidx.annotation:annotation:1.1.0'
