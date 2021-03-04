@@ -9,17 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DolphinDive">
+        <activity android:name=".diveshoplist"></activity>
         <activity
             android:name=".ProfileManagement"
             android:label="@string/title_activity_profile_management"
-            android:theme="@style/Theme.DolphinDive.NoActionBar"></activity>
+            android:theme="@style/Theme.DolphinDive.NoActionBar" />
         <activity android:name=".PostActivity" />
         <activity android:name=".Login" />
         <activity android:name=".Register" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".Chatting"/>
-        <activity android:name=".DiveLog_Free"/>
-        <activity android:name=".DiveLog_Scu"/>
+        <activity android:name=".Chatting" />
+        <activity android:name=".DiveLog_Free" />
+        <activity android:name=".DiveLog_Scu" />
         <activity android:name=".PreStart">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

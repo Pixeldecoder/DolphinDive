@@ -61,7 +61,7 @@
                     android:orientation="vertical">
 
                     <ImageButton
-                        android:id="@+id/imageButton2"
+                        android:id="@+id/Cancun_button"
                         android:layout_width="176dp"
                         android:layout_height="130dp"
                         android:layout_margin="10dp"
@@ -344,8 +344,10 @@
         android:background="@drawable/background"
         app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.461">
 
         <TextView
             android:id="@+id/textView13"
