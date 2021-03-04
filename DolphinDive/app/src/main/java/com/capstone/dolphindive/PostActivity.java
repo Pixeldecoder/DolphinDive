@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -51,6 +52,7 @@ public class PostActivity extends AppCompatActivity {
     private StorageReference PostImageReference;
     private DatabaseReference UsersRef, PostsRef;
     private FirebaseAuth mAuth;
+    private UploadTask uploadTask;
 
     private String saveCurrentDate, saveCurrentTime, postRandomName, downloadUrl, current_user_id;
 
@@ -61,8 +63,7 @@ public class PostActivity extends AppCompatActivity {
         setContentView(R.layout.activity_post);
 
         mAuth = FirebaseAuth.getInstance();
-//        current_user_id = mAuth.getCurrentUser().getUid();
-        current_user_id = "4GxxMO41dBhT379HeJZhO0Dky7i2";
+       current_user_id = mAuth.getCurrentUser().getUid();
 
         PostImageReference = FirebaseStorage.getInstance().getReference();
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -129,33 +130,36 @@ public class PostActivity extends AppCompatActivity {
         imgName = imgName.substring(0,imgName.lastIndexOf('.'));
 
         StorageReference filePath = PostImageReference.child("Post Images").child(imgName + postRandomName + ".jpg");
+        uploadTask = filePath.putFile(ImageUri);
 
-
-        filePath.putFile(ImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
             @Override
-            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                if(task.isSuccessful()){
-                    Task<Uri> downloadUrl = task.getResult().getMetadata().getReference().getDownloadUrl();
-                    Toast.makeText(PostActivity.this, "Post successfully!",  Toast.LENGTH_SHORT).show();
-
-//                    SavingPostInformationToDatabase();
-                    loadingBar.dismiss();
-                    SendUserToMainActivity();
-
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
                 }
-                else{
+                return filePath.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    downloadUrl = task.getResult().toString();
+                    Toast.makeText(PostActivity.this, "Post successfully!",  Toast.LENGTH_SHORT).show();
+                    SavingPostInformationToDatabase();
+                } else {
                     String message = task.getException().getMessage();
                     Toast.makeText(PostActivity.this, "Error occured: " + message,  Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
     }
 
     private void SavingPostInformationToDatabase() {
         UsersRef.child(current_user_id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Toast.makeText(PostActivity.this,"Error Occured"+UsersRef.child(current_user_id),Toast.LENGTH_SHORT).show();
                 if(dataSnapshot.exists()){
                     String userFullName = dataSnapshot.child("username").getValue().toString();
                     String userProfileImg = dataSnapshot.child("imageURL").getValue().toString();
@@ -222,7 +226,8 @@ public class PostActivity extends AppCompatActivity {
     }
 
     private void SendUserToMainActivity() {
-        Intent mainIntent = new Intent(PostActivity.this, SocialPlatform.class);
-        startActivity(mainIntent);
+        finish();
+//        Intent mainIntent = new Intent(PostActivity.this, SocialPlatform.class);
+//        startActivity(mainIntent);
     }
 }
