@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+
+import com.capstone.dolphindive.diveshoplistdetail;
 import com.capstone.dolphindive.model.diveshopdata;
 import com.capstone.dolphindive.R;
 import java.util.List;
@@ -43,6 +45,12 @@ public class placesAdapter extends RecyclerView.Adapter<placesAdapter.RecentsVie
         holder.placeName.setText(recentsDataList.get(position).getPlaceName());
         holder.price.setText(recentsDataList.get(position).getPrice());
         holder.placeImage.setImageResource(recentsDataList.get(position).getImageUrl());
+
+        holder.itemView.setOnClickListener((view)-> {
+                Intent i=new Intent(context, diveshoplistdetail.class);
+                context.startActivity(i);
+        });
+
     }
 
     @Override
