@@ -78,7 +78,7 @@ public class Chatting extends AppCompatActivity {
         }else {
             fuser = FirebaseAuth.getInstance().getCurrentUser();
         }
-        userid="4GxxMO41dBhT379HeJZhO0Dky7i2";
+        userid="wzxL5sBypWaPHf5v6mHAtvRARTm1";
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
