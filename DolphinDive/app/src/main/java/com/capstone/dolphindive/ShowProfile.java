@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +21,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -38,7 +41,10 @@ public class ShowProfile extends AppCompatActivity {
     FirebaseStorage firebaseStorage;
     StorageReference storageReference;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseUser user;
     DocumentReference documentReference;
+
+    String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +60,9 @@ public class ShowProfile extends AppCompatActivity {
         back_btn = findViewById(R.id.back_btn_profileShow);
         imageView = findViewById(R.id.image_view_profileShow);
 
-        documentReference = db.collection("user").document("profile");
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        uid = user.getUid();
+        documentReference = db.collection(uid).document("profile");
         storageReference = firebaseStorage.getInstance().getReference("Profile Images");
 
         btn.setOnClickListener(new View.OnClickListener() {
@@ -90,14 +98,20 @@ public class ShowProfile extends AppCompatActivity {
                     String address = task.getResult().getString("address");
                     String diverId = task.getResult().getString("diverId");
                     String url = task.getResult().getString("url");
-
-                    Picasso.get().load(url).centerCrop().fit().into(imageView);
-                    sh_name.setText(name);
-                    sh_email.setText(email);
-                    sh_phone.setText(phone);
-                    sh_address.setText(address);
-                    sh_DiverId.setText(diverId);
-
+                    if(!TextUtils.isEmpty(url)){
+                        Picasso.get().load(url).centerCrop().fit().into(imageView);
+                        sh_name.setText(name);
+                        sh_email.setText(email);
+                        sh_phone.setText(phone);
+                        sh_address.setText(address);
+                        sh_DiverId.setText(diverId);
+                    }else{
+                        sh_name.setText(name);
+                        sh_email.setText(email);
+                        sh_phone.setText(phone);
+                        sh_address.setText(address);
+                        sh_DiverId.setText(diverId);
+                    }
                 }else{
                     Toast.makeText(ShowProfile.this, "No Profile Exist",Toast.LENGTH_SHORT).show();
                 }

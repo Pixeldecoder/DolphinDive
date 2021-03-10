@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,7 @@ public class Profile extends Fragment implements View.OnClickListener{
     TextView numFollowing ;
     TextView numFollower;
     ImageView portrait;
+    String uid;
 
     @Nullable
     @Override
@@ -54,13 +56,9 @@ public class Profile extends Fragment implements View.OnClickListener{
 
         db=  FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
-        documentReference = db.collection("user").document("profile");
+        uid = user.getUid();
+        documentReference = db.collection(uid).document("profile");
 
-        String name="None";
-        if (user != null) {
-            // Name, email address etc
-            name = user.getDisplayName();
-        }
         edit= (Button)view.findViewById(R.id.editProfile);
         Divelog = (Button)view.findViewById(R.id.DivelogBtn);
         posts = (Button)view.findViewById(R.id.PostsBtn);
@@ -127,11 +125,12 @@ public class Profile extends Fragment implements View.OnClickListener{
                     }else{
                         userName.setText(user.getEmail());
                     }
-                    if(url!=null){
+                    if(!TextUtils.isEmpty(url)){
                         Picasso.get().load(url).centerCrop().fit().into(portrait);
                     }
 
                 }else{
+                    userName.setText(user.getEmail());
                     Toast.makeText(getActivity(), "No Profile Exist",Toast.LENGTH_SHORT).show();
                 }
 

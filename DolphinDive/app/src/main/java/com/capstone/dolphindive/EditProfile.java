@@ -55,10 +55,12 @@ public class EditProfile extends AppCompatActivity {
     private static final int PICK_IMAGE=1;
     UploadTask uploadTask;
     FirebaseStorage firebaseStorage;
+    FirebaseUser user;
     StorageReference storageReference;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference documentReference;
     String mode;
+    String uid;
 
 
     @Override
@@ -76,8 +78,12 @@ public class EditProfile extends AppCompatActivity {
         imageView = findViewById(R.id.image_view_profileEdit);
         comment = findViewById(R.id.comment_profileEdit);
 
-        documentReference = db.collection("user").document("profile");
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        uid = user.getUid();
+        documentReference = db.collection(uid).document("profile");
         storageReference = firebaseStorage.getInstance().getReference("Profile Images");
+
+        et_email.setText(user.getEmail());
 
         Bundle bundle = getIntent().getExtras();
         mode = bundle.getString("mode");
@@ -109,109 +115,114 @@ public class EditProfile extends AppCompatActivity {
         String address = et_address.getText().toString();
         String diverId = et_DiverId.getText().toString();
 
-        if(imageUri!=null){
+        if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(email)){
+            if(imageUri!=null ){
 
-            progressBar.setVisibility(View.VISIBLE);
-            final StorageReference reference = storageReference.child(System.currentTimeMillis()+"."+
-                    getFileExt(imageUri));
-            uploadTask = reference.putFile(imageUri);
+                progressBar.setVisibility(View.VISIBLE);
+                final StorageReference reference = storageReference.child(System.currentTimeMillis()+"."+
+                        getFileExt(imageUri));
+                uploadTask = reference.putFile(imageUri);
 
-            Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    if(!task.isSuccessful()){
-                        throw task.getException();
-                    }
-                    return reference.getDownloadUrl();
-                }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    if(task.isSuccessful()){
-                        Uri downloadUri = task.getResult();
-
-                        final DocumentReference sfDocRef = db.collection("user").document("profile");
-
-                        db.runTransaction(new Transaction.Function<Void>() {
-                            @Override
-                            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
-                                DocumentSnapshot snapshot = transaction.get(sfDocRef);
-
-                                //transaction.update(sfDocRef, "population", newPopulation);
-                                transaction.update(sfDocRef, "name", name);
-                                transaction.update(sfDocRef, "email", email);
-                                transaction.update(sfDocRef, "phone", phone);
-                                transaction.update(sfDocRef, "address", address);
-                                transaction.update(sfDocRef, "diverId", diverId);
-                                transaction.update(sfDocRef, "url", downloadUri.toString());
-
-                                // Success
-                                return null;
-                            }
-                        }).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                progressBar.setVisibility(View.INVISIBLE);
-                                Toast.makeText(EditProfile.this, "Profile Updated",Toast.LENGTH_SHORT).show();
-
-                                Intent intent = new Intent(EditProfile.this, ShowProfile.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                        })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(EditProfile.this, "failed",Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                    }
-                }
-            })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
+                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if(!task.isSuccessful()){
+                            throw task.getException();
                         }
-                    });
+                        return reference.getDownloadUrl();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if(task.isSuccessful()){
+                            Uri downloadUri = task.getResult();
+
+                            final DocumentReference sfDocRef = db.collection(uid).document("profile");
+
+                            db.runTransaction(new Transaction.Function<Void>() {
+                                @Override
+                                public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                                    DocumentSnapshot snapshot = transaction.get(sfDocRef);
+
+                                    //transaction.update(sfDocRef, "population", newPopulation);
+                                    transaction.update(sfDocRef, "name", name);
+                                    transaction.update(sfDocRef, "email", email);
+                                    transaction.update(sfDocRef, "phone", phone);
+                                    transaction.update(sfDocRef, "address", address);
+                                    transaction.update(sfDocRef, "diverId", diverId);
+                                    transaction.update(sfDocRef, "url", downloadUri.toString());
+
+                                    // Success
+                                    return null;
+                                }
+                            }).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    progressBar.setVisibility(View.INVISIBLE);
+                                    Toast.makeText(EditProfile.this, "Profile Updated",Toast.LENGTH_SHORT).show();
+
+                                    Intent intent = new Intent(EditProfile.this, ShowProfile.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(EditProfile.this, "failed",Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                        }
+                    }
+                })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                            }
+                        });
+            }else{
+
+                final DocumentReference sfDocRef = db.collection(uid).document("profile");
+
+                db.runTransaction(new Transaction.Function<Void>() {
+                    @Override
+                    public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                        DocumentSnapshot snapshot = transaction.get(sfDocRef);
+
+                        //transaction.update(sfDocRef, "population", newPopulation);
+                        transaction.update(sfDocRef, "name", name);
+                        transaction.update(sfDocRef, "email", email);
+                        transaction.update(sfDocRef, "phone", phone);
+                        transaction.update(sfDocRef, "address", address);
+                        transaction.update(sfDocRef, "diverId", diverId);
+                        //transaction.update(sfDocRef, "url", downloadUri.toString());
+
+                        // Success
+                        return null;
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        progressBar.setVisibility(View.INVISIBLE);
+                        Toast.makeText(EditProfile.this, "Profile Updated",Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(EditProfile.this, ShowProfile.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(EditProfile.this, "failed",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
         }else{
-
-            final DocumentReference sfDocRef = db.collection("user").document("profile");
-
-            db.runTransaction(new Transaction.Function<Void>() {
-                @Override
-                public Void apply(Transaction transaction) throws FirebaseFirestoreException {
-                    DocumentSnapshot snapshot = transaction.get(sfDocRef);
-
-                    //transaction.update(sfDocRef, "population", newPopulation);
-                    transaction.update(sfDocRef, "name", name);
-                    transaction.update(sfDocRef, "email", email);
-                    transaction.update(sfDocRef, "phone", phone);
-                    transaction.update(sfDocRef, "address", address);
-                    transaction.update(sfDocRef, "diverId", diverId);
-                    //transaction.update(sfDocRef, "url", downloadUri.toString());
-
-                    // Success
-                    return null;
-                }
-            }).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    progressBar.setVisibility(View.INVISIBLE);
-                    Toast.makeText(EditProfile.this, "Profile Updated",Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(EditProfile.this, ShowProfile.class);
-                    startActivity(intent);
-                    finish();
-                }
-            })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(EditProfile.this, "failed",Toast.LENGTH_SHORT).show();
-                        }
-                    });
+            Toast.makeText(EditProfile.this, "Name and email are Required",Toast.LENGTH_SHORT).show();
         }
     }
+
 
 
     private void UploadData() {
@@ -221,64 +232,92 @@ public class EditProfile extends AppCompatActivity {
         String address = et_address.getText().toString();
         String diverId = et_DiverId.getText().toString();
 
-        if(!TextUtils.isEmpty(name) || !TextUtils.isEmpty(email) || !TextUtils.isEmpty(phone) ||
-                !TextUtils.isEmpty(address) || !TextUtils.isEmpty(diverId) || imageUri!=null){
+        if(  !TextUtils.isEmpty(name) && !TextUtils.isEmpty(email) ) {
+            if(imageUri!=null){
+                progressBar.setVisibility(View.VISIBLE);
+                final StorageReference reference = storageReference.child(System.currentTimeMillis()+"."+
+                        getFileExt(imageUri));
+                uploadTask = reference.putFile(imageUri);
 
-            progressBar.setVisibility(View.VISIBLE);
-            final StorageReference reference = storageReference.child(System.currentTimeMillis()+"."+
-                    getFileExt(imageUri));
-            uploadTask = reference.putFile(imageUri);
-
-            Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    if(!task.isSuccessful()){
-                        throw task.getException();
-                    }
-                    return reference.getDownloadUrl();
-                }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    if(task.isSuccessful()){
-                        Uri downloadUri = task.getResult();
-
-                        Map<String, String> profile = new HashMap<>();
-                        profile.put("name", name);
-                        profile.put("email", email);
-                        profile.put("phone", phone);
-                        profile.put("address", address);
-                        profile.put("diverId", diverId);
-                        profile.put("url", downloadUri.toString());
-
-                        documentReference.set(profile).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                progressBar.setVisibility(View.INVISIBLE);
-                                Toast.makeText(EditProfile.this, "Profile Created",Toast.LENGTH_SHORT).show();
-
-                                Intent intent = new Intent(EditProfile.this, ShowProfile.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                        })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(EditProfile.this, "failed",Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                    }
-                }
-
-            })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
+                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if(!task.isSuccessful()){
+                            throw task.getException();
                         }
-                    });
+                        return reference.getDownloadUrl();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if(task.isSuccessful()){
+                            Uri downloadUri = task.getResult();
+
+                            Map<String, String> profile = new HashMap<>();
+                            profile.put("name", name);
+                            profile.put("email", email);
+                            profile.put("phone", phone);
+                            profile.put("address", address);
+                            profile.put("diverId", diverId);
+                            profile.put("url", downloadUri.toString());
+
+
+                            documentReference.set(profile).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    progressBar.setVisibility(View.INVISIBLE);
+                                    Toast.makeText(EditProfile.this, "Profile Created",Toast.LENGTH_SHORT).show();
+
+                                    Intent intent = new Intent(EditProfile.this, ShowProfile.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(EditProfile.this, "failed",Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                        }
+                    }
+
+                })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                            }
+                        });
+            }else{
+                Map<String, String> profile = new HashMap<>();
+                profile.put("name", name);
+                profile.put("email", email);
+                profile.put("phone", phone);
+                profile.put("address", address);
+                profile.put("diverId", diverId);
+                profile.put("url", "");
+
+
+                documentReference.set(profile).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        progressBar.setVisibility(View.INVISIBLE);
+                        Toast.makeText(EditProfile.this, "Profile Created",Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(EditProfile.this, ShowProfile.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(EditProfile.this, "failed",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
         }else{
-            Toast.makeText(EditProfile.this, "All Fields are Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(EditProfile.this, "Name and email are Required",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -331,7 +370,7 @@ public class EditProfile extends AppCompatActivity {
                     et_DiverId.setText(diverId);
 
                 }else{
-                    Toast.makeText(EditProfile.this, "No Profile Exist",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(EditProfile.this, "No Profile Exist",Toast.LENGTH_SHORT).show();
                 }
 
             }
