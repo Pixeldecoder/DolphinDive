@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.capstone.dolphindive.utility.CircleTransform;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -335,7 +336,7 @@ public class EditProfile extends AppCompatActivity {
         if(requestCode==PICK_IMAGE || resultCode == RESULT_OK ||
                 data!=null || data.getData()!=null){
             imageUri = data.getData();
-            Picasso.get().load(imageUri).centerCrop().fit().into(imageView);
+            Picasso.get().load(imageUri).transform(new CircleTransform()).centerCrop().fit().into(imageView);
         }
     }
 
@@ -361,7 +362,7 @@ public class EditProfile extends AppCompatActivity {
                     String url = task.getResult().getString("url");
 
                     if(mode.equals("create")){
-                        Picasso.get().load(url).centerCrop().fit().into(imageView);
+                        Picasso.get().load(url).transform(new CircleTransform()).centerCrop().fit().into(imageView);
                     }
                     et_name.setText(name);
                     et_email.setText(email);

@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.capstone.dolphindive.utility.CircleTransform;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -99,7 +100,7 @@ public class ShowProfile extends AppCompatActivity {
                     String diverId = task.getResult().getString("diverId");
                     String url = task.getResult().getString("url");
                     if(!TextUtils.isEmpty(url)){
-                        Picasso.get().load(url).centerCrop().fit().into(imageView);
+                        Picasso.get().load(url).transform(new CircleTransform()).centerCrop().fit().into(imageView);
                         sh_name.setText(name);
                         sh_email.setText(email);
                         sh_phone.setText(phone);

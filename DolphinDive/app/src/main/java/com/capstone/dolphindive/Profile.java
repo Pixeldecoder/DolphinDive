@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.capstone.dolphindive.utility.CircleTransform;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -126,7 +127,7 @@ public class Profile extends Fragment implements View.OnClickListener{
                         userName.setText(user.getEmail());
                     }
                     if(!TextUtils.isEmpty(url)){
-                        Picasso.get().load(url).centerCrop().fit().into(portrait);
+                        Picasso.get().load(url).transform(new CircleTransform()).centerCrop().fit().into(portrait);
                     }
 
                 }else{
