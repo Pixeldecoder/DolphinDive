@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="13dp"
-        android:layout_marginTop="37dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="133dp"
         android:layout_marginBottom="116dp"
         android:text="Caribbean Dive Shop"
@@ -45,7 +45,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="13dp"
-        android:layout_marginTop="11dp"
         android:layout_marginEnd="133dp"
         android:layout_marginBottom="86dp"
         android:text="Cuba, Hawanna"
@@ -54,20 +53,19 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/place_image"
         app:layout_constraintTop_toBottomOf="@+id/diveshop_name"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.322" />
 
     <TextView
         android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="17dp"
+        android:layout_marginStart="12dp"
         android:layout_marginBottom="50dp"
         android:text="From $300/ night"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/place_image"
         app:layout_constraintTop_toBottomOf="@+id/country_name"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.263" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -77,4 +75,46 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/arrow_icon" />
+
+    <TextView
+        android:id="@+id/rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="4.5"
+        app:layout_constraintStart_toStartOf="@+id/price"
+        app:layout_constraintTop_toBottomOf="@+id/price" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="19dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/rate"
+        app:layout_constraintStart_toEndOf="@+id/rate"
+        app:layout_constraintTop_toTopOf="@+id/rate"
+        app:srcCompat="@drawable/star_rate" />
+
+    <TextView
+        android:id="@+id/popular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="superhot"
+        android:textColor="#F44336"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/rate"
+        app:layout_constraintTop_toBottomOf="@+id/rate" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="21dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="5dp"
+        android:background="#00009688"
+        app:layout_constraintBottom_toBottomOf="@+id/popular"
+        app:layout_constraintStart_toEndOf="@+id/popular"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="0.833"
+        app:srcCompat="@drawable/fire" />
 </androidx.constraintlayout.widget.ConstraintLayout>
