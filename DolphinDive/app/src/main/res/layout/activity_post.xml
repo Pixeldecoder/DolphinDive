@@ -25,6 +25,7 @@
 
     <EditText
         android:id="@+id/editText"
+        android:background="@drawable/comment_style_rounded"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="false"
@@ -36,15 +37,21 @@
         android:inputType="textMultiLine"
         android:textColor="#000000" />
 
-    <Button
-        android:id="@+id/submit"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="false"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="178dp"
-        android:duplicateParentState="false"
-        android:text="POST" />
+        android:layout_below="@+id/editText"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        >
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/comment_style_rounded"
+            android:duplicateParentState="false"
+            android:text="POST" />
+    </LinearLayout>
+
 
 </RelativeLayout>

@@ -250,10 +250,7 @@ public class CommentActivity extends AppCompatActivity {
 //                            holder.uid.setText(model.getUid());
                         Picasso.get().load(model.getProfileimage()).into(holder.profileImage);
 
-                        final DatabaseReference postRef = getRef(position);
-                        DatabaseReference userPostRef = PostsRef.child(postRef.getKey());
                     }
-
                     @NonNull
                     @Override
                     public CommentActivity.CommentsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

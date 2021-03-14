@@ -14,7 +14,8 @@
         <activity android:name=".ShowProfile" />
         <activity android:name=".EditProfile" />
         <activity android:name=".PostActivity" />
-        <activity android:name=".CommentActivity"/>
+        <activity android:name=".CommentActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".Login" />
         <activity android:name=".Register" />
         <activity android:name=".MainActivity" />
