@@ -1,13 +1,16 @@
 package com.capstone.dolphindive.utility;
 
+import java.util.HashMap;
+
 public class Posts {
-    public String uid, time, date, postimage, profileimage, description, fullname;
+    public String uid, time, date, postimage, profileimage, description, fullname, likes, newLikes, liker, newLiker, commentCounter;
 
     public Posts(){
 
     }
 
-    public Posts(String uid, String time, String date, String postimage, String profileimage, String description, String fullname) {
+
+    public Posts(String uid, String time, String date, String postimage, String profileimage, String description, String fullname, String likes, String newLikes, String liker, String newLiker) {
         this.uid = uid;
         this.time = time;
         this.date = date;
@@ -15,7 +18,26 @@ public class Posts {
         this.profileimage = profileimage;
         this.description = description;
         this.fullname = fullname;
+        this.likes = likes;
+        this.newLikes = newLikes;
+        this.liker = liker;
+        this.newLiker = newLiker;
+        this.commentCounter = commentCounter;
+
     }
+
+
+    public String getNewLikes() { return newLikes; }
+
+    public String getLiker() { return liker; }
+
+    public void setLiker(String liker) { this.liker = liker; }
+
+    public String getNewLiker() { return newLiker; }
+
+    public void setNewLiker(String newLiker) { this.newLiker = newLiker; }
+
+    public void setNewLikes(String newLikes) { this.newLikes = newLikes; }
 
     public String getUid() {
         return uid;
@@ -72,4 +94,16 @@ public class Posts {
     public void setFullname(String fullname) {
         this.fullname = fullname;
     }
+
+    public String getLikes() {
+        return likes;
+    }
+
+    public void setLikes(String likes) {
+        this.likes = likes;
+    }
+
+    public String getCommentCounter() { return commentCounter; }
+
+    public void setCommentCounter(String commentCounter) { this.commentCounter = commentCounter; }
 }

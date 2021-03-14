@@ -32,6 +32,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -119,7 +120,6 @@ public class PostActivity extends AppCompatActivity {
         SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMMM-yyyy");
         saveCurrentDate = currentDate.format(callForDate.getTime());
 
-        Calendar callForTime = Calendar.getInstance();
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
         saveCurrentTime = currentTime.format(callForDate.getTime());
 
@@ -172,6 +172,12 @@ public class PostActivity extends AppCompatActivity {
                     postsMap.put("postimage", downloadUrl);
                     postsMap.put("profileimage", userProfileImg);
                     postsMap.put("fullname", userFullName);
+                    postsMap.put("likes", "0");
+                    postsMap.put("newLikes", "0");
+                    postsMap.put("liker", "");
+                    postsMap.put("newLiker", "");
+                    postsMap.put("commentCounter", "0");
+                    postsMap.put("comments", null);
 
                     PostsRef.child(current_user_id + postRandomName).updateChildren(postsMap)
                             .addOnCompleteListener(new OnCompleteListener() {
