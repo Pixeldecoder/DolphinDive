@@ -62,7 +62,7 @@ public class diveshoplist extends AppCompatActivity {
     private void ExampleData(){
         recentsDataList = new ArrayList<>();
         recentsDataList.add(new diveshopdata("Bali Diveshop","Bali","$175","4.5","Superhot",R.drawable.bali));
-        recentsDataList.add(new diveshopdata("Cancun Mono Diveshop","Cancun","$603","3.8","Medium",R.drawable.cancun));
+        recentsDataList.add(new diveshopdata("Cancun Diveshop","Cancun","$603","3.8","Medium",R.drawable.cancun));
         recentsDataList.add(new diveshopdata("Raja Ampat Diveshop","Indonesia","$200","2.7","Hot",R.drawable.rajaampat));
         recentsDataList.add(new diveshopdata("Semporna Diveshop","Indonesia","$324","3.6","Hot",R.drawable.semporna));
         recentsDataList.add(new diveshopdata("Red Sea Diveshop","Egypt","$200","5","Superhot",R.drawable.redsea));

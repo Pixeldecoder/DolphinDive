@@ -22,10 +22,10 @@
 
         <EditText
             android:id="@+id/searchdestinput"
-            android:layout_width="222dp"
-            android:layout_height="36dp"
+            android:layout_width="237dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="26dp"
-            android:layout_marginEnd="164dp"
             android:layout_marginBottom="26dp"
             android:background="#FFFFFF"
             android:drawableLeft="@drawable/ic_baseline_search_24"
@@ -37,7 +37,7 @@
             android:textColor="#8C8C8C"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
@@ -45,31 +45,26 @@
             android:layout_width="57dp"
             android:layout_height="54dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="26dp"
-            android:layout_marginEnd="100dp"
-            android:layout_marginBottom="25dp"
             android:background="#00FFFFFF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/searchdestinput"
+            app:layout_constraintBottom_toBottomOf="@+id/searchdestinput"
 
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageButton12"
+            app:layout_constraintStart_toEndOf="@+id/searchdestinput"
+            app:layout_constraintTop_toTopOf="@+id/searchdestinput"
+            app:layout_constraintVertical_bias="0.642"
             app:srcCompat="@drawable/ic_baseline_calendar_today_24" />
 
         <ImageButton
             android:id="@+id/imageButton12"
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="37dp"
             android:background="#00FFFFFF"
             app:layout_constraintBottom_toBottomOf="@+id/imageButton11"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.6"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/imageButton11"
             app:layout_constraintTop_toTopOf="@+id/imageButton11"
-            app:layout_constraintVertical_bias="0.619"
+            app:layout_constraintVertical_bias="1.0"
             app:srcCompat="@drawable/filter" />
 
         <TextView
@@ -80,31 +75,32 @@
             android:text="Filters"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="@+id/imageButton12"
-            app:layout_constraintStart_toEndOf="@+id/imageButton11"
+            app:layout_constraintStart_toStartOf="@+id/imageButton12"
             app:layout_constraintTop_toTopOf="@+id/imageButton12" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recent_recycler"
-        android:layout_width="400dp"
-        android:layout_height="525dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="391dp"
+        android:layout_height="519dp"
         android:layout_marginTop="11dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FilterGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/FilterGroup"
+        app:layout_constraintVertical_bias="0.014" />
 
     <RadioGroup
         android:id="@+id/FilterGroup"
-        android:layout_width="228dp"
-        android:layout_height="38dp"
+        android:layout_width="219dp"
+        android:layout_height="32dp"
 
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
