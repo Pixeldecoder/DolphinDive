@@ -2,12 +2,12 @@ package com.capstone.dolphindive;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +15,34 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.capstone.dolphindive.utility.CircleTransform;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 public class Profile extends Fragment implements View.OnClickListener{
+
+    FirebaseFirestore db;
+    FirebaseUser user;
+    DocumentReference documentReference;
+    Button edit;
+    Button Divelog;
+    Button posts;
+    ImageButton logout;
+    TextView userName;
+    TextView numPosts;
+    TextView numFollowing ;
+    TextView numFollower;
+    ImageView portrait;
+    String uid;
 
     @Nullable
     @Override
@@ -27,29 +50,29 @@ public class Profile extends Fragment implements View.OnClickListener{
         return inflater.inflate(R.layout.activity_profile, container, false);
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String name="None";
-        if (user != null) {
-            // Name, email address etc
-            name = user.getDisplayName();
-        }
-        Button edit= (Button)view.findViewById(R.id.editProfile);
-        Button Divelog = (Button)view.findViewById(R.id.DivelogBtn);
-        Button posts = (Button)view.findViewById(R.id.PostsBtn);
-        ImageButton logout =(ImageButton)view.findViewById(R.id.logoutBtn);
-        TextView userName = (TextView) view.findViewById(R.id.profile_username);
-        TextView numPosts = (TextView) view.findViewById(R.id.profile_numPosts);
-        TextView numFollowing = (TextView) view.findViewById(R.id.profile_numFol);
-        TextView numFollower = (TextView) view.findViewById(R.id.profile_numFollower);
-        ImageView portrait = (ImageView)view.findViewById(R.id.profile_portrait);
+
+        db=  FirebaseFirestore.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        uid = user.getUid();
+        documentReference = db.collection(uid).document("profile");
+
+        edit= (Button)view.findViewById(R.id.editProfile);
+        Divelog = (Button)view.findViewById(R.id.DivelogBtn);
+        posts = (Button)view.findViewById(R.id.PostsBtn);
+        logout =(ImageButton)view.findViewById(R.id.logoutBtn);
+        userName = (TextView) view.findViewById(R.id.profile_username);
+        numPosts = (TextView) view.findViewById(R.id.profile_numPosts);
+        numFollowing = (TextView) view.findViewById(R.id.profile_numFol);
+        numFollower = (TextView) view.findViewById(R.id.profile_numFollower);
+        portrait = (ImageView)view.findViewById(R.id.profile_portrait);
         edit.setOnClickListener((View.OnClickListener) this);
         Divelog.setOnClickListener((View.OnClickListener) this);
         posts.setOnClickListener((View.OnClickListener) this);
         logout.setOnClickListener((View.OnClickListener) this);
-        userName.setText(name);
         numPosts.setText("0");
         numFollowing.setText("0");
         numFollower.setText("0");
@@ -59,8 +82,21 @@ public class Profile extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.editProfile:
-                Intent i = new Intent(getActivity(), ProfileManagement.class);
-                startActivity(i);
+                documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.getResult().exists()){
+                            Intent i = new Intent(getActivity(), ShowProfile.class);
+                            startActivity(i);
+                        }else{
+                            Intent i = new Intent(getActivity(), EditProfile.class);
+                            Bundle bundle =new Bundle();
+                            bundle.putString("mode","create");
+                            i.putExtras(bundle);
+                            startActivity(i);
+                        }
+                    }
+                });
                 break;
             case R.id.DivelogBtn:
                 Intent myIntent = new Intent(getActivity(), DiveLog_Scu.class);
@@ -72,6 +108,41 @@ public class Profile extends Fragment implements View.OnClickListener{
                 logout();
                 break;
         }
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.getResult().exists()){
+                    String name = task.getResult().getString("name");
+                    String url = task.getResult().getString("url");
+                    if(!TextUtils.isEmpty(name) ){
+                        userName.setText(name);
+                    }else{
+                        userName.setText(user.getEmail());
+                    }
+                    if(!TextUtils.isEmpty(url)){
+                        Picasso.get().load(url).transform(new CircleTransform()).centerCrop().fit().into(portrait);
+                    }
+
+                }else{
+                    userName.setText(user.getEmail());
+                    Toast.makeText(getActivity(), "No Profile Exist",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
     }
 
     public void logout() {

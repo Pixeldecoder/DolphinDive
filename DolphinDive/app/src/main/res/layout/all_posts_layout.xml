@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -19,6 +21,7 @@
             android:layout_marginTop="1dp"
             android:padding="5dp"
             android:orientation="horizontal">
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/post_profile_image"
                 android:layout_width="60dp"
@@ -92,14 +95,87 @@
             android:padding="3dp"
             android:textSize="14sp"
             android:textColor="@android:color/black"/>
-
-        <ImageView
-            android:id="@+id/post_image"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_margin="3dp"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"/>
+            android:layout_margin="3dp">
+            <ImageView
+                android:id="@+id/post_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"/>
+
+            <xyz.hanks.library.bang.SmallBangView
+                android:id="@+id/imageViewAnimation"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="right|bottom">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/heart_selector" />
+            </xyz.hanks.library.bang.SmallBangView>
+        </FrameLayout>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right"
+        android:layout_marginLeft="5dp"
+        android:padding="2dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/commentIcon"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/ic_baseline_comment_24"/>
+            <TextView
+                android:id="@+id/commentCounter"
+                android:layout_toRightOf="@+id/commentIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:layout_marginRight="5dp"
+                android:textSize="13sp"
+                android:textColor="@android:color/darker_gray"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/peopleLikes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center"
+                android:text="people liked this post"
+                android:textSize="13sp"
+                android:textColor="@android:color/darker_gray"/>
+            <TextView
+                android:id="@+id/likeCounter"
+                android:layout_toLeftOf="@+id/peopleLikes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:layout_marginRight="5dp"
+                android:textSize="13sp"
+                android:textColor="@android:color/darker_gray"
+                android:textStyle="bold"/>
+
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
 
     </LinearLayout>
 

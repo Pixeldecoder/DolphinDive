@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".EditProfile">
+
+    <TextView
+        android:id="@+id/comment_profileEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center" />
+
+    <ImageView
+        android:id="@+id/image_view_profileEdit"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@android:drawable/ic_menu_gallery"
+        android:clickable="true"
+        android:onClick="ChooseImage" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:singleLine="true"
+        android:textColor="@android:color/black"
+        android:layout_margin="10dp"
+        android:id="@+id/name_profileEdit"
+        android:autoText="true"
+        android:backgroundTint="@color/colorPrimaryDark"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:singleLine="true"
+        android:textColor="@android:color/black"
+        android:layout_margin="10dp"
+        android:id="@+id/email_profileEdit"
+        android:autoText="true"
+        android:backgroundTint="@color/colorPrimaryDark"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Diver ID"
+        android:singleLine="true"
+        android:textColor="@android:color/black"
+        android:layout_margin="10dp"
+        android:id="@+id/diverID_profileEdit"
+        android:autoText="true"
+        android:backgroundTint="@color/colorPrimaryDark"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Phone"
+        android:singleLine="true"
+        android:textColor="@android:color/black"
+        android:layout_margin="10dp"
+        android:id="@+id/phone_profileEdit"
+        android:autoText="true"
+        android:backgroundTint="@color/colorPrimaryDark"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Address"
+        android:singleLine="true"
+        android:textColor="@android:color/black"
+        android:layout_margin="10dp"
+        android:id="@+id/address_profileEdit"
+        android:autoText="true"
+        android:backgroundTint="@color/colorPrimaryDark"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Profile"
+        android:id="@+id/save_profile_profileEdit"
+        android:layout_margin="20dp"/>
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/colorPrimaryDark"
+        android:visibility="invisible"
+        android:id="@+id/progressbar_profileEdit"/>
+
+</LinearLayout>
