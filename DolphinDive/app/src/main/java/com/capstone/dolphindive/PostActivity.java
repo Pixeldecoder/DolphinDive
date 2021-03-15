@@ -127,7 +127,9 @@ public class PostActivity extends AppCompatActivity {
 
         String path = ImageUri.getPath();
         String imgName = path.substring(path.lastIndexOf('/') + 1);
-        imgName = imgName.substring(0,imgName.lastIndexOf('.'));
+        if(imgName.lastIndexOf('.') != -1){
+            imgName = imgName.substring(0,imgName.lastIndexOf('.'));
+        }
 
         StorageReference filePath = PostImageReference.child("Post Images").child(imgName + postRandomName + ".jpg");
         uploadTask = filePath.putFile(ImageUri);
