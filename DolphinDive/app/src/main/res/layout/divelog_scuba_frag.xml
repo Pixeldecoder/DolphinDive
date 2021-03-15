@@ -1,80 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/save"
+        android:id="@+id/save_scuba"
         android:layout_width="154dp"
         android:layout_height="47dp"
-        android:layout_marginTop="525dp"
+        android:layout_marginTop="470dp"
         android:text="Save"
         app:backgroundTint="#9400E676"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.14"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/scuba_off" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/cancel_scuba"
         android:layout_width="154dp"
         android:layout_height="47dp"
-        android:layout_marginTop="525dp"
+        android:layout_marginTop="470dp"
         android:text="Cancel"
         app:backgroundTint="#FF8A80"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.87"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/scuba_off" />
-
-    <Button
-        android:id="@+id/free_on"
-        android:layout_width="195dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="217dp"
-        android:layout_marginLeft="217dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginRight="22dp"
-        android:text="Free Diving"
-        android:textColor="#0B0A0A"
-        android:textSize="18sp"
-        app:backgroundTint="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/scuba_off"
-        android:layout_width="195dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginLeft="22dp"
-        android:layout_marginTop="24dp"
-        android:text="Scuba Diving"
-        android:textColor="#0B0A0A"
-        android:textSize="18sp"
-        app:backgroundTint="#80D8FF"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="415dp"
-        android:layout_height="500dp"
+        android:layout_height="450dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
         android:fillViewport="true"
         android:isScrollContainer="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scuba_off">>
+        app:layout_constraintTop_toTopOf="parent">>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -206,6 +173,183 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/diving_site" />
 
+            <EditText
+                android:id="@+id/num_dive"
+                android:layout_width="365dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="12dp"
+                android:ems="10"
+                android:hint="No."
+                android:inputType="number"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/no_dive" />
+
+            <EditText
+                android:id="@+id/max_dep_input"
+                android:layout_width="167dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="12dp"
+                android:ems="10"
+                android:inputType="number"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/max_dep" />
+
+            <EditText
+                android:id="@+id/avg_dep_input"
+                android:layout_width="167dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="12dp"
+                android:ems="10"
+                android:inputType="number"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/avg_dep" />
+
+            <EditText
+                android:id="@+id/weight_input"
+                android:layout_width="365dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="12dp"
+                android:ems="10"
+                android:inputType="number"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weights" />
+
+            <EditText
+                android:id="@+id/min_temp_input"
+                android:layout_width="167dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="12dp"
+                android:ems="10"
+                android:inputType="numberSigned"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.875"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/max_dep" />
+
+            <EditText
+                android:id="@+id/avg_temp_input"
+                android:layout_width="167dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="12dp"
+                android:ems="10"
+                android:inputType="numberSigned"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.875"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/avg_temp" />
+
+            <EditText
+                android:id="@+id/BCD_Brand"
+                android:layout_width="91dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="200dp"
+                android:background="@null"
+                android:ems="10"
+                android:hint="Brand of BCD"
+                android:inputType="textPersonName"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/brand_equip"
+                app:layout_constraintTop_toBottomOf="@+id/brand_equip" />
+
+            <EditText
+                android:id="@+id/mask_Brand"
+                android:layout_width="91dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="52dp"
+                android:layout_marginLeft="52dp"
+                android:layout_marginTop="308dp"
+                android:background="@null"
+                android:ems="10"
+                android:hint="Brand of Mask"
+                android:inputType="textPersonName"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/brand_equip"
+                app:layout_constraintTop_toBottomOf="@+id/brand_equip" />
+
+            <EditText
+                android:id="@+id/watch_brand"
+                android:layout_width="91dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="184dp"
+                android:layout_marginLeft="184dp"
+                android:layout_marginTop="292dp"
+                android:background="@null"
+                android:ems="10"
+                android:hint="Brand of Watch"
+                android:inputType="textPersonName"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/brand_equip"
+                app:layout_constraintTop_toBottomOf="@+id/brand_equip" />
+
+            <EditText
+                android:id="@+id/wetsuit_brand"
+                android:layout_width="117dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="64dp"
+                android:layout_marginLeft="64dp"
+                android:layout_marginTop="152dp"
+                android:background="@null"
+                android:ems="10"
+                android:hint="Brand of Wetsuit"
+                android:inputType="textPersonName"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/brand_equip"
+                app:layout_constraintTop_toBottomOf="@+id/brand_equip" />
+
+            <EditText
+                android:id="@+id/fin_brand"
+                android:layout_width="117dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="320dp"
+                android:layout_marginLeft="320dp"
+                android:layout_marginTop="7dp"
+                android:background="@null"
+                android:ems="10"
+                android:hint="Brand of Fin"
+                android:inputType="textPersonName"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/brand_equip"
+                app:layout_constraintTop_toBottomOf="@+id/brand_equip" />
+
+            <EditText
+                android:id="@+id/cam_brand"
+                android:layout_width="117dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="268dp"
+                android:layout_marginLeft="268dp"
+                android:layout_marginTop="212dp"
+                android:background="@null"
+                android:ems="10"
+                android:hint="Brand of Camera"
+                android:inputType="textPersonName"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/brand_equip"
+                app:layout_constraintTop_toBottomOf="@+id/brand_equip" />
+
+            <ImageView
+                android:id="@+id/diver"
+                android:layout_width="356dp"
+                android:layout_height="326dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/brand_equip"
+                app:srcCompat="@drawable/diver" />
+
             <TextView
                 android:id="@+id/diving_data"
                 android:layout_width="wrap_content"
@@ -328,7 +472,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/no_input" />
+                app:layout_constraintTop_toBottomOf="@id/num_dive" />
 
             <TextView
                 android:id="@+id/avg_dep"
@@ -424,7 +568,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.672"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/no_input" />
+                app:layout_constraintTop_toBottomOf="@id/num_dive" />
 
             <TextView
                 android:id="@+id/avg_temp"
@@ -438,85 +582,6 @@
                 app:layout_constraintHorizontal_bias="0.676"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/min_temp_input" />
-
-            <EditText
-                android:id="@+id/no_input"
-                android:layout_width="365dp"
-                android:layout_height="35dp"
-                android:layout_marginTop="12dp"
-                android:ems="10"
-                android:hint="No."
-                android:inputType="number"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/no_dive" />
-
-            <EditText
-                android:id="@+id/max_dep_input"
-                android:layout_width="167dp"
-                android:layout_height="35dp"
-                android:layout_marginTop="12dp"
-                android:ems="10"
-                android:inputType="number"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/max_dep" />
-
-            <EditText
-                android:id="@+id/avg_dep_input"
-                android:layout_width="167dp"
-                android:layout_height="35dp"
-                android:layout_marginTop="12dp"
-                android:ems="10"
-                android:inputType="number"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/avg_dep" />
-
-            <EditText
-                android:id="@+id/weight_input"
-                android:layout_width="365dp"
-                android:layout_height="35dp"
-                android:layout_marginTop="12dp"
-                android:ems="10"
-                android:inputType="number"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/weights" />
-
-            <EditText
-                android:id="@+id/min_temp_input"
-                android:layout_width="167dp"
-                android:layout_height="35dp"
-                android:layout_marginTop="12dp"
-                android:ems="10"
-                android:inputType="numberSigned"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.875"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/max_dep" />
-
-            <EditText
-                android:id="@+id/avg_temp_input"
-                android:layout_width="167dp"
-                android:layout_height="35dp"
-                android:layout_marginTop="12dp"
-                android:ems="10"
-                android:inputType="numberSigned"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.875"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/avg_temp" />
 
             <TextView
                 android:id="@+id/unit_dis"
@@ -572,104 +637,6 @@
                 android:text="°C"
                 app:layout_constraintEnd_toEndOf="@+id/avg_temp_input"
                 app:layout_constraintTop_toBottomOf="@+id/avg_temp" />
-
-            <ImageView
-                android:id="@+id/diver"
-                android:layout_width="356dp"
-                android:layout_height="326dp"
-                android:layout_marginTop="12dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/brand_equip"
-                app:srcCompat="@drawable/diver" />
-
-            <EditText
-                android:id="@+id/BCD_Brand"
-                android:layout_width="91dp"
-                android:layout_height="36dp"
-                android:layout_marginTop="200dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="Brand of BCD"
-                android:background="@null"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/brand_equip"
-                app:layout_constraintTop_toBottomOf="@+id/brand_equip" />
-
-            <EditText
-                android:id="@+id/mask_Brand"
-                android:layout_width="91dp"
-                android:layout_height="36dp"
-                android:layout_marginStart="52dp"
-                android:layout_marginLeft="52dp"
-                android:layout_marginTop="308dp"
-                android:background="@null"
-                android:ems="10"
-                android:hint="Brand of Mask"
-                android:inputType="textPersonName"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/brand_equip"
-                app:layout_constraintTop_toBottomOf="@+id/brand_equip" />
-
-            <EditText
-                android:id="@+id/watch_brand"
-                android:layout_width="91dp"
-                android:layout_height="36dp"
-                android:layout_marginStart="184dp"
-                android:layout_marginLeft="184dp"
-                android:layout_marginTop="292dp"
-                android:background="@null"
-                android:ems="10"
-                android:hint="Brand of Watch"
-                android:inputType="textPersonName"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/brand_equip"
-                app:layout_constraintTop_toBottomOf="@+id/brand_equip" />
-
-            <EditText
-                android:id="@+id/wetsuit_brand"
-                android:layout_width="117dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="64dp"
-                android:layout_marginLeft="64dp"
-                android:layout_marginTop="152dp"
-                android:background="@null"
-                android:ems="10"
-                android:hint="Brand of Wetsuit"
-                android:inputType="textPersonName"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/brand_equip"
-                app:layout_constraintTop_toBottomOf="@+id/brand_equip" />
-
-            <EditText
-                android:id="@+id/fin_brand"
-                android:layout_width="117dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="320dp"
-                android:layout_marginLeft="320dp"
-                android:layout_marginTop="7dp"
-                android:background="@null"
-                android:ems="10"
-                android:hint="Brand of Fin"
-                android:inputType="textPersonName"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/brand_equip"
-                app:layout_constraintTop_toBottomOf="@+id/brand_equip" />
-
-            <EditText
-                android:id="@+id/cam_brand"
-                android:layout_width="117dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="268dp"
-                android:layout_marginLeft="268dp"
-                android:layout_marginTop="212dp"
-                android:background="@null"
-                android:ems="10"
-                android:hint="Brand of Camera"
-                android:inputType="textPersonName"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/brand_equip"
-                app:layout_constraintTop_toBottomOf="@+id/brand_equip" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
