@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,10 +85,10 @@ public class Profile extends Fragment implements View.OnClickListener{
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if(task.getResult().exists()){
-                            Intent i = new Intent(getActivity(), ShowProfile.class);
+                            Intent i = new Intent(getActivity(), Profile_Show.class);
                             startActivity(i);
                         }else{
-                            Intent i = new Intent(getActivity(), EditProfile.class);
+                            Intent i = new Intent(getActivity(), Profile_Edit.class);
                             Bundle bundle =new Bundle();
                             bundle.putString("mode","create");
                             i.putExtras(bundle);

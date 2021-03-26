@@ -5,11 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -19,7 +19,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -37,7 +36,9 @@ public class DiveLogList extends AppCompatActivity {
     FirebaseUser user;
 
     int count;
-    ArrayList<String> arrayList;
+    ArrayList<String> logList;
+    ArrayList<String> genreList;
+    ArrayList<String> nameList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +56,9 @@ public class DiveLogList extends AppCompatActivity {
         add_log_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(DiveLogList.this, DiveLog.class);
+                Intent i = new Intent(DiveLogList.this, DiveLog_Create.class);
                 Bundle bundle =new Bundle();
-                bundle.putString("numlog","log"+ String.valueOf(count+1));
+                bundle.putString("numlog","Log"+ String.valueOf(count+1));
                 i.putExtras(bundle);
                 startActivity(i);
             }
@@ -74,27 +75,40 @@ public class DiveLogList extends AppCompatActivity {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
                     int tmp = 0;
+                    genreList = new ArrayList<>();
+                    nameList = new ArrayList<>();
                     for (DocumentSnapshot document : task.getResult()) {
                         tmp++;
+                        genreList.add(document.getString("genre"));
+                        nameList.add(document.getString("title"));
                     }
                     count=tmp;
-                    arrayList = new ArrayList<>();
+                    logList = new ArrayList<>();
                     for(int i=1; i<=count;i++){
-                        arrayList.add("log"+i);
+                        logList.add("Log"+i+" -- "+nameList.get(i-1)+" -- "+genreList.get(i-1)+" Diving");
                     }
 
-                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, arrayList);
+                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, logList);
                     list.setAdapter(arrayAdapter);
                     list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             String clickedItem=(String) list.getItemAtPosition(position);
+                            String[] splitItem = clickedItem.split(" ");
+                            String genre = splitItem[splitItem.length-2].trim();
+                            String logNum = splitItem[0].trim();
                             Toast.makeText(DiveLogList.this,clickedItem,Toast.LENGTH_LONG).show();
-                            Intent i = new Intent(DiveLogList.this, DiveLog.class);
-                            Bundle bundle =new Bundle();
-                            bundle.putString("numlog",clickedItem);
-                            i.putExtras(bundle);
-                            startActivity(i);
+                            if(TextUtils.equals(genre,"Free")){
+                                Intent i = new Intent(DiveLogList.this, DiveLog_Edit_Free.class);
+                                i.putExtra("numlog",logNum);
+                                startActivity(i);
+                            }else if(TextUtils.equals(genre,"Scuba")){
+                                Intent i = new Intent(DiveLogList.this, DiveLog_Edit_Scu.class);
+                                i.putExtra("numlog",logNum);
+                                startActivity(i);
+                            }else{
+                                Toast.makeText(DiveLogList.this, "The genre is incorrect",Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
 

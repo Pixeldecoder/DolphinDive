@@ -16,7 +16,7 @@ import android.view.View;
 
 import com.capstone.dolphindive.ui.main.SectionsPagerAdapter;
 
-public class DiveLog extends AppCompatActivity {
+public class DiveLog_Create extends AppCompatActivity {
 
     String numlog="";
 

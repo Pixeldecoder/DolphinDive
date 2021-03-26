@@ -14,10 +14,11 @@
         <activity android:name=".diveshoplistdetail" />
         <activity android:name=".diveshoplist" />
         <activity android:name=".DiveLogList"></activity>
-        <activity
-            android:name=".DiveLog"></activity>
-        <activity android:name=".ShowProfile" />
-        <activity android:name=".EditProfile" />
+        <activity android:name=".DiveLog_Create"></activity>
+        <activity android:name=".Profile_Show" />
+        <activity android:name=".DiveLog_Edit_Scu" />
+        <activity android:name=".DiveLog_Edit_Free" />
+        <activity android:name=".Profile_Edit" />
         <activity android:name=".PostActivity" />
         <activity android:name=".CommentActivity"
             android:windowSoftInputMode="adjustPan"/>

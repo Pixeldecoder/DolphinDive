@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.capstone.dolphindive.DiveLog_Free_Frag;
-import com.capstone.dolphindive.DiveLog_Scu_Frag;
+import com.capstone.dolphindive.DiveLog_Create_Free_Frag;
+import com.capstone.dolphindive.DiveLog_Create_Scu_Frag;
 import com.capstone.dolphindive.R;
 
 /**
@@ -40,12 +40,12 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         switch (position) {
             case 0:
                 bundle.putString("numlog", num);
-                fragment = new DiveLog_Scu_Frag();
+                fragment = new DiveLog_Create_Scu_Frag();
                 fragment.setArguments(bundle);
                 break;
             case 1:
                 bundle.putString("numlog", num);
-                fragment = new DiveLog_Free_Frag();
+                fragment = new DiveLog_Create_Free_Frag();
                 fragment.setArguments(bundle);
                 break;
         }

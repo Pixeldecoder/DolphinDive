@@ -35,11 +35,11 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DiveLog_Scu_Frag extends Fragment implements View.OnClickListener{
+public class DiveLog_Create_Scu_Frag extends Fragment implements View.OnClickListener{
     Button cancel;
     Button save;
     TextView think, water, scenery, weather, start_time, end_time, dive_date, dive_loc, num_dive, max_dep, avg_dep, weight, min_temp,
-    avg_tmp, BCD_brand, mask_brand, watch_brand, wetsuit_brand, fin_brand, cam_brand;
+    avg_tmp, BCD_brand, mask_brand, watch_brand, wetsuit_brand, fin_brand, cam_brand, title;
 
     FirebaseFirestore db;
     DocumentReference documentReference;
@@ -64,6 +64,7 @@ public class DiveLog_Scu_Frag extends Fragment implements View.OnClickListener{
         documentReference = db.collection("Users").document(uid).collection("divelog").document(logNum);
 
         cancel = view.findViewById(R.id.cancel_scuba);
+        title = view.findViewById(R.id.title);
         save = view.findViewById(R.id.save_scuba);
         think = view.findViewById(R.id.think_content);
         water = view.findViewById(R.id.water_content);
@@ -88,26 +89,6 @@ public class DiveLog_Scu_Frag extends Fragment implements View.OnClickListener{
 
         save.setOnClickListener((View.OnClickListener) this);
         cancel.setOnClickListener((View.OnClickListener) this);
-        think.setOnClickListener((View.OnClickListener) this);
-        water.setOnClickListener((View.OnClickListener) this);
-        scenery.setOnClickListener((View.OnClickListener) this);
-        weather.setOnClickListener((View.OnClickListener) this);
-        start_time.setOnClickListener((View.OnClickListener) this);
-        end_time.setOnClickListener((View.OnClickListener) this);
-        dive_date.setOnClickListener((View.OnClickListener) this);
-        dive_loc.setOnClickListener((View.OnClickListener) this);
-        num_dive.setOnClickListener((View.OnClickListener) this);
-        max_dep.setOnClickListener((View.OnClickListener) this);
-        avg_dep.setOnClickListener((View.OnClickListener) this);
-        weight.setOnClickListener((View.OnClickListener) this);
-        min_temp.setOnClickListener((View.OnClickListener) this);
-        avg_tmp.setOnClickListener((View.OnClickListener) this);
-        BCD_brand.setOnClickListener((View.OnClickListener) this);
-        mask_brand.setOnClickListener((View.OnClickListener) this);
-        watch_brand.setOnClickListener((View.OnClickListener) this);
-        wetsuit_brand.setOnClickListener((View.OnClickListener) this);
-        fin_brand.setOnClickListener((View.OnClickListener) this);
-        cam_brand.setOnClickListener((View.OnClickListener) this);
     }
 
     @Override
@@ -118,7 +99,7 @@ public class DiveLog_Scu_Frag extends Fragment implements View.OnClickListener{
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if(task.getResult().exists()){
-                            EditData();
+                            Toast.makeText(getActivity(),"The log already existed",Toast.LENGTH_SHORT).show();
                         }else{
                             UploadData();
                         }
@@ -134,6 +115,7 @@ public class DiveLog_Scu_Frag extends Fragment implements View.OnClickListener{
 
     private void UploadData() {
         String think_txt = think.getText().toString();
+        String title_txt = title.getText().toString();
         String water_txt = water.getText().toString();
         String scenery_txt = scenery.getText().toString();
         String weather_txt = weather.getText().toString();
@@ -154,10 +136,11 @@ public class DiveLog_Scu_Frag extends Fragment implements View.OnClickListener{
         String fin_brand_txt = fin_brand.getText().toString();
         String cam_brand_txt = cam_brand.getText().toString();
 
-        if(  !TextUtils.isEmpty(num_dive_txt)) {
+        if(  !TextUtils.isEmpty(title_txt)) {
             Map<String, String> divelog = new HashMap<>();
-            divelog.put("genre", "scuba");
+            divelog.put("genre", "Scuba");
             divelog.put("think", think_txt);
+            divelog.put("title", title_txt);
             divelog.put("water", water_txt);
             divelog.put("scenery", scenery_txt);
             divelog.put("weather", weather_txt);
@@ -193,86 +176,10 @@ public class DiveLog_Scu_Frag extends Fragment implements View.OnClickListener{
                         }
                     });
         }else{
-            Toast.makeText(getActivity(), "Number of Dive is Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Title is Required",Toast.LENGTH_SHORT).show();
         }
     }
 
-
-    private void EditData() {
-        String think_txt = think.getText().toString();
-        String water_txt = water.getText().toString();
-        String scenery_txt = scenery.getText().toString();
-        String weather_txt = weather.getText().toString();
-        String start_time_txt = start_time.getText().toString();
-        String end_time_txt = end_time.getText().toString();
-        String dive_date_txt = dive_date.getText().toString();
-        String dive_loc_txt = dive_loc.getText().toString();
-        String num_dive_txt = num_dive.getText().toString();
-        String max_dep_txt = max_dep.getText().toString();
-        String avg_dep_txt = avg_dep.getText().toString();
-        String weight_txt = weight.getText().toString();
-        String min_tmp_txt = min_temp.getText().toString();
-        String avg_tmp_txt = avg_tmp.getText().toString();
-        String BCD_brand_txt = BCD_brand.getText().toString();
-        String mask_brand_txt = mask_brand.getText().toString();
-        String watch_brand_txt = watch_brand.getText().toString();
-        String wetsuit_brand_txt = wetsuit_brand.getText().toString();
-        String fin_brand_txt = fin_brand.getText().toString();
-        String cam_brand_txt = cam_brand.getText().toString();
-
-        if(!TextUtils.isEmpty(num_dive_txt) ){
-
-            final DocumentReference sfDocRef = db.collection("Users").document(uid).collection("divelog").document(logNum);
-
-            db.runTransaction(new Transaction.Function<Void>() {
-                @Override
-                public Void apply(Transaction transaction) throws FirebaseFirestoreException {
-                    DocumentSnapshot snapshot = transaction.get(sfDocRef);
-
-                    //transaction.update(sfDocRef, "population", newPopulation);
-                    transaction.update(sfDocRef, "think", think_txt);
-                    transaction.update(sfDocRef, "water", water_txt);
-                    transaction.update(sfDocRef, "scenery", scenery_txt);
-                    transaction.update(sfDocRef, "weather", weather_txt);
-                    transaction.update(sfDocRef, "start_time", start_time_txt);
-                    transaction.update(sfDocRef, "end_time", end_time_txt);
-                    transaction.update(sfDocRef, "dive_date", dive_date_txt);
-                    transaction.update(sfDocRef, "dive_loc", dive_loc_txt);
-                    transaction.update(sfDocRef, "num_dive", num_dive_txt);
-                    transaction.update(sfDocRef, "max_dep", max_dep_txt);
-                    transaction.update(sfDocRef, "avg_dep", avg_dep_txt);
-                    transaction.update(sfDocRef, "weight", weight_txt);
-                    transaction.update(sfDocRef, "min_tmp", min_tmp_txt);
-                    transaction.update(sfDocRef, "avg_tmp", avg_tmp_txt);
-                    transaction.update(sfDocRef, "BCD_brand", BCD_brand_txt);
-                    transaction.update(sfDocRef, "mask_brand", mask_brand_txt);
-                    transaction.update(sfDocRef, "watch_brand", watch_brand_txt);
-                    transaction.update(sfDocRef, "wetsuit_brand", wetsuit_brand_txt);
-                    transaction.update(sfDocRef, "fin_brand", fin_brand_txt);
-                    transaction.update(sfDocRef, "cam_brand", cam_brand_txt);
-
-                    //transaction.update(sfDocRef, "url", downloadUri.toString());
-
-                    // Success
-                    return null;
-                }
-            }).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    Toast.makeText(getActivity(), "Divelog Updated",Toast.LENGTH_SHORT).show();
-                    getActivity().finish();
-                }
-            })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getActivity(), "failed",Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        }else{
-            Toast.makeText(getActivity(), "Number of Dive is Required",Toast.LENGTH_SHORT).show();
-        }
-    }
 
 
 
@@ -284,6 +191,7 @@ public class DiveLog_Scu_Frag extends Fragment implements View.OnClickListener{
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.getResult().exists()){
+                    String title_txt = task.getResult().getString("title");
                     String think_txt = task.getResult().getString("think");
                     String water_txt = task.getResult().getString("water");
                     String scenery_txt = task.getResult().getString("scenery");
@@ -306,6 +214,7 @@ public class DiveLog_Scu_Frag extends Fragment implements View.OnClickListener{
                     String cam_brand_txt = task.getResult().getString("cam_brand");
 
                     think.setText(think_txt);
+                    title.setText(title_txt);
                     water.setText(water_txt);
                     scenery.setText(scenery_txt);
                     weather.setText(weather_txt);

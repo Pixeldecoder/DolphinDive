@@ -13,9 +13,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -31,22 +28,19 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditProfile extends AppCompatActivity {
+public class Profile_Edit extends AppCompatActivity {
     EditText et_name, et_email, et_DiverId, et_phone, et_address;
     Button btn;
     ProgressBar progressBar;
@@ -100,7 +94,7 @@ public class EditProfile extends AppCompatActivity {
                 }else if(mode.equals("edit")){
                     EditData();
                 }else{
-                    Toast.makeText(EditProfile.this, "System error:No Mode specified",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Profile_Edit.this, "System error:No Mode specified",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -160,9 +154,9 @@ public class EditProfile extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     progressBar.setVisibility(View.INVISIBLE);
-                                    Toast.makeText(EditProfile.this, "Profile Updated",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Profile_Edit.this, "Profile Updated",Toast.LENGTH_SHORT).show();
 
-                                    Intent intent = new Intent(EditProfile.this, ShowProfile.class);
+                                    Intent intent = new Intent(Profile_Edit.this, Profile_Show.class);
                                     startActivity(intent);
                                     finish();
                                 }
@@ -170,7 +164,7 @@ public class EditProfile extends AppCompatActivity {
                                     .addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(EditProfile.this, "failed",Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Profile_Edit.this, "failed",Toast.LENGTH_SHORT).show();
                                         }
                                     });
                         }
@@ -205,9 +199,9 @@ public class EditProfile extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         progressBar.setVisibility(View.INVISIBLE);
-                        Toast.makeText(EditProfile.this, "Profile Updated",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Profile_Edit.this, "Profile Updated",Toast.LENGTH_SHORT).show();
 
-                        Intent intent = new Intent(EditProfile.this, ShowProfile.class);
+                        Intent intent = new Intent(Profile_Edit.this, Profile_Show.class);
                         startActivity(intent);
                         finish();
                     }
@@ -215,12 +209,12 @@ public class EditProfile extends AppCompatActivity {
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(EditProfile.this, "failed",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Profile_Edit.this, "failed",Toast.LENGTH_SHORT).show();
                             }
                         });
             }
         }else{
-            Toast.makeText(EditProfile.this, "Name and email are Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(Profile_Edit.this, "Name and email are Required",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -267,9 +261,9 @@ public class EditProfile extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     progressBar.setVisibility(View.INVISIBLE);
-                                    Toast.makeText(EditProfile.this, "Profile Created",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Profile_Edit.this, "Profile Created",Toast.LENGTH_SHORT).show();
 
-                                    Intent intent = new Intent(EditProfile.this, ShowProfile.class);
+                                    Intent intent = new Intent(Profile_Edit.this, Profile_Show.class);
                                     startActivity(intent);
                                     finish();
                                 }
@@ -277,7 +271,7 @@ public class EditProfile extends AppCompatActivity {
                                     .addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(EditProfile.this, "failed",Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Profile_Edit.this, "failed",Toast.LENGTH_SHORT).show();
                                         }
                                     });
                         }
@@ -303,9 +297,9 @@ public class EditProfile extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         progressBar.setVisibility(View.INVISIBLE);
-                        Toast.makeText(EditProfile.this, "Profile Created",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Profile_Edit.this, "Profile Created",Toast.LENGTH_SHORT).show();
 
-                        Intent intent = new Intent(EditProfile.this, ShowProfile.class);
+                        Intent intent = new Intent(Profile_Edit.this, Profile_Show.class);
                         startActivity(intent);
                         finish();
                     }
@@ -313,12 +307,12 @@ public class EditProfile extends AppCompatActivity {
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(EditProfile.this, "failed",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Profile_Edit.this, "failed",Toast.LENGTH_SHORT).show();
                             }
                         });
             }
         }else{
-            Toast.makeText(EditProfile.this, "Name and email are Required",Toast.LENGTH_SHORT).show();
+            Toast.makeText(Profile_Edit.this, "Name and email are Required",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -371,7 +365,7 @@ public class EditProfile extends AppCompatActivity {
                     et_DiverId.setText(diverId);
 
                 }else{
-                    //Toast.makeText(EditProfile.this, "No Profile Exist",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(Profile_Edit.this, "No Profile Exist",Toast.LENGTH_SHORT).show();
                 }
 
             }
