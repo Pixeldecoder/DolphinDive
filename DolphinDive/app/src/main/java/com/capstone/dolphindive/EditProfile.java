@@ -81,10 +81,10 @@ public class EditProfile extends AppCompatActivity {
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
-        documentReference = db.collection(uid).document("profile");
+        documentReference = db.collection("Users").document(uid);
         storageReference = firebaseStorage.getInstance().getReference("Profile Images");
 
-        et_email.setText(user.getEmail());
+        //et_email.setText(user.getEmail());
 
         Bundle bundle = getIntent().getExtras();
         mode = bundle.getString("mode");
@@ -138,7 +138,7 @@ public class EditProfile extends AppCompatActivity {
                         if(task.isSuccessful()){
                             Uri downloadUri = task.getResult();
 
-                            final DocumentReference sfDocRef = db.collection(uid).document("profile");
+                            final DocumentReference sfDocRef = db.collection("Users").document(uid);
 
                             db.runTransaction(new Transaction.Function<Void>() {
                                 @Override
@@ -183,7 +183,7 @@ public class EditProfile extends AppCompatActivity {
                         });
             }else{
 
-                final DocumentReference sfDocRef = db.collection(uid).document("profile");
+                final DocumentReference sfDocRef = db.collection("Users").document(uid);
 
                 db.runTransaction(new Transaction.Function<Void>() {
                     @Override

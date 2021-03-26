@@ -61,7 +61,7 @@ public class DiveLog_Scu_Frag extends Fragment implements View.OnClickListener{
         db=  FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
-        documentReference = db.collection(uid).document("profile").collection("divelog").document(logNum);
+        documentReference = db.collection("Users").document(uid).collection("divelog").document(logNum);
 
         cancel = view.findViewById(R.id.cancel_scuba);
         save = view.findViewById(R.id.save_scuba);
@@ -222,7 +222,7 @@ public class DiveLog_Scu_Frag extends Fragment implements View.OnClickListener{
 
         if(!TextUtils.isEmpty(num_dive_txt) ){
 
-            final DocumentReference sfDocRef = db.collection(uid).document("profile").collection("divelog").document(logNum);
+            final DocumentReference sfDocRef = db.collection("Users").document(uid).collection("divelog").document(logNum);
 
             db.runTransaction(new Transaction.Function<Void>() {
                 @Override

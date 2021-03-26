@@ -58,7 +58,7 @@ public class Profile extends Fragment implements View.OnClickListener{
         db=  FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
-        documentReference = db.collection(uid).document("profile");
+        documentReference = db.collection("Users").document(uid);
 
         edit= (Button)view.findViewById(R.id.editProfile);
         Divelog = (Button)view.findViewById(R.id.DivelogBtn);
@@ -120,11 +120,12 @@ public class Profile extends Fragment implements View.OnClickListener{
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.getResult().exists()){
                     String name = task.getResult().getString("name");
+                    String email = task.getResult().getString("email");
                     String url = task.getResult().getString("url");
                     if(!TextUtils.isEmpty(name) ){
                         userName.setText(name);
                     }else{
-                        userName.setText(user.getEmail());
+                        userName.setText(email);
                     }
                     if(!TextUtils.isEmpty(url)){
                         Picasso.get().load(url).transform(new CircleTransform()).centerCrop().fit().into(portrait);

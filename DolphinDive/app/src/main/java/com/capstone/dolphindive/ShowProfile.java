@@ -18,9 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.capstone.dolphindive.utility.CircleTransform;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
+import com.capstone.dolphindive.utility.UserProfile;
+import com.capstone.dolphindive.utility.UserProfileCallback;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,6 +30,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ShowProfile extends AppCompatActivity {
 
@@ -63,7 +65,7 @@ public class ShowProfile extends AppCompatActivity {
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
-        documentReference = db.collection(uid).document("profile");
+        documentReference = db.collection("Users").document(uid);
         storageReference = firebaseStorage.getInstance().getReference("Profile Images");
 
         btn.setOnClickListener(new View.OnClickListener() {
@@ -88,17 +90,17 @@ public class ShowProfile extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        UserProfile userProfile = new UserProfile(uid);
+        userProfile.getProfile(new UserProfileCallback() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.getResult().exists()){
-                    String name = task.getResult().getString("name");
-                    String email = task.getResult().getString("email");
-                    String phone = task.getResult().getString("phone");
-                    String address = task.getResult().getString("address");
-                    String diverId = task.getResult().getString("diverId");
-                    String url = task.getResult().getString("url");
+            public void onComplete(HashMap<String,String> profile) {
+                if(profile!=null){
+                    String name = profile.get("name");
+                    String email = profile.get("email");
+                    String phone = profile.get("phone");
+                    String address = profile.get("address");
+                    String diverId = profile.get("diverId");
+                    String url = profile.get("url");
                     if(!TextUtils.isEmpty(url)){
                         Picasso.get().load(url).transform(new CircleTransform()).centerCrop().fit().into(imageView);
                         sh_name.setText(name);
@@ -116,14 +118,43 @@ public class ShowProfile extends AppCompatActivity {
                 }else{
                     Toast.makeText(ShowProfile.this, "No Profile Exist",Toast.LENGTH_SHORT).show();
                 }
-
             }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                    }
-                });
+        });
+//        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                if(task.getResult().exists()){
+//                    String name = task.getResult().getString("name");
+//                    String email = task.getResult().getString("email");
+//                    String phone = task.getResult().getString("phone");
+//                    String address = task.getResult().getString("address");
+//                    String diverId = task.getResult().getString("diverId");
+//                    String url = task.getResult().getString("url");
+//                    if(!TextUtils.isEmpty(url)){
+//                        Picasso.get().load(url).transform(new CircleTransform()).centerCrop().fit().into(imageView);
+//                        sh_name.setText(name);
+//                        sh_email.setText(email);
+//                        sh_phone.setText(phone);
+//                        sh_address.setText(address);
+//                        sh_DiverId.setText(diverId);
+//                    }else{
+//                        sh_name.setText(name);
+//                        sh_email.setText(email);
+//                        sh_phone.setText(phone);
+//                        sh_address.setText(address);
+//                        sh_DiverId.setText(diverId);
+//                    }
+//                }else{
+//                    Toast.makeText(ShowProfile.this, "No Profile Exist",Toast.LENGTH_SHORT).show();
+//                }
+//
+//            }
+//        })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//
+//                    }
+//                });
     }
 }

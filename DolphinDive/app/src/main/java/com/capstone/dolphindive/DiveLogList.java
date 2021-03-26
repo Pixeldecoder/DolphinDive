@@ -47,7 +47,7 @@ public class DiveLogList extends AppCompatActivity {
         db=  FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
-        collectionReference = db.collection(uid).document("profile").collection("divelog");
+        collectionReference = db.collection("Users").document(uid).collection("divelog");
 
         list = findViewById(R.id.divelog_list);
         add_log_btn = findViewById(R.id.add_new_log);
