@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_anchorGravity="center"
+    tools:context=".equipment_rental">
+
+    <ImageButton
+        android:id="@+id/equipgoback"
+        android:layout_width="44dp"
+        android:layout_height="65dp"
+        android:background="#00FFFFFF"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:scrollbarSize="10dp"
+        android:translationZ="90dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/go_back_arrow" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="351dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="0dp"
+                android:fontFamily="sans-serif-medium"
+                android:includeFontPadding="true"
+                android:text="How to rent quality equipments?"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imageView15"
+                android:layout_width="match_parent"
+                android:layout_height="312dp"
+                app:srcCompat="@drawable/dive_equip2" />
+
+            <ImageView
+                android:id="@+id/imageView14"
+                android:layout_width="match_parent"
+                android:layout_height="376dp"
+                android:layout_marginBottom="20dp"
+                app:srcCompat="@drawable/dive_equip1" />
+
+            <TextView
+                android:id="@+id/textView38"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="Shop Around"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView39"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="20dp"
+                android:text="Before you go, you should know how to check the safety of your rented diving equipment. It is better to find a dive shop with a pool of water so that they can test their equipment. Ask the clerk a few questions about the equipment and see if the answer fits your mind. If you can, test the equipment yourself in the pool before you plan to rent it. It is best not only in a selection test, visit a few more potential stores, comprehensive comparison, and then decide which potential store you go to rent equipment."
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView40"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:foregroundGravity="center"
+                android:gravity="center"
+                android:text="What Should You Ask?"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView41"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="20dp"
+                android:text="What questions should you ask when entering the dive shop? See below: Ask how often diving equipment is repaired? Ask if the equipment in the store is regularly tested? Request to see the maintenance record and test certificate! Generally speaking, a salesperson will not refuse to answer these questions, because you are the customer. Have you ever seen a shop assistant respond to a customer's question with silence? If the clerk gets annoyed and doesn't want to answer these questions, move on. Do not choose a dive shop that refuses to answer questions about diving equipment. Do you think such a dive shop's equipment is safe?"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView42"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="CheckYour Diving Gear"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView43"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="20dp"
+                android:text="You can also check your own equipment, and the store staff will tell you how to check the safety of your rented diving equipment. You can check some obvious features, such as: how well are the seams and seals on the wetsuit? Check if the diving suit fits. Are you mobile? Are the weight belts and loads safe enough? Check seals on air hoses for corrosion or rust?"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView45"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="Underwater Inspection"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView46"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="20dp"
+                android:text="Go into the sink of the dive shop to make sure the equipment meets your expectations. If a problem is found, the employee is told to replace it. Make sure the regulator is working properly. Check the operability of the diving suit. Make sure the BCD gives you enough buoyancy. Enter the pool for an underwater test"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView50"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="Why Do So Nany Tests?"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView58"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="20dp"
+                android:text="These checks are important because divers need to be confident that their equipment will keep them safe. Otherwise you will be constantly worrying about the condition and safety of your equipment while diving, and diving will no longer be an enjoyment for you, but a pain! Here are some of the dangers of unsafe diving gear: Damaging or worn wetsuits can affect buoyancy and body temperature. Damaged or worn heavy belts or vests may break and cause a hazard. Corroded air hoses may spread out in open water. A faulty regulator could endanger your life."
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView59"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="20dp"
+                android:text="If you are satisfied with the results of the inspection and testing, you can rent diving equipment. When diving, if you are sure that your equipment is safe, then you can enjoy the diving!"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
