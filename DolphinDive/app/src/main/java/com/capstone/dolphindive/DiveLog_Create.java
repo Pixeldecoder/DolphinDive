@@ -18,7 +18,7 @@ import com.capstone.dolphindive.ui.main.SectionsPagerAdapter;
 
 public class DiveLog_Create extends AppCompatActivity {
 
-    String numlog="";
+    String logId="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +27,10 @@ public class DiveLog_Create extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if(bundle!=null){
-            numlog = bundle.getString("numlog");
+            logId = bundle.getString("logId");
         }
 
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(),numlog);
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(),logId);
         ViewPager viewPager = findViewById(R.id.view_pager);
 
         viewPager.setAdapter(sectionsPagerAdapter);

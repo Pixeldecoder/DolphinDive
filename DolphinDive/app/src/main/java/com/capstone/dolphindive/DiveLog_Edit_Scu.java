@@ -2,7 +2,6 @@ package com.capstone.dolphindive;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -33,7 +32,7 @@ public class DiveLog_Edit_Scu extends AppCompatActivity {
     FirebaseFirestore db;
     DocumentReference documentReference;
     String uid;
-    String logNum;
+    String logId;
     FirebaseUser user;
 
 
@@ -42,12 +41,12 @@ public class DiveLog_Edit_Scu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_divelog_edit_scu);
 
-        logNum = getIntent().getStringExtra("numlog");
+        logId = getIntent().getStringExtra("logId");
 
         db=  FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
-        documentReference = db.collection("Users").document(uid).collection("divelog").document(logNum);
+        documentReference = db.collection("Users").document(uid).collection("divelog").document(logId);
 
         cancel = findViewById(R.id.cancel_scuba);
         save = findViewById(R.id.save_scuba);
@@ -122,7 +121,7 @@ public class DiveLog_Edit_Scu extends AppCompatActivity {
 
         if(!TextUtils.isEmpty(title_txt) ){
 
-            final DocumentReference sfDocRef = db.collection("Users").document(uid).collection("divelog").document(logNum);
+            final DocumentReference sfDocRef = db.collection("Users").document(uid).collection("divelog").document(logId);
 
             db.runTransaction(new Transaction.Function<Void>() {
                 @Override

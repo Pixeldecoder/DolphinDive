@@ -1,6 +1,5 @@
 package com.capstone.dolphindive;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -14,18 +13,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.capstone.dolphindive.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Transaction;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,13 +34,13 @@ public class DiveLog_Create_Free_Frag extends Fragment implements View.OnClickLi
     FirebaseFirestore db;
     DocumentReference documentReference;
     String uid;
-    String logNum;
+    String logId;
     FirebaseUser user;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        logNum = getArguments().getString("numlog");
+        logId = getArguments().getString("logId");
         return inflater.inflate(R.layout.divelog_free_frag, container,false);
     }
 
@@ -56,7 +51,7 @@ public class DiveLog_Create_Free_Frag extends Fragment implements View.OnClickLi
         db=  FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
-        documentReference = db.collection("Users").document(uid).collection("divelog").document(logNum);
+        documentReference = db.collection("Users").document(uid).collection("divelog").document(logId);
 
         cancel = view.findViewById(R.id.cancel_free);
         save = view.findViewById(R.id.save_free);
@@ -112,6 +107,7 @@ public class DiveLog_Create_Free_Frag extends Fragment implements View.OnClickLi
 
         if(  !TextUtils.isEmpty(title_text)) {
             Map<String, String> divelog = new HashMap<>();
+            divelog.put("id", logId);
             divelog.put("genre", "Free");
             divelog.put("title",title_text);
             divelog.put("think", think_txt);

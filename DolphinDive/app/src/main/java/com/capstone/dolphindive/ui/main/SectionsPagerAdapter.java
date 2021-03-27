@@ -22,12 +22,12 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.Divelog_tab_text_1, R.string.Divelog_tab_text_2};
     private final Context mContext;
-    private String num;
+    private String id;
 
-    public SectionsPagerAdapter(Context context, FragmentManager fm , String numlog) {
+    public SectionsPagerAdapter(Context context, FragmentManager fm , String logId) {
         super(fm);
         mContext = context;
-        num = numlog;
+        id = logId;
     }
 
     @Override
@@ -39,12 +39,12 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         Bundle bundle = new Bundle();
         switch (position) {
             case 0:
-                bundle.putString("numlog", num);
+                bundle.putString("logId", id);
                 fragment = new DiveLog_Create_Scu_Frag();
                 fragment.setArguments(bundle);
                 break;
             case 1:
-                bundle.putString("numlog", num);
+                bundle.putString("logId", id);
                 fragment = new DiveLog_Create_Free_Frag();
                 fragment.setArguments(bundle);
                 break;

@@ -1,9 +1,8 @@
 package com.capstone.dolphindive;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,22 +14,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.capstone.dolphindive.utility.CircleTransform;
-import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Transaction;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -44,13 +35,13 @@ public class DiveLog_Create_Scu_Frag extends Fragment implements View.OnClickLis
     FirebaseFirestore db;
     DocumentReference documentReference;
     String uid;
-    String logNum;
+    String logId;
     FirebaseUser user;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        logNum = getArguments().getString("numlog");
+        logId = getArguments().getString("logId");
         return inflater.inflate(R.layout.divelog_scuba_frag, container,false);
     }
 
@@ -61,7 +52,8 @@ public class DiveLog_Create_Scu_Frag extends Fragment implements View.OnClickLis
         db=  FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
-        documentReference = db.collection("Users").document(uid).collection("divelog").document(logNum);
+
+        documentReference = db.collection("Users").document(uid).collection("divelog").document(logId);
 
         cancel = view.findViewById(R.id.cancel_scuba);
         title = view.findViewById(R.id.title);
@@ -138,6 +130,7 @@ public class DiveLog_Create_Scu_Frag extends Fragment implements View.OnClickLis
 
         if(  !TextUtils.isEmpty(title_txt)) {
             Map<String, String> divelog = new HashMap<>();
+            divelog.put("id", logId);
             divelog.put("genre", "Scuba");
             divelog.put("think", think_txt);
             divelog.put("title", title_txt);

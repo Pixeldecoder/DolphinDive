@@ -34,6 +34,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class DiveLogList extends AppCompatActivity {
 
@@ -50,6 +52,8 @@ public class DiveLogList extends AppCompatActivity {
     ArrayList<String> logList;
     ArrayList<String> genreList;
     ArrayList<String> nameList;
+    ArrayList<String> idList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +73,13 @@ public class DiveLogList extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(DiveLogList.this, DiveLog_Create.class);
                 Bundle bundle =new Bundle();
-                bundle.putString("numlog","Log"+ String.valueOf(count+1));
+//                String id = UUID.randomUUID().toString();
+//                bundle.putString("logId",id);
+                if(count==0){
+                    bundle.putString("logId","65536");
+                }else{
+                    bundle.putString("logId",String.valueOf(Integer.valueOf(idList.get(0))-1));
+                }
                 i.putExtras(bundle);
                 startActivity(i);
             }
@@ -90,15 +100,17 @@ public class DiveLogList extends AppCompatActivity {
                     int tmp = 0;
                     genreList = new ArrayList<>();
                     nameList = new ArrayList<>();
+                    logList = new ArrayList<>();
+                    idList = new ArrayList<>();
                     for (DocumentSnapshot document : task.getResult()) {
                         tmp++;
                         genreList.add(document.getString("genre"));
                         nameList.add(document.getString("title"));
+                        idList.add(document.getString("id"));
                     }
                     count=tmp;
-                    logList = new ArrayList<>();
                     for(int i=1; i<=count;i++){
-                        logList.add("Log"+i+" -- "+nameList.get(i-1)+" -- "+genreList.get(i-1)+" Diving");
+                        logList.add(nameList.get(i-1)+" -- "+genreList.get(i-1)+" Diving");
                     }
 
                     ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, logList);
@@ -129,17 +141,16 @@ public class DiveLogList extends AppCompatActivity {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             String clickedItem=(String) list.getItemAtPosition(position);
-                            String[] splitItem = clickedItem.split(" ");
-                            String genre = splitItem[splitItem.length-2].trim();
-                            String logNum = splitItem[0].trim();
                             Toast.makeText(DiveLogList.this,clickedItem,Toast.LENGTH_LONG).show();
+                            String genre = genreList.get(position);
+                            String logId = idList.get(position);
                             if(TextUtils.equals(genre,"Free")){
                                 Intent i = new Intent(DiveLogList.this, DiveLog_Edit_Free.class);
-                                i.putExtra("numlog",logNum);
+                                i.putExtra("logId",logId);
                                 startActivity(i);
                             }else if(TextUtils.equals(genre,"Scuba")){
                                 Intent i = new Intent(DiveLogList.this, DiveLog_Edit_Scu.class);
-                                i.putExtra("numlog",logNum);
+                                i.putExtra("logId",logId);
                                 startActivity(i);
                             }else{
                                 Toast.makeText(DiveLogList.this, "The genre is incorrect",Toast.LENGTH_SHORT).show();
@@ -153,7 +164,7 @@ public class DiveLogList extends AppCompatActivity {
                             switch (index) {
                                 case 0:
                                     int num = position+1;
-                                    showDialog(nameList.get(position), "Log"+num);
+                                    showDialog(nameList.get(position), idList.get(position));
                                     break;
                             }
                             // false : close the menu; true : not close the menu
@@ -168,14 +179,14 @@ public class DiveLogList extends AppCompatActivity {
         });
     }
 
-    private void showDialog(String name, String lognum){
+    private void showDialog(String name, String logId){
         AlertDialog.Builder builder = new AlertDialog.Builder(DiveLogList.this);
         builder.setTitle("Delete");
         builder.setMessage("Are you sure to delete "+name);
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                collectionReference.document(lognum).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                collectionReference.document(logId).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(DiveLogList.this, "Log deleted",Toast.LENGTH_SHORT).show();
