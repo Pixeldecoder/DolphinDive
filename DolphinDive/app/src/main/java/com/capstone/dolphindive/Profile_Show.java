@@ -50,7 +50,7 @@ public class Profile_Show extends AppCompatActivity {
         sh_phone = findViewById(R.id.phone_profileShow);
         sh_address = findViewById(R.id.address_profileShow);
         btn = findViewById(R.id.floating_btn_profileShow);
-        back_btn = findViewById(R.id.back_btn_profileShow);
+        //back_btn = findViewById(R.id.back_btn_profileShow);
         imageView = findViewById(R.id.image_view_profileShow);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -69,12 +69,12 @@ public class Profile_Show extends AppCompatActivity {
                 finish();
             }
         });
-        back_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+//        back_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
     }
 
     @Override
