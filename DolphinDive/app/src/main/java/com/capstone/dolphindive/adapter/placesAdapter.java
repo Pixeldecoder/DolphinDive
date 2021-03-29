@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,13 +22,15 @@ import com.capstone.dolphindive.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class placesAdapter extends RecyclerView.Adapter<placesAdapter.RecentsViewHolder> {
+public class placesAdapter extends RecyclerView.Adapter<placesAdapter.RecentsViewHolder> implements Filterable{
     private ArrayList<diveshopdata> recentsDataList;
+    private ArrayList<diveshopdata> fullList;
     Context context;
 
-    public placesAdapter(Context context, ArrayList<diveshopdata> recentsDataList) {
+    public placesAdapter(Context context, int i, ArrayList<diveshopdata> recentsDataList) {
         this.context = context;
         this.recentsDataList = recentsDataList;
+        fullList = new ArrayList<>(recentsDataList);
     }
 
     @NonNull
@@ -63,6 +67,38 @@ public class placesAdapter extends RecyclerView.Adapter<placesAdapter.RecentsVie
         return recentsDataList.size();
     }
 
+    @Override
+    public Filter getFilter() {
+        return exampleFilter;
+    }
+
+    private Filter exampleFilter = new Filter(){
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<diveshopdata> filteredList = new ArrayList<>();
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(fullList);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for (diveshopdata item : fullList) {
+                    if (item.getCountryName().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+    }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            recentsDataList.clear();
+            recentsDataList.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
+
     public static final class RecentsViewHolder extends RecyclerView.ViewHolder{
 
         ImageView placeImage;
@@ -79,5 +115,7 @@ public class placesAdapter extends RecyclerView.Adapter<placesAdapter.RecentsVie
             rate = itemView.findViewById(R.id.rate);
         }
     }
+
+
 }
 

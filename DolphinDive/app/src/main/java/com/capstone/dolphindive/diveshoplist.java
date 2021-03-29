@@ -5,22 +5,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CompoundButton;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.capstone.dolphindive.adapter.placesAdapter;
 import com.capstone.dolphindive.model.diveshopdata;
 
-import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 public class diveshoplist extends AppCompatActivity {
     private ArrayList<diveshopdata> recentsDataList;
@@ -29,14 +25,16 @@ public class diveshoplist extends AppCompatActivity {
     private RadioGroup radioFilterGroup;
     private RadioButton radioFilterButton;
     private TextView btndisplay;
+    private RecyclerView recyclerView;
     RecyclerView recentRecycler;
     placesAdapter recentsAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diveshoplist);
+        initSearchWidget();
         ExampleData();
-        buildRecentRecycler();
+        buildRecentRecycler(recentsDataList);
         //setRecentRecycler(recentsDataList);
 
 
@@ -57,6 +55,7 @@ public class diveshoplist extends AppCompatActivity {
         });
 
     }
+
 
 
     private void ExampleData(){
@@ -100,21 +99,48 @@ public class diveshoplist extends AppCompatActivity {
         mRecyclerViewAdapter.notifyDataSetChanged();
     }
 
+    private void initSearchWidget(){
+        SearchView searchView = (SearchView) findViewById(R.id.dest_seach);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                ArrayList<diveshopdata> filteredlist = new ArrayList<diveshopdata>();
+                for(diveshopdata item : recentsDataList)
+                {
+                    if (item.getCountryName().toLowerCase().contains(s.toLowerCase()))
+                    {
+                    filteredlist.add(item);
+                    }
+                }
+                buildRecentRecycler(filteredlist);
+
+                return false;
+            }
+        });
+    }
+
 
     private void setRecentRecycler(ArrayList<diveshopdata> recentsDataList) {
         recentRecycler = findViewById(R.id.recent_recycler);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recentRecycler.setLayoutManager(layoutManager);
-        recentsAdapter = new placesAdapter(this, recentsDataList);
+        recentsAdapter = new placesAdapter(this, 0, recentsDataList);
         recentRecycler.setAdapter(recentsAdapter);
     }
 
-    private void buildRecentRecycler(){
+    private void buildRecentRecycler(ArrayList liststate){
         RecyclerView recyclerView = findViewById(R.id.recent_recycler);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recyclerView.setHasFixedSize(true);
-        mRecyclerViewAdapter = new placesAdapter(this,recentsDataList);
+        mRecyclerViewAdapter = new placesAdapter(this, 0, liststate);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(mRecyclerViewAdapter);
     }
+
+
 }
