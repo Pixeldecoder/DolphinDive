@@ -32,11 +32,16 @@ public class diveshoplist extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diveshoplist);
+        Bundle extras = getIntent().getExtras();
+        String instruction = extras.getString("Key");
         initSearchWidget();
         ExampleData();
         buildRecentRecycler(recentsDataList);
+        filterwithinstruction(instruction);
         //setRecentRecycler(recentsDataList);
 
+        TextView test = (TextView) findViewById(R.id.test);
+        test.setText(instruction);
 
         RadioGroup radiotext = (RadioGroup) findViewById(R.id.FilterGroup);
         radiotext.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -65,7 +70,7 @@ public class diveshoplist extends AppCompatActivity {
         recentsDataList.add(new diveshopdata("Raja Ampat Diveshop","Indonesia","$200","2.7","Hot",R.drawable.rajaampat));
         recentsDataList.add(new diveshopdata("Semporna Diveshop","Indonesia","$324","3.6","Hot",R.drawable.semporna));
         recentsDataList.add(new diveshopdata("Red Sea Diveshop","Egypt","$200","5","Superhot",R.drawable.redsea));
-        recentsDataList.add(new diveshopdata("Honolulu Diveshop","Honolulu","$260","4.9","Superhot",R.drawable.cancun));
+        recentsDataList.add(new diveshopdata("Lembongan Diveshop","Indonesia","$260","4.9","Superhot",R.drawable.cancun));
     }
 
 
@@ -122,6 +127,17 @@ public class diveshoplist extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    private boolean filterwithinstruction(String instruction){
+        ArrayList<diveshopdata> filteredlist = new ArrayList<diveshopdata>();
+        for (diveshopdata item : recentsDataList) {
+            if (instruction != null && item.getCountryName().toLowerCase().contains(instruction.toLowerCase())) {
+                filteredlist.add(item);
+            }
+        }
+        buildRecentRecycler(filteredlist);
+        return false;
     }
 
 

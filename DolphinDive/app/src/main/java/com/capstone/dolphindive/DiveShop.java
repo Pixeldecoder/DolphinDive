@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.SearchView;
 
 import com.capstone.dolphindive.model.diveshopdata;
 import com.denzcoskun.imageslider.ImageSlider;
@@ -21,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DiveShop extends Fragment {
-    private ArrayList<diveshopdata> recentsDataList;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -31,7 +31,9 @@ public class DiveShop extends Fragment {
         cancunbtnOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String sessionId = "cancun";
                 Intent in = new Intent(getActivity(),diveshoplist.class);
+                in.putExtra("Key", sessionId);
                 startActivity(in);
             }
         });
@@ -40,7 +42,9 @@ public class DiveShop extends Fragment {
         redseabtnOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String sessionId = "Egypt";
                 Intent in = new Intent(getActivity(),diveshoplist.class);
+                in.putExtra("Key", sessionId);
                 startActivity(in);
             }
         });
@@ -49,7 +53,9 @@ public class DiveShop extends Fragment {
         sempornabtnOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String sessionId = "Indonesia";
                 Intent in = new Intent(getActivity(),diveshoplist.class);
+                in.putExtra("Key", sessionId);
                 startActivity(in);
             }
         });
@@ -58,7 +64,9 @@ public class DiveShop extends Fragment {
         rajaampatbtnOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String sessionId = "Indonesia";
                 Intent in = new Intent(getActivity(),diveshoplist.class);
+                in.putExtra("Key", sessionId);
                 startActivity(in);
             }
         });
@@ -67,7 +75,9 @@ public class DiveShop extends Fragment {
         balibtnOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String sessionId = "Indonesia";
                 Intent in = new Intent(getActivity(),diveshoplist.class);
+                in.putExtra("Key", sessionId);
                 startActivity(in);
             }
         });
@@ -76,7 +86,9 @@ public class DiveShop extends Fragment {
         lembornaislandbtnOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String sessionId = "Indonesia";
                 Intent in = new Intent(getActivity(),diveshoplist.class);
+                in.putExtra("Key", sessionId);
                 startActivity(in);
             }
         });
@@ -107,6 +119,24 @@ public class DiveShop extends Fragment {
                 startActivity(in);
             }
         });
+
+        SearchView searchView = (SearchView) view.findViewById(R.id.main_seach_dest);
+        CharSequence instruction = searchView.getQuery();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                Intent in = new Intent(getActivity(),diveshoplist.class);
+                in.putExtra("Key", instruction.toString().toLowerCase());
+                startActivity(in);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
+
 
         return view;
     }
