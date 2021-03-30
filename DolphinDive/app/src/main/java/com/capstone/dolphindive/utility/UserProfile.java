@@ -10,6 +10,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Transaction;
 
 import java.util.HashMap;
 
@@ -37,6 +39,9 @@ public class UserProfile {
                     String address = task.getResult().getString("address");
                     String diverId = task.getResult().getString("diverId");
                     String url = task.getResult().getString("url");
+                    String numFollowing = task.getResult().getString("numFollowing");
+                    String numFollower = task.getResult().getString("numFollower");
+                    String numPosts = task.getResult().getString("numPosts");
 
                     profile.put("userId", userId);
                     profile.put("name", name);
@@ -45,6 +50,9 @@ public class UserProfile {
                     profile.put("address", address);
                     profile.put("diverId", diverId);
                     profile.put("url", url);
+                    profile.put("numPosts", numPosts);
+                    profile.put("numFollowing", numFollowing);
+                    profile.put("numFollower", numFollower);
 
                 }else{
                     //remember to check if profile is null in your implementation.
@@ -61,5 +69,38 @@ public class UserProfile {
                     }
                 });
     }
+
+    public void increaseFollowing(UserProfileCallback customCallback){
+        db.runTransaction(new Transaction.Function<Void>() {
+            @Override
+            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                DocumentSnapshot snapshot = transaction.get(documentReference);
+
+                //transaction.update(sfDocRef, "population", newPopulation);
+                transaction.update(documentReference, "numFollowing", "2");
+
+                // Success
+                return null;
+            }
+        });
+    }
+
+    public void increaseFollower(UserProfileCallback customCallback){
+        db.runTransaction(new Transaction.Function<Void>() {
+            @Override
+            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                DocumentSnapshot snapshot = transaction.get(documentReference);
+
+                //transaction.update(sfDocRef, "population", newPopulation);
+                transaction.update(documentReference, "numFollowing", "2");
+
+                // Success
+                return null;
+            }
+        });
+    }
+
+
+
 
 }

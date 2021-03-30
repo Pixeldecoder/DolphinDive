@@ -153,6 +153,9 @@ public class Register extends AppCompatActivity {
                                         documentReference = db.collection("Users").document(userid);
                                         Map<String, String> profile = new HashMap<>();
                                         profile.put("email", email);
+                                        profile.put("numFollower", "0");
+                                        profile.put("numFollowing", "0");
+                                        profile.put("numPosts", "0");
                                         profile.put("name",regUserName.getText().toString());
                                         documentReference.set(profile).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
