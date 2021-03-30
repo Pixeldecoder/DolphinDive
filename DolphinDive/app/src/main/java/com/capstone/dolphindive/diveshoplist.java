@@ -18,10 +18,12 @@ import com.capstone.dolphindive.model.diveshopdata;
 import com.squareup.timessquare.CalendarPickerView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 
 public class diveshoplist extends AppCompatActivity {
     private ArrayList<diveshopdata> recentsDataList;
@@ -36,7 +38,7 @@ public class diveshoplist extends AppCompatActivity {
     private TextView Groupsize, num_rooms, num_adults, num_child;
     private ImageButton filtercheck, filtercancel, groupsize_minus, groupsize_plus, room_minus, room_plus, adults_minus, adult_plus, child_minus, child_plus, Calendar_confirm,Calendar_goback;
     private int group_size = 0, num_room = 0, num_adult = 0, num_children = 0;
-    private String check_in,check_out;
+    private String check_in,check_out,teststring;
     RecyclerView recentRecycler;
     placesAdapter recentsAdapter;
     @Override
@@ -177,6 +179,7 @@ public class diveshoplist extends AppCompatActivity {
         final View calendarpopupview = getLayoutInflater().inflate(R.layout.activity_diveshop_calendar, null);
         checkin_date = (TextView) findViewById(R.id.checkindate);
         checkout_date = (TextView) findViewById(R.id.checkoutdate);
+        TextView test = (TextView) findViewById(R.id.test);
         Calendar_confirm = (ImageButton) calendarpopupview.findViewById(R.id.calendar_confirm);
         Calendar_goback = (ImageButton) calendarpopupview.findViewById(R.id.calendar_goback);
         Date today = new Date();
@@ -198,7 +201,16 @@ public class diveshoplist extends AppCompatActivity {
                         + "-" + calSelected.get(Calendar.YEAR);
                 String selecteddate = datePicker.getSelectedDates().toString();
                 //Toast.makeText(diveshop_calendar.this, selectedDate, Toast.LENGTH_SHORT).show();
-                check_out = selecteddate;
+                ArrayList<String> myList = new ArrayList<String>(Arrays.asList(selecteddate.split(" ")));
+                //ArrayList<String> myListcheckout = new ArrayList<String>(Arrays.asList(myList1.split(" ")));
+                String checkindate = myList.get(1).toString()+"-"+myList.get(2).toString()+"-"+myList.get(5).toString();
+                String checkoutdate = myList.get(myList.size()-5).toString()+"-"+myList.get(myList.size()-4).toString()+"-"+myList.get(myList.size()-1).toString();
+                checkindate = checkindate.replace(",", "");
+                checkoutdate = checkoutdate.replace("]", "");
+                check_out = checkoutdate;
+                check_in = checkindate;
+                teststring = selecteddate;
+
             }
 
             @Override
@@ -213,6 +225,8 @@ public class diveshoplist extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 checkout_date.setText(check_out);
+                checkin_date.setText(check_in);
+                test.setText(teststring);
                 dialogcalendar.dismiss();
             }
         });
