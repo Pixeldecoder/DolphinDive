@@ -24,10 +24,10 @@
         app:srcCompat="@drawable/go_back_arrow" />
 
     <ScrollView
-        android:layout_width="371dp"
-        android:layout_height="639dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="388dp"
+        android:layout_height="638dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="-10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -76,8 +76,8 @@
 
             <ImageView
                 android:id="@+id/imageView16"
-                android:layout_width="wrap_content"
-                android:layout_height="232dp"
+                android:layout_width="366dp"
+                android:layout_height="236dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginEnd="10dp"
@@ -123,7 +123,7 @@
             <ImageView
                 android:id="@+id/imageView18"
                 android:layout_width="match_parent"
-                android:layout_height="224dp"
+                android:layout_height="241dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginEnd="10dp"
@@ -134,7 +134,7 @@
             <ImageView
                 android:id="@+id/imageView19"
                 android:layout_width="wrap_content"
-                android:layout_height="234dp"
+                android:layout_height="241dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginEnd="10dp"
@@ -174,7 +174,7 @@
             <ImageView
                 android:id="@+id/imageView20"
                 android:layout_width="match_parent"
-                android:layout_height="252dp"
+                android:layout_height="241dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginEnd="10dp"
@@ -216,7 +216,7 @@
             <ImageView
                 android:id="@+id/imageView21"
                 android:layout_width="match_parent"
-                android:layout_height="262dp"
+                android:layout_height="241dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginEnd="10dp"
@@ -260,7 +260,7 @@
             <ImageView
                 android:id="@+id/imageView23"
                 android:layout_width="match_parent"
-                android:layout_height="248dp"
+                android:layout_height="241dp"
                 app:srcCompat="@drawable/img_0475" />
 
             <TextView
@@ -273,6 +273,106 @@
                 android:layout_marginRight="18dp"
                 android:layout_marginBottom="10dp"
                 android:text="Every visitor to Phoku Island will come here. Shrimp, crab, fish, squid, scallop, sea urchin and other fresh seafood can be tasted here. Most of them are roasted. In addition to seafood, order vegetables, spring rolls and other side dishes."
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView74"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="Green lemon and cane juice"
+                android:textColor="#2196F3" />
+
+            <ImageView
+                android:id="@+id/imageView12"
+                android:layout_width="match_parent"
+                android:layout_height="241dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                app:srcCompat="@drawable/img_0476" />
+
+            <TextView
+                android:id="@+id/textView75"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginBottom="10dp"
+                android:text="A common drink to be found on the streets of Vietnam is sugar cane lemonade. Freshly squeezed cane juice with lime, honey and ice cubes."
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView76"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="Sugar cane shrimp"
+                android:textColor="#2196F3" />
+
+            <ImageView
+                android:id="@+id/imageView24"
+                android:layout_width="match_parent"
+                android:layout_height="241dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                app:srcCompat="@drawable/img_0477" />
+
+            <TextView
+                android:id="@+id/textView77"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginBottom="10dp"
+                android:text="Sugarcane prawns are a typical Vietnamese dish. They are chopped fresh prawns, beaten into prawn glue, wrapped in sugarcane sticks and deep-fried in a wok. They are dipped in a bit of spicy and sour Thai chicken sauce."
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView78"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="Fish Sauce"
+                android:textColor="#2196F3" />
+
+            <ImageView
+                android:id="@+id/imageView25"
+                android:layout_width="match_parent"
+                android:layout_height="241dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                app:srcCompat="@drawable/img_0478" />
+
+            <TextView
+                android:id="@+id/textView79"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginBottom="10dp"
+                android:text="The most important secret to Vietnamese food is the bowl of fish sauce on the table, which is so delicious for dipping in spring rolls! Fish are mixed and mashed with salt to produce fish sauce. In the process, well water is filtered to make a good fish sauce."
                 android:textSize="18sp" />
         </LinearLayout>
     </ScrollView>

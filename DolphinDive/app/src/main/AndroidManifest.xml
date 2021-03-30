@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DolphinDive">
-        <activity android:name=".Local_tips"></activity>
+        <activity android:name=".diveshop_calendar"></activity>
+        <activity android:name=".Local_tips" />
         <activity android:name=".Local_Food" />
         <activity android:name=".equipment_rental" />
         <activity android:name=".PaymentConfirmation" />
