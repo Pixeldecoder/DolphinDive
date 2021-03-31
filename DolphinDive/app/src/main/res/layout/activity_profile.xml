@@ -47,7 +47,7 @@
                     android:layout_height="200dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:text="Dive Buddy"
                     app:backgroundTint="@color/colorPrimaryDark"
                     app:layout_constraintStart_toStartOf="parent"
