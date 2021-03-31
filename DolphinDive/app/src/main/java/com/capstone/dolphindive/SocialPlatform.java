@@ -2,6 +2,7 @@ package com.capstone.dolphindive;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -157,9 +158,14 @@ public class SocialPlatform extends Fragment {
                             holder.profileImage.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    Intent intent =new Intent(getActivity(),Social_Profile.class);
-                                    intent.putExtra("uid",model.getUid() );
-                                    startActivity(intent);
+                                    String uid = model.getUid();
+                                    if(! TextUtils.equals(uid,current_user_id)){
+                                        Intent intent =new Intent(getActivity(),Social_Profile.class);
+                                        intent.putExtra("uid",uid);
+                                        startActivity(intent);
+                                    }else{
+                                        Toast.makeText(getActivity(), "Click on other's portait to view their profile",Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             });
 
