@@ -326,7 +326,7 @@ public class Chatting extends AppCompatActivity {
         status("offline");
         currentUser("none");
     }
-}
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
