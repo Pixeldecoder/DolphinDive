@@ -43,6 +43,8 @@ public class Profile extends Fragment implements View.OnClickListener{
     ImageView portrait;
     String uid;
 
+    Button follow;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -75,6 +77,9 @@ public class Profile extends Fragment implements View.OnClickListener{
         numPosts.setText("0");
         numFollowing.setText("0");
         numFollower.setText("0");
+
+        follow = (Button)view.findViewById(R.id.follow);
+        follow.setOnClickListener((View.OnClickListener) this);
     }
 
     @Override
@@ -105,6 +110,10 @@ public class Profile extends Fragment implements View.OnClickListener{
                 break;
             case R.id.logoutBtn:
                 logout();
+                break;
+            case R.id.follow:
+                Intent myIntent2 = new Intent(getActivity(), Follow_List.class);
+                startActivity(myIntent2);
                 break;
         }
     }

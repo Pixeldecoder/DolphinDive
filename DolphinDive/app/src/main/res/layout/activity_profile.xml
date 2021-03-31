@@ -117,7 +117,7 @@
             android:inputType="number"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/txt_following"
+            app:layout_constraintBottom_toTopOf="@+id/follow"
             app:layout_constraintEnd_toStartOf="@+id/profile_numFollower"
             app:layout_constraintStart_toEndOf="@+id/profile_numPosts"
             app:layout_constraintTop_toTopOf="@+id/guideline" />
@@ -140,26 +140,16 @@
             android:textColor="#191A1C"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
-            app:layout_constraintEnd_toStartOf="@+id/txt_following"
+            app:layout_constraintEnd_toStartOf="@+id/follow"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
             app:layout_constraintTop_toBottomOf="@+id/profile_numPosts" />
 
-        <EditText
-            android:id="@+id/txt_following"
-            android:layout_width="0dp"
+        <Button
+            android:id="@+id/follow"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="8dp"
-            android:background="#FFFFFF"
-            android:ems="4"
-            android:gravity="center|center_vertical"
-            android:inputType="textPersonName"
-            android:text="following"
-            android:textSize="12sp"
+            android:text="Follower"
+            android:textSize="8sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintEnd_toStartOf="@+id/txt_followers"
             app:layout_constraintStart_toEndOf="@+id/txt_posts"
@@ -205,7 +195,7 @@
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/txt_following"
+            app:layout_constraintStart_toEndOf="@+id/follow"
             app:layout_constraintTop_toBottomOf="@+id/profile_numFollower" />
 
         <ImageButton
