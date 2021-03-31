@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.capstone.dolphindive">
 
     <application
@@ -16,6 +17,8 @@
         <activity android:name=".DiveLogList"></activity>
         <activity android:name=".DiveLog_Create"></activity>
         <activity android:name=".Profile_Show" />
+        <activity android:name=".Follow_List" />
+        <activity android:name=".Following_List" />
         <activity android:name=".DiveLog_Edit_Scu" />
         <activity android:name=".DiveLog_Edit_Free" />
         <activity android:name=".Profile_Edit" />
