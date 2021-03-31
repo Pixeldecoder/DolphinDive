@@ -75,15 +75,12 @@ public class Profile extends Fragment implements View.OnClickListener{
         Divelog.setOnClickListener((View.OnClickListener) this);
         posts.setOnClickListener((View.OnClickListener) this);
         logout.setOnClickListener((View.OnClickListener) this);
-        numPosts.setText("0");
-        numFollowing.setText("0");
-        numFollower.setText("0");
-
-        follow = (TextView) view.findViewById(R.id.follow);
-        follow.setOnClickListener((View.OnClickListener) this);
 
         following = (TextView) view.findViewById(R.id.following);
         following.setOnClickListener((View.OnClickListener) this);
+
+        follow = (TextView) view.findViewById(R.id.follower);
+        follow.setOnClickListener((View.OnClickListener) this);
     }
 
     @Override
@@ -115,12 +112,12 @@ public class Profile extends Fragment implements View.OnClickListener{
             case R.id.logoutBtn:
                 logout();
                 break;
-            case R.id.follow:
+            case R.id.following:
                 Intent myIntent2 = new Intent(getActivity(), Follow_List.class);
                 startActivity(myIntent2);
                 break;
 
-            case R.id.following:
+            case R.id.follower:
                 Intent myIntent3 = new Intent(getActivity(), Following_List.class);
                 startActivity(myIntent3);
                 break;
@@ -139,6 +136,9 @@ public class Profile extends Fragment implements View.OnClickListener{
                     String name = task.getResult().getString("name");
                     String email = task.getResult().getString("email");
                     String url = task.getResult().getString("url");
+                    String numPosts_txt = task.getResult().getString("numPosts");
+                    String numFollowing_txt = task.getResult().getString("numFollowing");
+                    String numFollower_txt = task.getResult().getString("numFollower");
                     if(!TextUtils.isEmpty(name) ){
                         userName.setText(name);
                     }else{
@@ -147,6 +147,9 @@ public class Profile extends Fragment implements View.OnClickListener{
                     if(!TextUtils.isEmpty(url)){
                         Picasso.get().load(url).transform(new CircleTransform()).centerCrop().fit().into(portrait);
                     }
+                    numPosts.setText(numPosts_txt);
+                    numFollowing.setText(numFollowing_txt);
+                    numFollower.setText(numFollower_txt);
 
                 }else{
                     userName.setText(user.getEmail());

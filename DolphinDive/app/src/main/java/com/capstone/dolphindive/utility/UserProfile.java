@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.capstone.dolphindive.utility.ui.login.UserProfileFollowCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -70,32 +71,126 @@ public class UserProfile {
                 });
     }
 
-    public void increaseFollowing(UserProfileCallback customCallback){
-        db.runTransaction(new Transaction.Function<Void>() {
+    public void increaseFollowing(UserProfileFollowCallback customCallback){
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
-                DocumentSnapshot snapshot = transaction.get(documentReference);
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                String numFollowing;
+                if (task.getResult().exists()) {
+                    numFollowing = task.getResult().getString("numFollowing");
+                } else {
+                    numFollowing = "0";
+                }
+                db.runTransaction(new Transaction.Function<Void>() {
+                    @Override
+                    public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                        DocumentSnapshot snapshot = transaction.get(documentReference);
 
-                //transaction.update(sfDocRef, "population", newPopulation);
-                transaction.update(documentReference, "numFollowing", "2");
+                        //transaction.update(sfDocRef, "population", newPopulation);
+                        transaction.update(documentReference, "numFollowing",
+                                String.valueOf(Integer.parseInt(numFollowing)+1));
 
-                // Success
-                return null;
+                        if (customCallback != null) {
+                            customCallback.onComplete();
+                        }
+
+                        // Success
+                        return null;
+                    }
+                });
             }
         });
     }
 
-    public void increaseFollower(UserProfileCallback customCallback){
-        db.runTransaction(new Transaction.Function<Void>() {
+    public void increaseFollower(UserProfileFollowCallback customCallback){
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
-                DocumentSnapshot snapshot = transaction.get(documentReference);
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                String numFollower;
+                if (task.getResult().exists()) {
+                    numFollower = task.getResult().getString("numFollower");
+                } else {
+                    numFollower = "0";
+                }
+                db.runTransaction(new Transaction.Function<Void>() {
+                    @Override
+                    public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                        DocumentSnapshot snapshot = transaction.get(documentReference);
 
-                //transaction.update(sfDocRef, "population", newPopulation);
-                transaction.update(documentReference, "numFollowing", "2");
+                        //transaction.update(sfDocRef, "population", newPopulation);
+                        transaction.update(documentReference, "numFollower",
+                                String.valueOf(Integer.parseInt(numFollower)+1));
 
-                // Success
-                return null;
+                        if (customCallback != null) {
+                            customCallback.onComplete();
+                        }
+
+                        // Success
+                        return null;
+                    }
+                });
+            }
+        });
+    }
+
+    public void decreaseFollowing(UserProfileFollowCallback customCallback){
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                String numFollowing;
+                if (task.getResult().exists()) {
+                    numFollowing = task.getResult().getString("numFollowing");
+                } else {
+                    numFollowing = "0";
+                }
+                db.runTransaction(new Transaction.Function<Void>() {
+                    @Override
+                    public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                        DocumentSnapshot snapshot = transaction.get(documentReference);
+
+                        //transaction.update(sfDocRef, "population", newPopulation);
+                        transaction.update(documentReference, "numFollowing",
+                                String.valueOf(Integer.parseInt(numFollowing)-1));
+
+                        if (customCallback != null) {
+                            customCallback.onComplete();
+                        }
+
+                        // Success
+                        return null;
+                    }
+                });
+            }
+        });
+    }
+
+    public void decreaseFollower(UserProfileFollowCallback customCallback){
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                String numFollower;
+                if (task.getResult().exists()) {
+                    numFollower = task.getResult().getString("numFollower");
+                } else {
+                    numFollower = "0";
+                }
+                db.runTransaction(new Transaction.Function<Void>() {
+                    @Override
+                    public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                        DocumentSnapshot snapshot = transaction.get(documentReference);
+
+                        //transaction.update(sfDocRef, "population", newPopulation);
+                        transaction.update(documentReference, "numFollower",
+                                String.valueOf(Integer.parseInt(numFollower)-1));
+
+                        if (customCallback != null) {
+                            customCallback.onComplete();
+                        }
+
+                        // Success
+                        return null;
+                    }
+                });
             }
         });
     }

@@ -17,6 +17,7 @@
         <activity android:name=".DiveLogList"></activity>
         <activity android:name=".DiveLog_Create"></activity>
         <activity android:name=".Profile_Show" />
+        <activity android:name=".Social_Profile" />
         <activity android:name=".Follow_List" />
         <activity android:name=".Following_List" />
         <activity android:name=".DiveLog_Edit_Scu" />

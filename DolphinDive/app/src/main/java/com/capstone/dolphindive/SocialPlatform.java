@@ -154,6 +154,15 @@ public class SocialPlatform extends Fragment {
                             final DatabaseReference postRef = getRef(position);
                             DatabaseReference userPostRef = PostsRef.child(postRef.getKey());
 
+                            holder.profileImage.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent =new Intent(getActivity(),Social_Profile.class);
+                                    intent.putExtra("uid",model.getUid() );
+                                    startActivity(intent);
+                                }
+                            });
+
                             holder.comment.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
