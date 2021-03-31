@@ -131,7 +131,7 @@ public class Social_Profile extends AppCompatActivity {
                                                 public void onComplete() {
                                                 }
                                             });
-                                            Toast.makeText(Social_Profile.this, "Successfully UnFollowed",Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Social_Profile.this, "Successfully Unfollowed",Toast.LENGTH_SHORT).show();
                                             followBtn.setText("Follow");
                                         }
                                     });
