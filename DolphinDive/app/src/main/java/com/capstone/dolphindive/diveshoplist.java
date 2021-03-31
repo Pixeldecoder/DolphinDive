@@ -95,7 +95,7 @@ public class diveshoplist extends AppCompatActivity {
         recentsDataList.add(new diveshopdata("Raja Ampat Diveshop","Raja Ampat","$200","2.7","Hot",R.drawable.rajaampat,"+1 333-648-2564","Rajaampatdive@rajaampatdive.in","Raja Ampat Dive Shop located at the beautiful beach in Bali, Indonesia, providing stunning living environment, shore dive and boat dive service, we aim to give to the best diving experience in your staying with us.",20,10,"123 Street, Bali","Check in after 3.30pm, check out before 11.30 am, all meals included, airport shuttle included, smoke free, any other question please contact our reception!"));
         recentsDataList.add(new diveshopdata("Semporna Diveshop","Semporna","$324","3.6","Hot",R.drawable.semporna,"+1 234-647-9283","sempdive@gmail.com","Semporna Dive Shop located at the beautiful beach in Semporna,Indonesia, providing stunning living environment, shore dive and boat dive service, we aim to give to the best diving experience in your staying with us.",15,8,"123 Street, Bali","Check in after 3.30pm, check out before 11.30 am, all meals included, airport shuttle included, smoke free, any other question please contact our reception!"));
         recentsDataList.add(new diveshopdata("Red Sea Diveshop","Red Sea","$200","5","Superhot",R.drawable.redsea,"+1 365-888-4929","Redseadive@gmail.com","Red Sea Dive Shop located at the beautiful beach in Red Sea,Egypt, providing stunning living environment, shore dive and boat dive service, we aim to give to the best diving experience in your staying with us.",30,15,"123 Street, Bali","Check in after 3.30pm, check out before 11.30 am, all meals included, airport shuttle included, smoke free, any other question please contact our reception!"));
-        recentsDataList.add(new diveshopdata("Lemborna Island Diveshop","Lemborna","$260","4.9","Superhot",R.drawable.cancun,"+1 456-788-3215","lemdive@bali.in","Lemborna Dive Shop located at the beautiful beach in Lembongan Island, Indonesia, providing stunning living environment, shore dive and boat dive service, we aim to give to the best diving experience in your staying with us.",10,6,"123 Street, Bali","Check in after 3.30pm, check out before 11.30 am, all meals included, airport shuttle included, smoke free, any other question please contact our reception!"));
+        recentsDataList.add(new diveshopdata("Lemborna Island Diveshop","Lemborna Island","$260","4.9","Superhot",R.drawable.cancun,"+1 456-788-3215","lemdive@bali.in","Lemborna Dive Shop located at the beautiful beach in Lembongan Island, Indonesia, providing stunning living environment, shore dive and boat dive service, we aim to give to the best diving experience in your staying with us.",10,6,"123 Street, Bali","Check in after 3.30pm, check out before 11.30 am, all meals included, airport shuttle included, smoke free, any other question please contact our reception!"));
     }
     private void sortArrayListRate(ArrayList inputlist){
         Collections.sort(inputlist, new Comparator<diveshopdata>() {
@@ -308,7 +308,9 @@ public class diveshoplist extends AppCompatActivity {
         adult_plus.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                num_adult = num_adult +1;
+                if(num_adult+num_children<group_size){
+                    num_adult = num_adult +1;
+                }
                 num_adults.setText(String.valueOf(num_adult));
             }
         });
@@ -316,7 +318,8 @@ public class diveshoplist extends AppCompatActivity {
         child_plus.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                num_children = num_children +1;
+                if(num_adult+num_children<group_size){
+                num_children = num_children +1;}
                 num_child.setText(String.valueOf(num_children));
             }
         });

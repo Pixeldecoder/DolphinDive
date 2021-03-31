@@ -42,7 +42,7 @@ public class DiveShop extends Fragment {
         redseabtnOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String sessionId = "Egypt";
+                String sessionId = "Red Sea";
                 Intent in = new Intent(getActivity(),diveshoplist.class);
                 in.putExtra("Key", sessionId);
                 startActivity(in);
@@ -86,7 +86,7 @@ public class DiveShop extends Fragment {
         lembornaislandbtnOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String sessionId = "lemborna island";
+                String sessionId = "Lemborna Island";
                 Intent in = new Intent(getActivity(),diveshoplist.class);
                 in.putExtra("Key", sessionId);
                 startActivity(in);

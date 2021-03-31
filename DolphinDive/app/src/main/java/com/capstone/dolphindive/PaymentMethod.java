@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class PaymentMethod extends AppCompatActivity {
-    private TextView diveshopname,address,adult,children,rooms,checkin,checkout,cellphone,email,policy;
+    private TextView diveshopname,address,adults,children,rooms,checkin,checkout,cellphone,email,policy;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +34,8 @@ public class PaymentMethod extends AppCompatActivity {
         checkin.setText(userfilter[0]);
         checkout = (TextView) findViewById(R.id.pay_checkout_date);
         checkout.setText(userfilter[1]);
-        adult = (TextView) findViewById(R.id.pay_adult_number);
-        adult.setText(userfilter[2]);
+        adults = (TextView) findViewById(R.id.pay_adult_number);
+        adults.setText(userfilter[2]);
         children = (TextView) findViewById(R.id.pay_child_number);
         children.setText(userfilter[3]);
         rooms = (TextView) findViewById(R.id.pay_rooms);
