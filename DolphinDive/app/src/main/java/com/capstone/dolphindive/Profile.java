@@ -113,12 +113,12 @@ public class Profile extends Fragment implements View.OnClickListener{
                 logout();
                 break;
             case R.id.following:
-                Intent myIntent2 = new Intent(getActivity(), Follow_List.class);
+                Intent myIntent2 = new Intent(getActivity(), Following_List.class);
                 startActivity(myIntent2);
                 break;
 
             case R.id.follower:
-                Intent myIntent3 = new Intent(getActivity(), Following_List.class);
+                Intent myIntent3 = new Intent(getActivity(), Follower_List.class);
                 startActivity(myIntent3);
                 break;
         }
