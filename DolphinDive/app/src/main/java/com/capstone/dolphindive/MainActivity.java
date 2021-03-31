@@ -14,6 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
+ 
 
     Button chatBtn;
 
@@ -59,8 +60,16 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.nav_diveshop:
                     selectedFragment = new DiveShop();
                     break;
+                case R.id.nav_chat:
+                    Intent i= new Intent(MainActivity.this,Chatting.class);
+                    startActivity(i);
+                    return true;
                 case R.id.nav_profile:
-                    selectedFragment = new Profile();
+                    if(FirebaseAuth.getInstance().getCurrentUser()==null){
+                        selectedFragment = new PreLogin();
+                    }else{
+                        selectedFragment = new Profile();
+                    }
                     break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -69,12 +78,4 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    public void logout(View view) {
-        FirebaseAuth.getInstance().signOut();
-        Intent regintent = new Intent(MainActivity.this, Login.class);
-        startActivity(regintent);
-        finish();
-    }
-
-    ;
 }

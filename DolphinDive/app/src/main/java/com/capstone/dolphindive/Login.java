@@ -2,7 +2,6 @@ package com.capstone.dolphindive;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +22,7 @@ public class Login extends AppCompatActivity {
 
     EditText logEmail, logPassword;
     Button logBtn;
+    Button cancelBtn;
     TextView navReg;
     ProgressBar progressBar;
     FirebaseAuth fAuth;
@@ -41,6 +41,8 @@ public class Login extends AppCompatActivity {
 
         progressBar = findViewById(R.id.progressBar2);
 
+        cancelBtn = findViewById(R.id.login_cancelBtn);
+
         fAuth = FirebaseAuth.getInstance();
 
 
@@ -52,6 +54,14 @@ public class Login extends AppCompatActivity {
                 startActivity(logintent);
             }
 
+        });
+
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent logintent = new Intent(Login.this, MainActivity.class);
+                startActivity(logintent);
+            }
         });
 
        logBtn.setOnClickListener(new View.OnClickListener(){

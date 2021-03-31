@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.capstone.dolphindive">
-<uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,24 +10,38 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DolphinDive">
+        <activity android:name=".PaymentConfirmation"></activity>
+        <activity android:name=".PaymentMethod" />
+        <activity android:name=".diveshoplistdetail" />
+        <activity android:name=".diveshoplist" />
+        <activity android:name=".DiveLogList"></activity>
+        <activity android:name=".DiveLog_Create"></activity>
+        <activity android:name=".Profile_Show" />
+        <activity android:name=".Follow_List" />
+        <activity android:name=".Following_List" />
+        <activity android:name=".DiveLog_Edit_Scu" />
+        <activity android:name=".DiveLog_Edit_Free" />
+        <activity android:name=".Profile_Edit" />
+        <activity android:name=".PostActivity" />
+        <activity android:name=".CommentActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".Login" />
-        <activity android:name=".Register"/>
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".Register" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Chatting" />
         <activity android:name=".PreStart">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-        </activity>
-        <activity android:name=".DiveLog_Scu" android:windowSoftInputMode="stateHidden|adjustResize"
-            />
-        <activity android:name=".DiveLog_Free"
-            android:windowSoftInputMode="adjustPan|adjustResize"  />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <activity android:name=".Chatting"/>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
