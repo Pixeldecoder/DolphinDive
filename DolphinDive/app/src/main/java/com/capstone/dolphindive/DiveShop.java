@@ -53,7 +53,7 @@ public class DiveShop extends Fragment {
         sempornabtnOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String sessionId = "Indonesia";
+                String sessionId = "semporna";
                 Intent in = new Intent(getActivity(),diveshoplist.class);
                 in.putExtra("Key", sessionId);
                 startActivity(in);
@@ -64,7 +64,7 @@ public class DiveShop extends Fragment {
         rajaampatbtnOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String sessionId = "Indonesia";
+                String sessionId = "raja ampat";
                 Intent in = new Intent(getActivity(),diveshoplist.class);
                 in.putExtra("Key", sessionId);
                 startActivity(in);
@@ -75,7 +75,7 @@ public class DiveShop extends Fragment {
         balibtnOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String sessionId = "Indonesia";
+                String sessionId = "bali";
                 Intent in = new Intent(getActivity(),diveshoplist.class);
                 in.putExtra("Key", sessionId);
                 startActivity(in);
@@ -86,7 +86,7 @@ public class DiveShop extends Fragment {
         lembornaislandbtnOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String sessionId = "Indonesia";
+                String sessionId = "lemborna island";
                 Intent in = new Intent(getActivity(),diveshoplist.class);
                 in.putExtra("Key", sessionId);
                 startActivity(in);

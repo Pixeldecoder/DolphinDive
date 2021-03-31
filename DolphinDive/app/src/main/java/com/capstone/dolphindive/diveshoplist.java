@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -37,8 +38,8 @@ public class diveshoplist extends AppCompatActivity {
     private AlertDialog.Builder dialogBuilder,dialogBuildercalendar;
     private TextView Groupsize, num_rooms, num_adults, num_child;
     private ImageButton filtercheck, filtercancel, groupsize_minus, groupsize_plus, room_minus, room_plus, adults_minus, adult_plus, child_minus, child_plus, Calendar_confirm,Calendar_goback;
-    private int group_size = 0, num_room = 0, num_adult = 0, num_children = 0;
-    private String check_in,check_out,teststring;
+    private Integer group_size = 0, num_room = 0, num_adult = 0, num_children = 0;
+    private String check_in,check_out,instruction;
     RecyclerView recentRecycler;
     placesAdapter recentsAdapter;
     @Override
@@ -46,12 +47,11 @@ public class diveshoplist extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diveshoplist);
         Bundle extras = getIntent().getExtras();
-        String instruction = extras.getString("Key");
+        instruction = extras.getString("Key");
         initSearchWidget();
         ExampleData();
         buildRecentRecycler(recentsDataList);
         filterwithinstruction(instruction);
-
 
 
         ImageButton filterbutton  = (ImageButton) findViewById(R.id.con_filter);
@@ -90,12 +90,12 @@ public class diveshoplist extends AppCompatActivity {
     }
     private void ExampleData(){
         recentsDataList = new ArrayList<>();
-        recentsDataList.add(new diveshopdata("Bali Diveshop","Bali","$175","4.5","Superhot",R.drawable.bali));
-        recentsDataList.add(new diveshopdata("Cancun Diveshop","Cancun","$603","3.8","Medium",R.drawable.cancun));
-        recentsDataList.add(new diveshopdata("Raja Ampat Diveshop","Indonesia","$200","2.7","Hot",R.drawable.rajaampat));
-        recentsDataList.add(new diveshopdata("Semporna Diveshop","Indonesia","$324","3.6","Hot",R.drawable.semporna));
-        recentsDataList.add(new diveshopdata("Red Sea Diveshop","Egypt","$200","5","Superhot",R.drawable.redsea));
-        recentsDataList.add(new diveshopdata("Lembongan Diveshop","Indonesia","$260","4.9","Superhot",R.drawable.cancun));
+        recentsDataList.add(new diveshopdata("Bali Diveshop","Bali","$175","4.5","Superhot",R.drawable.bali,"+1 456-788-6923","balidive@bali.in","Bali Dive Shop located at the beautiful beach in Bali, Indonesia, providing stunning living environment, shore dive and boat dive service, we aim to give to the best diving experience in your staying with us.",20,10,"123 Street, Bali","Check in after 3.30pm, check out before 11.30 am, all meals included, airport shuttle included, smoke free, any other question please contact our reception!"));
+        recentsDataList.add(new diveshopdata("Cancun Diveshop","Cancun","$603","3.8","Medium",R.drawable.cancun,"+1 134-658-3432","Cancundive@google.com","Cancun Dive Shop located at the beautiful beach in Cancun, Indonesia, providing stunning living environment, shore dive and boat dive service, we aim to give to the best diving experience in your staying with us.",10,3,"123 Street, Bali","Check in after 3.30pm, check out before 11.30 am, all meals included, airport shuttle included, smoke free, any other question please contact our reception!"));
+        recentsDataList.add(new diveshopdata("Raja Ampat Diveshop","Raja Ampat","$200","2.7","Hot",R.drawable.rajaampat,"+1 333-648-2564","Rajaampatdive@rajaampatdive.in","Raja Ampat Dive Shop located at the beautiful beach in Bali, Indonesia, providing stunning living environment, shore dive and boat dive service, we aim to give to the best diving experience in your staying with us.",20,10,"123 Street, Bali","Check in after 3.30pm, check out before 11.30 am, all meals included, airport shuttle included, smoke free, any other question please contact our reception!"));
+        recentsDataList.add(new diveshopdata("Semporna Diveshop","Semporna","$324","3.6","Hot",R.drawable.semporna,"+1 234-647-9283","sempdive@gmail.com","Semporna Dive Shop located at the beautiful beach in Semporna,Indonesia, providing stunning living environment, shore dive and boat dive service, we aim to give to the best diving experience in your staying with us.",15,8,"123 Street, Bali","Check in after 3.30pm, check out before 11.30 am, all meals included, airport shuttle included, smoke free, any other question please contact our reception!"));
+        recentsDataList.add(new diveshopdata("Red Sea Diveshop","Red Sea","$200","5","Superhot",R.drawable.redsea,"+1 365-888-4929","Redseadive@gmail.com","Red Sea Dive Shop located at the beautiful beach in Red Sea,Egypt, providing stunning living environment, shore dive and boat dive service, we aim to give to the best diving experience in your staying with us.",30,15,"123 Street, Bali","Check in after 3.30pm, check out before 11.30 am, all meals included, airport shuttle included, smoke free, any other question please contact our reception!"));
+        recentsDataList.add(new diveshopdata("Lemborna Island Diveshop","Lemborna","$260","4.9","Superhot",R.drawable.cancun,"+1 456-788-3215","lemdive@bali.in","Lemborna Dive Shop located at the beautiful beach in Lembongan Island, Indonesia, providing stunning living environment, shore dive and boat dive service, we aim to give to the best diving experience in your staying with us.",10,6,"123 Street, Bali","Check in after 3.30pm, check out before 11.30 am, all meals included, airport shuttle included, smoke free, any other question please contact our reception!"));
     }
     private void sortArrayListRate(ArrayList inputlist){
         Collections.sort(inputlist, new Comparator<diveshopdata>() {
@@ -137,7 +137,7 @@ public class diveshoplist extends AppCompatActivity {
                 ArrayList<diveshopdata> filteredlist = new ArrayList<diveshopdata>();
                 for(diveshopdata item : recentsDataList)
                 {
-                    if (item.getCountryName().toLowerCase().contains(s.toLowerCase()))
+                    if (item.getCountryName().toLowerCase().contains(s.toLowerCase())&&num_room<=item.getRoomavail()&&group_size<=item.getSizeavail())
                     {
                     filteredlist.add(item);
                     }
@@ -151,7 +151,7 @@ public class diveshoplist extends AppCompatActivity {
     private boolean filterwithinstruction(String instruction){
         ArrayList<diveshopdata> filteredlist = new ArrayList<diveshopdata>();
         for (diveshopdata item : recentsDataList) {
-            if (instruction != null && item.getCountryName().toLowerCase().contains(instruction.toLowerCase())) {
+            if (instruction != null && item.getCountryName().toLowerCase().contains(instruction.toLowerCase())&&num_room<=item.getRoomavail()&&group_size<=item.getSizeavail()) {
                 filteredlist.add(item);
             }
         }
@@ -159,18 +159,12 @@ public class diveshoplist extends AppCompatActivity {
         sorting(filteredlist);
         return false;
     }
-    private void setRecentRecycler(ArrayList<diveshopdata> recentsDataList) {
-        recentRecycler = findViewById(R.id.recent_recycler);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        recentRecycler.setLayoutManager(layoutManager);
-        recentsAdapter = new placesAdapter(this, 0, recentsDataList);
-        recentRecycler.setAdapter(recentsAdapter);
-    }
     private void buildRecentRecycler(ArrayList liststate){
+        String[] userfilter= {check_in,check_out,num_adult.toString(),num_children.toString(),num_room.toString()};
         RecyclerView recyclerView = findViewById(R.id.recent_recycler);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recyclerView.setHasFixedSize(true);
-        mRecyclerViewAdapter = new placesAdapter(this, 0, liststate);
+        mRecyclerViewAdapter = new placesAdapter(this, 0, liststate,userfilter);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(mRecyclerViewAdapter);
     }
@@ -179,7 +173,6 @@ public class diveshoplist extends AppCompatActivity {
         final View calendarpopupview = getLayoutInflater().inflate(R.layout.activity_diveshop_calendar, null);
         checkin_date = (TextView) findViewById(R.id.checkindate);
         checkout_date = (TextView) findViewById(R.id.checkoutdate);
-        TextView test = (TextView) findViewById(R.id.test);
         Calendar_confirm = (ImageButton) calendarpopupview.findViewById(R.id.calendar_confirm);
         Calendar_goback = (ImageButton) calendarpopupview.findViewById(R.id.calendar_goback);
         Date today = new Date();
@@ -209,7 +202,7 @@ public class diveshoplist extends AppCompatActivity {
                 checkoutdate = checkoutdate.replace("]", "");
                 check_out = checkoutdate;
                 check_in = checkindate;
-                teststring = selecteddate;
+
 
             }
 
@@ -226,7 +219,6 @@ public class diveshoplist extends AppCompatActivity {
             public void onClick(View v){
                 checkout_date.setText(check_out);
                 checkin_date.setText(check_in);
-                test.setText(teststring);
                 dialogcalendar.dismiss();
             }
         });
@@ -347,6 +339,7 @@ public class diveshoplist extends AppCompatActivity {
                 num_adult = Integer.parseInt(num_adults.getText().toString());
                 num_children = Integer.parseInt(num_child.getText().toString());
                 dialog.dismiss();
+                filterwithinstruction(instruction);
             }
         });
 
