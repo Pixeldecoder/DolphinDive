@@ -43,7 +43,8 @@ public class Profile extends Fragment implements View.OnClickListener{
     ImageView portrait;
     String uid;
 
-    Button follow;
+    TextView follow;
+    TextView following;
 
     @Nullable
     @Override
@@ -78,8 +79,11 @@ public class Profile extends Fragment implements View.OnClickListener{
         numFollowing.setText("0");
         numFollower.setText("0");
 
-        follow = (Button)view.findViewById(R.id.follow);
+        follow = (TextView) view.findViewById(R.id.follow);
         follow.setOnClickListener((View.OnClickListener) this);
+
+        following = (TextView) view.findViewById(R.id.following);
+        following.setOnClickListener((View.OnClickListener) this);
     }
 
     @Override
@@ -114,6 +118,11 @@ public class Profile extends Fragment implements View.OnClickListener{
             case R.id.follow:
                 Intent myIntent2 = new Intent(getActivity(), Follow_List.class);
                 startActivity(myIntent2);
+                break;
+
+            case R.id.following:
+                Intent myIntent3 = new Intent(getActivity(), Following_List.class);
+                startActivity(myIntent3);
                 break;
         }
     }
