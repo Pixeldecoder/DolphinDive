@@ -1,6 +1,8 @@
 package com.capstone.dolphindive.utility;
 
 import android.content.Context;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.capstone.dolphindive.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
@@ -25,6 +31,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     private Context mContext;
     private List<Message> mChat;
     private String imageurl;
+
+    private String TAG = "Chatting";
 
     FirebaseUser fuser;
 
@@ -51,13 +59,45 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
         Message chat = mChat.get(position);
 
-        holder.show_message.setText(chat.getMessage());
-
         if (imageurl.equals("default")){
             holder.profile_image.setImageResource(R.mipmap.ic_launcher);
         } else {
             Glide.with(mContext).load(imageurl).into(holder.profile_image);
         }
+
+        if(chat.getMessage() != null) {
+            holder.show_message.setText(chat.getMessage());
+            holder.show_message.setVisibility(TextView.VISIBLE);
+            holder.messageImageView.setVisibility(ImageView.GONE);
+        } else if(chat.getFileUrl() != null) {
+            String imageUrl = chat.getFileUrl();
+            if (imageUrl.startsWith("gs://")) {
+                StorageReference storageReference = FirebaseStorage.getInstance()
+                        .getReferenceFromUrl(imageUrl);
+                storageReference.getDownloadUrl().addOnCompleteListener(
+                        new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+                                if (task.isSuccessful()) {
+                                    String downloadUrl = task.getResult().toString();
+                                    Glide.with(holder.messageImageView.getContext())
+                                            .load(downloadUrl)
+                                            .into(holder.messageImageView);
+                                } else {
+                                    Log.w(TAG, "Getting download url was not successful.",
+                                            task.getException());
+                                }
+                            }
+                        });
+            }else{
+                    Glide.with(holder.messageImageView.getContext())
+                            .load(chat.getFileUrl())
+                            .into(holder.messageImageView);
+                }
+                holder.messageImageView.setVisibility(ImageView.VISIBLE);
+                holder.show_message.setVisibility(TextView.GONE);
+            }
+
 
         if (position == mChat.size()-1){
             if (chat.isIsseen()){
@@ -81,6 +121,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         public TextView show_message;
         public ImageView profile_image;
         public TextView txt_seen;
+        public ImageView messageImageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -88,6 +129,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             show_message = itemView.findViewById(R.id.show_message);
             profile_image = itemView.findViewById(R.id.profile_image);
             txt_seen = itemView.findViewById(R.id.txt_seen);
+            messageImageView = itemView.findViewById(R.id.messageImageView);
         }
     }
 
