@@ -1,13 +1,10 @@
 package com.capstone.dolphindive;
 
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.capstone.dolphindive.utility.CircleTransform;
 import com.capstone.dolphindive.utility.UserProfile;
 import com.capstone.dolphindive.utility.UserProfileCallback;
-import com.capstone.dolphindive.utility.ui.login.UserProfileFollowCallback;
+import com.capstone.dolphindive.utility.UserProfileFollowCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

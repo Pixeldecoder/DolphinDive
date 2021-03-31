@@ -1,4 +1,4 @@
-package com.capstone.dolphindive.utility.ui.login;
+package com.capstone.dolphindive.utility;
 
 public interface UserProfileFollowCallback {
     void onComplete();

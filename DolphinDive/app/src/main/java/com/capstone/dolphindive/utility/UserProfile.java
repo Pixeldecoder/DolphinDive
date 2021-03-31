@@ -1,10 +1,7 @@
 package com.capstone.dolphindive.utility;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
-import com.capstone.dolphindive.utility.ui.login.UserProfileFollowCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -133,6 +130,37 @@ public class UserProfile {
         });
     }
 
+    public void increasePosts(UserProfileFollowCallback customCallback){
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                String numPosts;
+                if (task.getResult().exists()) {
+                    numPosts = task.getResult().getString("numPosts");
+                } else {
+                    numPosts = "0";
+                }
+                db.runTransaction(new Transaction.Function<Void>() {
+                    @Override
+                    public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                        DocumentSnapshot snapshot = transaction.get(documentReference);
+
+                        //transaction.update(sfDocRef, "population", newPopulation);
+                        transaction.update(documentReference, "numPosts",
+                                String.valueOf(Integer.parseInt(numPosts)-1));
+
+                        if (customCallback != null) {
+                            customCallback.onComplete();
+                        }
+
+                        // Success
+                        return null;
+                    }
+                });
+            }
+        });
+    }
+
     public void decreaseFollowing(UserProfileFollowCallback customCallback){
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -194,6 +222,38 @@ public class UserProfile {
             }
         });
     }
+
+    public void decreasePosts(UserProfileFollowCallback customCallback){
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                String numPosts;
+                if (task.getResult().exists()) {
+                    numPosts = task.getResult().getString("numPosts");
+                } else {
+                    numPosts = "0";
+                }
+                db.runTransaction(new Transaction.Function<Void>() {
+                    @Override
+                    public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                        DocumentSnapshot snapshot = transaction.get(documentReference);
+
+                        //transaction.update(sfDocRef, "population", newPopulation);
+                        transaction.update(documentReference, "numPosts",
+                                String.valueOf(Integer.parseInt(numPosts)-1));
+
+                        if (customCallback != null) {
+                            customCallback.onComplete();
+                        }
+
+                        // Success
+                        return null;
+                    }
+                });
+            }
+        });
+    }
+
 
 
 
