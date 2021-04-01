@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".DiveShop">
 
 
@@ -91,7 +92,7 @@
                     android:orientation="vertical">
 
                     <ImageButton
-                        android:id="@+id/imageButton3"
+                        android:id="@+id/redsea_button"
                         android:layout_width="176dp"
                         android:layout_height="130dp"
                         android:layout_margin="10dp"
@@ -126,7 +127,7 @@
                     android:orientation="vertical">
 
                     <ImageButton
-                        android:id="@+id/imageButton4"
+                        android:id="@+id/semporna_button"
                         android:layout_width="176dp"
                         android:layout_height="130dp"
                         android:layout_margin="10dp"
@@ -153,7 +154,7 @@
                     android:orientation="vertical">
 
                     <ImageButton
-                        android:id="@+id/imageButton5"
+                        android:id="@+id/rajaampat_button"
                         android:layout_width="176dp"
                         android:layout_height="130dp"
                         android:layout_margin="10dp"
@@ -186,7 +187,7 @@
                     android:orientation="vertical">
 
                     <ImageButton
-                        android:id="@+id/imageButton6"
+                        android:id="@+id/bali_button"
                         android:layout_width="176dp"
                         android:layout_height="130dp"
                         android:layout_margin="10dp"
@@ -213,7 +214,7 @@
                     android:orientation="vertical">
 
                     <ImageButton
-                        android:id="@+id/imageButton7"
+                        android:id="@+id/lembornaisland_button"
                         android:layout_width="176dp"
                         android:layout_height="130dp"
                         android:layout_margin="10dp"
@@ -260,7 +261,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:id="@+id/imageButton8"
+                    android:id="@+id/diveequip_button"
                     android:layout_width="175dp"
                     android:layout_height="92dp"
                     android:layout_margin="10dp"
@@ -287,7 +288,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:id="@+id/imageButton9"
+                    android:id="@+id/localfood_button"
                     android:layout_width="175dp"
                     android:layout_height="92dp"
                     android:layout_margin="10dp"
@@ -314,7 +315,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:id="@+id/imageButton10"
+                    android:id="@+id/localtip_button"
                     android:layout_width="175dp"
                     android:layout_height="92dp"
                     android:layout_margin="10dp"
@@ -384,29 +385,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
-        <EditText
-            android:id="@+id/editTextTextPersonName"
-            android:layout_width="250dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="80dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="40dp"
+        <SearchView
+            android:id="@+id/main_seach_dest"
+            android:layout_width="236dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="17dp"
             android:background="#FFFFFF"
-            android:drawableLeft="@drawable/ic_baseline_search_24"
-            android:ems="10"
-            android:fontFamily="@font/aldrich"
-            android:inputType="textPersonName"
-            android:paddingStart="10dp"
-            android:text="Search destination"
-            android:textColor="#8C8C8C"
-            android:textStyle="bold"
+            android:iconifiedByDefault="false"
+            android:queryHint="Enter Destination"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/textView13"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintStart_toEndOf="@+id/textView14"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

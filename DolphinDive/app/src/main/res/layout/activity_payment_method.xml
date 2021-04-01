@@ -44,10 +44,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkout_date" />
+        app:layout_constraintTop_toBottomOf="@+id/pay_checkout_date" />
 
     <TextView
-        android:id="@+id/textView25"
+        android:id="@+id/pay_diveshop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
@@ -62,8 +62,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="Check-in:"
-        app:layout_constraintStart_toStartOf="@+id/textView25"
-        app:layout_constraintTop_toBottomOf="@+id/textView25" />
+        app:layout_constraintStart_toStartOf="@+id/pay_diveshop"
+        app:layout_constraintTop_toBottomOf="@+id/pay_diveshop" />
 
     <TextView
         android:id="@+id/textView27"
@@ -75,7 +75,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
     <TextView
-        android:id="@+id/checkin_date"
+        android:id="@+id/pay_checkin_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -85,7 +85,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView26" />
 
     <TextView
-        android:id="@+id/checkout_date"
+        android:id="@+id/pay_checkout_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -181,7 +181,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView37" />
 
     <TextView
-        android:id="@+id/adult_number"
+        android:id="@+id/pay_adult_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -191,7 +191,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView30" />
 
     <TextView
-        android:id="@+id/child_number"
+        android:id="@+id/pay_child_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -201,7 +201,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView31" />
 
     <TextView
-        android:id="@+id/room_number"
+        android:id="@+id/pay_rooms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -211,7 +211,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView32" />
 
     <TextView
-        android:id="@+id/diveshop_address"
+        android:id="@+id/pay_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -221,7 +221,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView33" />
 
     <TextView
-        android:id="@+id/diveshop_cell"
+        android:id="@+id/pay_cell"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -254,7 +254,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView44" />
 
     <TextView
-        android:id="@+id/diveshop_email"
+        android:id="@+id/pay_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -264,7 +264,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView35" />
 
     <TextView
-        android:id="@+id/Diveshop_policy"
+        android:id="@+id/pay_policy"
         android:layout_width="285dp"
         android:layout_height="39dp"
         android:layout_marginStart="12dp"

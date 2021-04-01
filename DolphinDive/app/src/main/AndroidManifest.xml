@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.capstone.dolphindive">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,22 +12,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DolphinDive">
-        <activity android:name=".PaymentConfirmation"></activity>
+        <activity android:name=".diveshop_calendar"></activity>
+        <activity android:name=".Local_tips" />
+        <activity android:name=".Local_Food" />
+        <activity android:name=".equipment_rental" />
+        <activity android:name=".PaymentConfirmation" />
         <activity android:name=".PaymentMethod" />
         <activity android:name=".diveshoplistdetail" />
         <activity android:name=".diveshoplist" />
-        <activity android:name=".DiveLogList"></activity>
+        <activity
+            android:name=".ProfileManagement"
+            android:label="@string/title_activity_profile_management"
+            android:theme="@style/Theme.DolphinDive.NoActionBar" />
+        <activity android:name=".DiveLogList" />
+        <activity android:name=".diveshoplist" />
+        <activity android:name=".ShowProfile" />
+        <activity android:name=".EditProfile" />
         <activity android:name=".DiveLog_Create"></activity>
         <activity android:name=".Profile_Show" />
         <activity android:name=".Social_Profile" />
-        <activity android:name=".Follow_List" />
+        <activity android:name=".Follower_List" />
         <activity android:name=".Following_List" />
         <activity android:name=".DiveLog_Edit_Scu" />
         <activity android:name=".DiveLog_Edit_Free" />
         <activity android:name=".Profile_Edit" />
         <activity android:name=".PostActivity" />
-        <activity android:name=".CommentActivity"
-            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".CommentActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Login" />
         <activity android:name=".Register" />
         <activity android:name=".MainActivity" />
@@ -42,7 +56,5 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

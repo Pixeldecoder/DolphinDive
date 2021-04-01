@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#56FFFFFF">
+
+    <TextView
+        android:id="@+id/textView80"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="66dp"
+        android:text="Group size:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/groupsize_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:text="0"
+        app:layout_constraintBottom_toBottomOf="@+id/groupsize_minus"
+        app:layout_constraintStart_toEndOf="@+id/groupsize_minus"
+        app:layout_constraintTop_toTopOf="@+id/groupsize_minus" />
+
+    <TextView
+        android:id="@+id/rooms_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:text="0"
+        app:layout_constraintBottom_toBottomOf="@+id/rooms_minus"
+        app:layout_constraintStart_toEndOf="@+id/rooms_minus"
+        app:layout_constraintTop_toTopOf="@+id/rooms_minus" />
+
+    <TextView
+        android:id="@+id/adult_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:text="0"
+        app:layout_constraintBottom_toBottomOf="@+id/adult_minus"
+        app:layout_constraintStart_toEndOf="@+id/adult_minus"
+        app:layout_constraintTop_toTopOf="@+id/adult_minus" />
+
+    <TextView
+        android:id="@+id/child_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:text="0"
+        app:layout_constraintBottom_toBottomOf="@+id/child_minus"
+        app:layout_constraintStart_toEndOf="@+id/child_minus"
+        app:layout_constraintTop_toTopOf="@+id/child_minus" />
+
+    <TextView
+        android:id="@+id/textView81"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Rooms:"
+        app:layout_constraintStart_toStartOf="@+id/textView80"
+        app:layout_constraintTop_toBottomOf="@+id/textView80" />
+
+    <TextView
+        android:id="@+id/textView83"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Adult:"
+        app:layout_constraintStart_toStartOf="@+id/textView81"
+        app:layout_constraintTop_toBottomOf="@+id/textView81" />
+
+    <TextView
+        android:id="@+id/textView84"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Child:"
+        app:layout_constraintStart_toStartOf="@+id/textView83"
+        app:layout_constraintTop_toBottomOf="@+id/textView83" />
+
+    <ImageButton
+        android:id="@+id/groupsize_minus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/textView80"
+        app:layout_constraintStart_toEndOf="@+id/textView80"
+        app:layout_constraintTop_toTopOf="@+id/textView80"
+        app:srcCompat="@drawable/minus" />
+
+    <ImageButton
+        android:id="@+id/rooms_minus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/textView81"
+        app:layout_constraintStart_toStartOf="@+id/groupsize_minus"
+        app:layout_constraintTop_toTopOf="@+id/textView81"
+        app:srcCompat="@drawable/minus" />
+
+    <ImageButton
+        android:id="@+id/adult_minus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/textView83"
+        app:layout_constraintStart_toStartOf="@+id/rooms_minus"
+        app:layout_constraintTop_toTopOf="@+id/textView83"
+        app:srcCompat="@drawable/minus" />
+
+    <ImageButton
+        android:id="@+id/child_minus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/textView84"
+        app:layout_constraintStart_toStartOf="@+id/adult_minus"
+        app:layout_constraintTop_toTopOf="@+id/textView84"
+        app:srcCompat="@drawable/minus" />
+
+    <ImageButton
+        android:id="@+id/groupsize_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/groupsize_num"
+        app:layout_constraintStart_toEndOf="@+id/groupsize_num"
+        app:layout_constraintTop_toTopOf="@+id/groupsize_num"
+        app:srcCompat="@drawable/add" />
+
+    <ImageButton
+        android:id="@+id/rooms_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/rooms_num"
+        app:layout_constraintStart_toEndOf="@+id/rooms_num"
+        app:layout_constraintTop_toTopOf="@+id/rooms_num"
+        app:srcCompat="@drawable/add" />
+
+    <ImageButton
+        android:id="@+id/adult_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/adult_num"
+        app:layout_constraintStart_toEndOf="@+id/adult_num"
+        app:layout_constraintTop_toTopOf="@+id/adult_num"
+        app:srcCompat="@drawable/add" />
+
+    <ImageButton
+        android:id="@+id/child_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/child_num"
+        app:layout_constraintStart_toEndOf="@+id/child_num"
+        app:layout_constraintTop_toTopOf="@+id/child_num"
+        app:srcCompat="@drawable/add" />
+
+    <ImageButton
+        android:id="@+id/filter_check"
+        android:layout_width="54dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="25dp"
+        android:background="#00FFFFFF"
+        android:scaleX="2"
+        android:scaleY="2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/child_minus"
+        app:srcCompat="@drawable/check" />
+
+    <ImageButton
+        android:id="@+id/filter_can"
+        android:layout_width="54dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:background="#00FFFFFF"
+        android:scaleX="2"
+        android:scaleY="2"
+        app:layout_constraintBottom_toBottomOf="@+id/filter_check"
+        app:layout_constraintStart_toEndOf="@+id/filter_check"
+        app:layout_constraintTop_toTopOf="@+id/filter_check"
+        app:srcCompat="@drawable/cancel" />
+
+    <TextView
+        android:id="@+id/textView89"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear"
+        app:layout_constraintEnd_toEndOf="@+id/filter_can"
+        app:layout_constraintStart_toStartOf="@+id/filter_can"
+        app:layout_constraintTop_toBottomOf="@+id/filter_can" />
+
+    <TextView
+        android:id="@+id/textView90"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm"
+        app:layout_constraintEnd_toEndOf="@+id/filter_check"
+        app:layout_constraintStart_toStartOf="@+id/filter_check"
+        app:layout_constraintTop_toBottomOf="@+id/filter_check" />
+</androidx.constraintlayout.widget.ConstraintLayout>

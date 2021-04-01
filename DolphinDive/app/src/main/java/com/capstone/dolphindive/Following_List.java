@@ -21,7 +21,7 @@ public class Following_List extends AppCompatActivity {
 //        back.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                Intent logintent = new Intent(Follow_List.this, Profile.class);
+//                Intent logintent = new Intent(Follower_List.this, Profile.class);
 //                startActivity(logintent);
 //            }
 //

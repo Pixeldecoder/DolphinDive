@@ -14,7 +14,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.capstone.dolphindive.ui.main.SectionsPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
-public class Follow_List extends AppCompatActivity {
+public class Follower_List extends AppCompatActivity {
 
     ImageButton back;
 
@@ -29,7 +29,7 @@ public class Follow_List extends AppCompatActivity {
 //        back.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                Intent logintent = new Intent(Follow_List.this, Profile.class);
+//                Intent logintent = new Intent(Follower_List.this, Profile.class);
 //                startActivity(logintent);
 //            }
 //
