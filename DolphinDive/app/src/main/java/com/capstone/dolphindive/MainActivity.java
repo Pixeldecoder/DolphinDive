@@ -68,10 +68,9 @@ public class MainActivity extends AppCompatActivity {
                     if(FirebaseAuth.getInstance().getCurrentUser()==null){
                         selectedFragment = new PreLogin();
                     }else{
-                        Intent i= new Intent(MainActivity.this,Chatting.class);
-                        startActivity(i);
-                        return true;
+                        selectedFragment = new ChattingHistory();
                     }
+                    break;
                 case R.id.nav_profile:
                     if(FirebaseAuth.getInstance().getCurrentUser()==null){
                         selectedFragment = new PreLogin();

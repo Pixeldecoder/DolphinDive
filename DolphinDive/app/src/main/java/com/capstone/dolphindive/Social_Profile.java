@@ -75,7 +75,13 @@ public class Social_Profile extends AppCompatActivity {
         msgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Add intent here
+                if(!TextUtils.equals(target_uid, cur_uid)){
+                    Intent intent = new Intent(Social_Profile.this, Chatting.class);
+                    intent.putExtra("userid", target_uid);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(Social_Profile.this, "Click on other's portait to view their profile",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

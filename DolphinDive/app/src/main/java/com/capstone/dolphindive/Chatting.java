@@ -102,7 +102,7 @@ public class Chatting extends AppCompatActivity {
             fuser = FirebaseAuth.getInstance().getCurrentUser();
         }
 
-        userid="SSPXVDqkBCWLPn3fnmwudl8gY2Z2";
+        userid = getIntent().getExtras().getString("userid");
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,7 +123,7 @@ public class Chatting extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
-                username.setText(user.getUsername());
+                username.setText(user.getSearch());
                 if (user.getImageURL().equals("default")){
                     profile_image.setImageResource(R.mipmap.ic_launcher);
                 } else {
@@ -201,6 +201,11 @@ public class Chatting extends AppCompatActivity {
                 if (!dataSnapshot.exists()){
                     chatRef.child("id").setValue(userid);
                 }
+                if(message != null){
+                    chatRef.child("message").setValue(message);
+                }else{
+                    chatRef.child("message").setValue("[image]");
+                }
             }
 
             @Override
@@ -213,6 +218,11 @@ public class Chatting extends AppCompatActivity {
                 .child(userid)
                 .child(fuser.getUid());
         chatRefReceiver.child("id").setValue(fuser.getUid());
+        if(message != null){
+            chatRefReceiver.child("message").setValue(message);
+        }else{
+            chatRefReceiver.child("message").setValue("[image]");
+        }
 
         userReference = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
         userReference.addValueEventListener(new ValueEventListener() {
@@ -344,7 +354,7 @@ public class Chatting extends AppCompatActivity {
                     hashMap.put("receiver", userid);
                     hashMap.put("message", null);
                     hashMap.put("isseen", false);
-                    hashMap.put("photoUrl",  mPhotoUrl);
+                    hashMap.put("photoUrl",  fuser.getPhotoUrl());
                     hashMap.put("fileUrl", LOADING_IMAGE_URL);
 
                     reference.child("Chats").push().setValue(hashMap, new DatabaseReference.CompletionListener() {
