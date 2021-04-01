@@ -80,7 +80,7 @@ public class Social_Profile extends AppCompatActivity {
                     intent.putExtra("userid", target_uid);
                     startActivity(intent);
                 }else{
-                    Toast.makeText(Social_Profile.this, "Click on other's portait to view their profile",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Social_Profile.this, "Message failed",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -105,15 +105,18 @@ public class Social_Profile extends AppCompatActivity {
                                             curUser.increaseFollowing(new UserProfileFollowCallback() {
                                                 @Override
                                                 public void onComplete() {
+                                                    tarUser.increaseFollower(new UserProfileFollowCallback() {
+                                                        @Override
+                                                        public void onComplete() {
+                                                            Toast.makeText(Social_Profile.this, "Successfully Followed",Toast.LENGTH_SHORT).show();
+                                                            //followBtn.setText("Unfollow");
+                                                            finish();
+                                                            startActivity(getIntent());
+                                                        }
+                                                    });
                                                 }
                                             });
-                                            tarUser.increaseFollower(new UserProfileFollowCallback() {
-                                                @Override
-                                                public void onComplete() {
-                                                }
-                                            });
-                                            Toast.makeText(Social_Profile.this, "Successfully Followed",Toast.LENGTH_SHORT).show();
-                                            followBtn.setText("Unfollow");
+
     //                                finish();
     //                                Intent intent = new Intent(Social_Profile.this, Social_Profile.class);
     //                                intent.putExtra("uid",target_uid);
@@ -139,15 +142,17 @@ public class Social_Profile extends AppCompatActivity {
                                             curUser.decreaseFollowing(new UserProfileFollowCallback() {
                                                 @Override
                                                 public void onComplete() {
+                                                    tarUser.decreaseFollower(new UserProfileFollowCallback() {
+                                                        @Override
+                                                        public void onComplete() {
+                                                            Toast.makeText(Social_Profile.this, "Successfully Unfollowed",Toast.LENGTH_SHORT).show();
+                                                            //followBtn.setText("Follow");
+                                                            finish();
+                                                            startActivity(getIntent());
+                                                        }
+                                                    });
                                                 }
                                             });
-                                            tarUser.decreaseFollower(new UserProfileFollowCallback() {
-                                                @Override
-                                                public void onComplete() {
-                                                }
-                                            });
-                                            Toast.makeText(Social_Profile.this, "Successfully Unfollowed",Toast.LENGTH_SHORT).show();
-                                            followBtn.setText("Follow");
                                         }
                                     });
                                 }

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -87,12 +88,15 @@ public class UserProfile {
                         transaction.update(documentReference, "numFollowing",
                                 String.valueOf(Integer.parseInt(numFollowing)+1));
 
+                        // Success
+                        return null;
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
                         if (customCallback != null) {
                             customCallback.onComplete();
                         }
-
-                        // Success
-                        return null;
                     }
                 });
             }
@@ -118,12 +122,15 @@ public class UserProfile {
                         transaction.update(documentReference, "numFollower",
                                 String.valueOf(Integer.parseInt(numFollower)+1));
 
+                        // Success
+                        return null;
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
                         if (customCallback != null) {
                             customCallback.onComplete();
                         }
-
-                        // Success
-                        return null;
                     }
                 });
             }
@@ -149,12 +156,15 @@ public class UserProfile {
                         transaction.update(documentReference, "numPosts",
                                 String.valueOf(Integer.parseInt(numPosts)-1));
 
+                        // Success
+                        return null;
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
                         if (customCallback != null) {
                             customCallback.onComplete();
                         }
-
-                        // Success
-                        return null;
                     }
                 });
             }
@@ -180,12 +190,15 @@ public class UserProfile {
                         transaction.update(documentReference, "numFollowing",
                                 String.valueOf(Integer.parseInt(numFollowing)-1));
 
+                        // Success
+                        return null;
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
                         if (customCallback != null) {
                             customCallback.onComplete();
                         }
-
-                        // Success
-                        return null;
                     }
                 });
             }
@@ -211,12 +224,15 @@ public class UserProfile {
                         transaction.update(documentReference, "numFollower",
                                 String.valueOf(Integer.parseInt(numFollower)-1));
 
+                        // Success
+                        return null;
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
                         if (customCallback != null) {
                             customCallback.onComplete();
                         }
-
-                        // Success
-                        return null;
                     }
                 });
             }
@@ -242,12 +258,15 @@ public class UserProfile {
                         transaction.update(documentReference, "numPosts",
                                 String.valueOf(Integer.parseInt(numPosts)-1));
 
+                        // Success
+                        return null;
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
                         if (customCallback != null) {
                             customCallback.onComplete();
                         }
-
-                        // Success
-                        return null;
                     }
                 });
             }
