@@ -16,7 +16,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/post_list"
             android:layout_width="match_parent"
-            android:layout_height="697dp">
+            android:layout_height="531dp">
 
         </androidx.recyclerview.widget.RecyclerView>
 
