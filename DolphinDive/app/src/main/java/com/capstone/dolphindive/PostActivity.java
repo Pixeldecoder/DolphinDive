@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.EventLog;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +36,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
@@ -195,13 +199,23 @@ public class PostActivity extends AppCompatActivity {
                     postsMap.put("timestamp", ServerValue.TIMESTAMP);
 
                     HashMap userPostsMap = new HashMap();
-                    postsMap.put("date", saveCurrentDate);
-                    postsMap.put("time", saveCurrentTime);
-                    postsMap.put("description", Description);
-                    postsMap.put("postimage", downloadUrl);
-                    postsMap.put("timestamp", ServerValue.TIMESTAMP);
+                    userPostsMap.put("date", saveCurrentDate);
+                    userPostsMap.put("time", saveCurrentTime);
+                    userPostsMap.put("description", Description);
+                    userPostsMap.put("postimage", downloadUrl);
+                    userPostsMap.put("timestamp", FieldValue.serverTimestamp());
 
-                    collectionReference.document(current_user_id + postRandomName).set(userPostsMap);
+                    collectionReference.document(current_user_id + postRandomName).set(userPostsMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            ;
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w("Error","Error writting document", e);
+                        }
+                    });
 
                     PostsRef.child(current_user_id + postRandomName).updateChildren(postsMap)
                             .addOnCompleteListener(new OnCompleteListener() {
