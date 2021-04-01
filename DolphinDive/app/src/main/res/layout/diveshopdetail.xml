@@ -236,7 +236,7 @@
 
     <TextView
         android:id="@+id/detail_area"
-        android:layout_width="66dp"
+        android:layout_width="wrap_content"
         android:layout_height="27dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"

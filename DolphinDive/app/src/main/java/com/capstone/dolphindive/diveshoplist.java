@@ -137,7 +137,7 @@ public class diveshoplist extends AppCompatActivity {
                 ArrayList<diveshopdata> filteredlist = new ArrayList<diveshopdata>();
                 for(diveshopdata item : recentsDataList)
                 {
-                    if (item.getCountryName().toLowerCase().contains(s.toLowerCase())&&num_room<=item.getRoomavail()&&group_size<=item.getSizeavail())
+                    if (item.getCountryName().toLowerCase().contains(s.toLowerCase()))
                     {
                     filteredlist.add(item);
                     }
