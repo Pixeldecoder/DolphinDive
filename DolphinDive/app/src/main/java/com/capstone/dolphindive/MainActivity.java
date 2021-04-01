@@ -55,15 +55,23 @@ public class MainActivity extends AppCompatActivity {
             Fragment selectedFragment = null;
             switch (item.getItemId()) {
                 case R.id.nav_community:
-                    selectedFragment = new SocialPlatform();
+                    if(FirebaseAuth.getInstance().getCurrentUser()==null){
+                        selectedFragment = new PreLogin();
+                    }else{
+                        selectedFragment = new SocialPlatform();
+                    }
                     break;
                 case R.id.nav_diveshop:
                     selectedFragment = new DiveShop();
                     break;
                 case R.id.nav_chat:
-                    Intent i= new Intent(MainActivity.this,Chatting.class);
-                    startActivity(i);
-                    return true;
+                    if(FirebaseAuth.getInstance().getCurrentUser()==null){
+                        selectedFragment = new PreLogin();
+                    }else{
+                        Intent i= new Intent(MainActivity.this,Chatting.class);
+                        startActivity(i);
+                        return true;
+                    }
                 case R.id.nav_profile:
                     if(FirebaseAuth.getInstance().getCurrentUser()==null){
                         selectedFragment = new PreLogin();

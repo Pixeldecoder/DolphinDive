@@ -16,17 +16,30 @@
         tools:context=".Profile">
 
 
-
         <Button
             android:id="@+id/followBtn"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorPrimaryDark"
             app:layout_constraintBottom_toTopOf="@+id/guideline2"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/chatBtn"
             app:layout_constraintStart_toEndOf="@+id/profile_portrait"
             app:layout_constraintTop_toTopOf="@+id/guideline3"
-            android:layout_width="0dp" />
+            app:layout_constraintVertical_bias="0.533" />
 
+        <Button
+            android:id="@+id/chatBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:text="Message"
+            app:layout_constraintBottom_toTopOf="@+id/guideline2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/followBtn"
+            app:layout_constraintTop_toTopOf="@+id/guideline3"
+            app:layout_constraintVertical_bias="0.533" />
 
         <TextView
             android:id="@+id/profile_numFollower"
