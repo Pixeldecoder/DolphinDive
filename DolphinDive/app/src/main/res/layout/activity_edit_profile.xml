@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".EditProfile">
+    tools:context=".Profile_Edit">
 
     <TextView
         android:id="@+id/comment_profileEdit"

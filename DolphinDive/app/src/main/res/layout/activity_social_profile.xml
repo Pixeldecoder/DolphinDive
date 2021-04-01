@@ -2,7 +2,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/profile_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,68 +16,17 @@
         tools:context=".Profile">
 
 
+
         <Button
-            android:id="@+id/editProfile"
-            android:layout_width="0dp"
+            android:id="@+id/followBtn"
             android:layout_height="wrap_content"
-            android:text="Edit Profile"
+            android:backgroundTint="@color/colorPrimaryDark"
             app:layout_constraintBottom_toTopOf="@+id/guideline2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/profile_portrait"
-            app:layout_constraintTop_toTopOf="@+id/guideline3" />
+            app:layout_constraintTop_toTopOf="@+id/guideline3"
+            android:layout_width="0dp" />
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:fillViewport="true"
-            android:isScrollContainer="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline2">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/scrollView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <Button
-                    android:id="@+id/buddyBtn"
-                    android:layout_width="160dp"
-                    android:layout_height="200dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:text="Dive Buddy"
-                    app:backgroundTint="@color/colorPrimaryDark"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/PostsBtn" />
-
-                <Button
-                    android:id="@+id/DivelogBtn"
-                    android:layout_width="160dp"
-                    android:layout_height="270dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
-                    android:text="Dive Log"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <Button
-                    android:id="@+id/PostsBtn"
-                    android:layout_width="160dp"
-                    android:layout_height="200dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:text="Posts"
-                    app:backgroundTint="#03A9F4"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </ScrollView>
 
         <TextView
             android:id="@+id/profile_numFollower"
@@ -146,7 +94,7 @@
 
         <TextView
             android:id="@+id/following"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
@@ -156,15 +104,14 @@
             android:layout_marginBottom="8dp"
             android:background="#FFFFFF"
             android:ems="4"
-            android:gravity="center|center_horizontal|center_vertical"
-            android:text="Following"
-            android:textColor="#0B0A0A"
+            android:gravity="center|center_vertical"
+            android:inputType="textPersonName"
+            android:text="following"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintEnd_toStartOf="@+id/follower"
             app:layout_constraintStart_toEndOf="@+id/txt_posts"
             app:layout_constraintTop_toBottomOf="@+id/profile_numFol" />
-
 
 
         <TextView
@@ -201,23 +148,14 @@
             android:background="#FFFFFF"
             android:ems="4"
             android:gravity="center|center_horizontal|center_vertical"
-            android:text="Follower"
-            android:textColor="#0C0C0C"
+            android:inputType="textPersonName"
+            android:text="followers"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/following"
             app:layout_constraintTop_toBottomOf="@+id/profile_numFollower" />
 
-        <ImageButton
-            android:id="@+id/logoutBtn"
-            android:layout_width="50dp"
-            android:layout_height="0dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/common_full_open_on_phone"
-            app:layout_constraintBottom_toTopOf="@+id/guideline"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/profile_portrait"
@@ -275,6 +213,24 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_begin="120dp" />
+
+        <FrameLayout
+            android:id="@+id/post_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline2">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/post_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </FrameLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

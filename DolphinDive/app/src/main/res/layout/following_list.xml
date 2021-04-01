@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SocialPlatform">
+
+    <FrameLayout
+        android:id="@+id/post_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="55dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/follow_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/follower_list">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </FrameLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/update_post_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/background">
+
+        <TextView
+            android:id="@+id/follow_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Following"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="154dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

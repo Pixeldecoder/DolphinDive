@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +43,9 @@ public class Profile extends Fragment implements View.OnClickListener{
     ImageView portrait;
     String uid;
 
+    TextView follow;
+    TextView following;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,7 +60,7 @@ public class Profile extends Fragment implements View.OnClickListener{
         db=  FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
-        documentReference = db.collection(uid).document("profile");
+        documentReference = db.collection("Users").document(uid);
 
         edit= (Button)view.findViewById(R.id.editProfile);
         Divelog = (Button)view.findViewById(R.id.DivelogBtn);
@@ -73,9 +75,12 @@ public class Profile extends Fragment implements View.OnClickListener{
         Divelog.setOnClickListener((View.OnClickListener) this);
         posts.setOnClickListener((View.OnClickListener) this);
         logout.setOnClickListener((View.OnClickListener) this);
-        numPosts.setText("0");
-        numFollowing.setText("0");
-        numFollower.setText("0");
+
+        following = (TextView) view.findViewById(R.id.following);
+        following.setOnClickListener((View.OnClickListener) this);
+
+        follow = (TextView) view.findViewById(R.id.follower);
+        follow.setOnClickListener((View.OnClickListener) this);
     }
 
     @Override
@@ -86,10 +91,10 @@ public class Profile extends Fragment implements View.OnClickListener{
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if(task.getResult().exists()){
-                            Intent i = new Intent(getActivity(), ShowProfile.class);
+                            Intent i = new Intent(getActivity(), Profile_Show.class);
                             startActivity(i);
                         }else{
-                            Intent i = new Intent(getActivity(), EditProfile.class);
+                            Intent i = new Intent(getActivity(), Profile_Edit.class);
                             Bundle bundle =new Bundle();
                             bundle.putString("mode","create");
                             i.putExtras(bundle);
@@ -99,13 +104,22 @@ public class Profile extends Fragment implements View.OnClickListener{
                 });
                 break;
             case R.id.DivelogBtn:
-                Intent myIntent = new Intent(getActivity(), DiveLog_Scu.class);
+                Intent myIntent = new Intent(getActivity(), DiveLogList.class);
                 startActivity(myIntent);
                 break;
             case R.id.PostsBtn:
                 break;
             case R.id.logoutBtn:
                 logout();
+                break;
+            case R.id.following:
+                Intent myIntent2 = new Intent(getActivity(), Following_List.class);
+                startActivity(myIntent2);
+                break;
+
+            case R.id.follower:
+                Intent myIntent3 = new Intent(getActivity(), Follower_List.class);
+                startActivity(myIntent3);
                 break;
         }
     }
@@ -120,15 +134,22 @@ public class Profile extends Fragment implements View.OnClickListener{
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.getResult().exists()){
                     String name = task.getResult().getString("name");
+                    String email = task.getResult().getString("email");
                     String url = task.getResult().getString("url");
+                    String numPosts_txt = task.getResult().getString("numPosts");
+                    String numFollowing_txt = task.getResult().getString("numFollowing");
+                    String numFollower_txt = task.getResult().getString("numFollower");
                     if(!TextUtils.isEmpty(name) ){
                         userName.setText(name);
                     }else{
-                        userName.setText(user.getEmail());
+                        userName.setText(email);
                     }
                     if(!TextUtils.isEmpty(url)){
                         Picasso.get().load(url).transform(new CircleTransform()).centerCrop().fit().into(portrait);
                     }
+                    numPosts.setText(numPosts_txt);
+                    numFollowing.setText(numFollowing_txt);
+                    numFollower.setText(numFollower_txt);
 
                 }else{
                     userName.setText(user.getEmail());

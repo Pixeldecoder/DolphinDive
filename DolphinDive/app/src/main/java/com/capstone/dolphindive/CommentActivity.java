@@ -54,7 +54,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import xyz.hanks.library.bang.SmallBangView;
+//import xyz.hanks.library.bang.SmallBangView;
 
 
 public class CommentActivity extends AppCompatActivity {
