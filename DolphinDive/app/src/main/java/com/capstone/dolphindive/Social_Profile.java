@@ -39,6 +39,7 @@ public class Social_Profile extends AppCompatActivity {
     DocumentReference following;
     DocumentReference follower;
     Button followBtn;
+    Button msgBtn;
     TextView userName;
     TextView numPosts;
     TextView numFollowing ;
@@ -64,11 +65,19 @@ public class Social_Profile extends AppCompatActivity {
         follower  = db.collection("Users").document(target_uid).collection("follower").document(cur_uid);
 
         followBtn= (Button)findViewById(R.id.followBtn);
+        msgBtn = (Button) findViewById(R.id.chatBtn);
         userName = (TextView) findViewById(R.id.profile_username);
         numPosts = (TextView) findViewById(R.id.profile_numPosts);
         numFollowing = (TextView) findViewById(R.id.profile_numFol);
         numFollower = (TextView) findViewById(R.id.profile_numFollower);
         portrait = (ImageView)findViewById(R.id.profile_portrait);
+
+        msgBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Add intent here
+            }
+        });
 
         followBtn.setOnClickListener(new View.OnClickListener() {
             @Override
