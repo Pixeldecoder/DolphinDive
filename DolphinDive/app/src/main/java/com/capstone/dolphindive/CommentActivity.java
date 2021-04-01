@@ -41,8 +41,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -62,7 +69,10 @@ public class CommentActivity extends AppCompatActivity {
     private ProgressDialog loadingBar;
     private RecyclerView commentList;
     private Toolbar mToolbar;
-    private DatabaseReference UsersRef, PostsRef, userPostRef, CommentsRef;
+    private DatabaseReference PostsRef, userPostRef, CommentsRef;
+    private CollectionReference UserRef;
+    private FirebaseFirestore db;
+    private Query sortCommentRef;
     private FirebaseAuth mAuth;
     private String current_user_id;
     private TextView fullName, date, description, time, likes, uid, commentCounter;
@@ -106,11 +116,13 @@ public class CommentActivity extends AppCompatActivity {
 //        UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
         PostsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
 
-        UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        db = FirebaseFirestore.getInstance();
+        UserRef = db.collection("Users");
 
         String postID = getIntent().getStringExtra("PostID");
         userPostRef = PostsRef.child(postID);
         CommentsRef = FirebaseDatabase.getInstance().getReference().child("Comments").child(postID);
+        sortCommentRef = FirebaseDatabase.getInstance().getReference().child("Comments").child(postID).orderByChild("timestamp");
 
         loadingBar = new ProgressDialog(this);
 
@@ -171,12 +183,12 @@ public class CommentActivity extends AppCompatActivity {
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
         saveCurrentTime = currentTime.format(callForDate.getTime());
 
-        UsersRef.child(current_user_id).addValueEventListener(new ValueEventListener() {
+        UserRef.document(current_user_id).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    String userFullName = dataSnapshot.child("username").getValue().toString();
-                    String userProfileImg = dataSnapshot.child("imageURL").getValue().toString();
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if(value.exists()){
+                    String userFullName = value.get("name").toString();
+                    String userProfileImg = value.get("url").toString();
 
                     HashMap commentMap = new HashMap();
                     commentMap.put("uid", current_user_id);
@@ -185,6 +197,7 @@ public class CommentActivity extends AppCompatActivity {
                     commentMap.put("content", comment);
                     commentMap.put("profileimage", userProfileImg);
                     commentMap.put("fullname", userFullName);
+                    commentMap.put("timestamp", ServerValue.TIMESTAMP);
 
                     CommentsRef.child(current_user_id + saveCurrentDate + saveCurrentTime).updateChildren(commentMap)
                             .addOnCompleteListener(new OnCompleteListener() {
@@ -226,17 +239,13 @@ public class CommentActivity extends AppCompatActivity {
                             });
                 }
             }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
         });
     }
 
     private void DisplayAllComments(){
         FirebaseRecyclerOptions<Comments> options =
                 new FirebaseRecyclerOptions.Builder<Comments>()
-                        .setQuery(CommentsRef, Comments.class)
+                        .setQuery(sortCommentRef, Comments.class)
                         .build();
 
         FirebaseRecyclerAdapter<Comments, CommentActivity.CommentsViewHolder> firebaseRecyclerAdapter =

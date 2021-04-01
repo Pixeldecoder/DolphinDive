@@ -37,6 +37,7 @@
         <activity android:name=".DiveLog_Edit_Free" />
         <activity android:name=".Profile_Edit" />
         <activity android:name=".PostActivity" />
+        <activity android:name=".NotifyActivity"/>
         <activity
             android:name=".CommentActivity"
             android:windowSoftInputMode="adjustPan" />

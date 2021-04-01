@@ -67,6 +67,19 @@
             app:layout_constraintStart_toEndOf="@+id/appImg"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/red_dot"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:background="@drawable/background"
+            android:visibility="invisible"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            android:layout_margin="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/notification"
+            app:layout_constraintTop_toTopOf="@+id/notification"
+            android:src="@drawable/red_circle"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

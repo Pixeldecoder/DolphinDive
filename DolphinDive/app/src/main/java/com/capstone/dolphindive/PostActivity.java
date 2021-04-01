@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.EventLog;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -27,7 +28,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -51,7 +58,10 @@ public class PostActivity extends AppCompatActivity {
     private String Description;
 
     private StorageReference PostImageReference;
-    private DatabaseReference UsersRef, PostsRef;
+    private DatabaseReference PostsRef;
+    private FirebaseFirestore db;
+    private CollectionReference collectionReference;
+    private CollectionReference UserRef;
     private FirebaseAuth mAuth;
     private UploadTask uploadTask;
 
@@ -64,10 +74,12 @@ public class PostActivity extends AppCompatActivity {
         setContentView(R.layout.activity_post);
 
         mAuth = FirebaseAuth.getInstance();
-       current_user_id = mAuth.getCurrentUser().getUid();
+        current_user_id = mAuth.getCurrentUser().getUid();
+        db = FirebaseFirestore.getInstance();
+        collectionReference = db.collection("Users").document(current_user_id).collection("posts");
+        UserRef = db.collection("Users");
 
         PostImageReference = FirebaseStorage.getInstance().getReference();
-        UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
         PostsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
 
         SelectImg = (ImageButton) findViewById(R.id.select_image);
@@ -159,12 +171,12 @@ public class PostActivity extends AppCompatActivity {
     }
 
     private void SavingPostInformationToDatabase() {
-        UsersRef.child(current_user_id).addValueEventListener(new ValueEventListener() {
+        UserRef.document(current_user_id).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    String userFullName = dataSnapshot.child("username").getValue().toString();
-                    String userProfileImg = dataSnapshot.child("imageURL").getValue().toString();
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if(value.exists()){
+                    String userFullName = value.get("name").toString();
+                    String userProfileImg = value.get("url").toString();
 
                     HashMap postsMap = new HashMap();
                     postsMap.put("uid", current_user_id);
@@ -180,6 +192,16 @@ public class PostActivity extends AppCompatActivity {
                     postsMap.put("newLiker", "");
                     postsMap.put("commentCounter", "0");
                     postsMap.put("comments", null);
+                    postsMap.put("timestamp", ServerValue.TIMESTAMP);
+
+                    HashMap userPostsMap = new HashMap();
+                    postsMap.put("date", saveCurrentDate);
+                    postsMap.put("time", saveCurrentTime);
+                    postsMap.put("description", Description);
+                    postsMap.put("postimage", downloadUrl);
+                    postsMap.put("timestamp", ServerValue.TIMESTAMP);
+
+                    collectionReference.document(current_user_id + postRandomName).set(userPostsMap);
 
                     PostsRef.child(current_user_id + postRandomName).updateChildren(postsMap)
                             .addOnCompleteListener(new OnCompleteListener() {
@@ -197,11 +219,6 @@ public class PostActivity extends AppCompatActivity {
                                 }
                             });
                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }

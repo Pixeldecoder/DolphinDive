@@ -27,6 +27,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
@@ -39,11 +40,13 @@ public class SocialPlatform extends Fragment {
 
         private ImageView appName;
         private ImageView appIcon;
+        private ImageView red_dot;
         private RecyclerView postList;
         private ImageButton Notification;
         private ImageButton AddNewPostButton;
         private DatabaseReference PostsRef;
         private FirebaseAuth mAuth;
+        private Query PostsRec;
         private String current_user_id;
         private String current_user_image;
         private DatabaseReference UsersRef;
@@ -67,20 +70,22 @@ public class SocialPlatform extends Fragment {
                 }
             });
 
+            red_dot = (ImageView) view.findViewById(R.id.red_dot);
+            if (current_user_id.equals("Mz459IRSlfgGZMdTVmtMbnnFSUq2")){
+                red_dot.setVisibility(View.VISIBLE);
+            }
+
             Notification = (ImageButton) view.findViewById(R.id.notification);
             Notification.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
-                    getParentFragmentManager().beginTransaction().replace(R.id.post_container,
-                            new NotifyActivity()).commit();
+                    Intent NotifyIntent = new Intent(getActivity(), NotifyActivity.class);
+                    startActivity(NotifyIntent);
                 }
-//                public void onBackPressed(View v){
-//                    getParentFragmentManager().beginTransaction().replace(R.id.post_container,
-//                            new SocialPlatform()).commit();
-//                }
             });
 
             PostsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
+            PostsRec = FirebaseDatabase.getInstance().getReference().child("Posts").orderByChild("timestamp");
 
             postList = (RecyclerView) view.findViewById(R.id.post_list);
             postList.setHasFixedSize(true);
@@ -116,9 +121,8 @@ public class SocialPlatform extends Fragment {
         private void DisplayAllUsersPosts(){
             FirebaseRecyclerOptions<Posts> options =
                     new FirebaseRecyclerOptions.Builder<Posts>()
-                            .setQuery(PostsRef, Posts.class)
+                            .setQuery(PostsRec, Posts.class)
                             .build();
-//            PostsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
 
             FirebaseRecyclerAdapter<Posts, PostsViewHolder> firebaseRecyclerAdapter =
                     new FirebaseRecyclerAdapter<Posts, PostsViewHolder>(options) {
@@ -166,7 +170,7 @@ public class SocialPlatform extends Fragment {
                                     checkComment.putExtra("date", model.getDate());
                                     checkComment.putExtra("description", model.getDescription());
                                     checkComment.putExtra("time", model.getTime());
-                                    checkComment.putExtra("likes", model.getLikes());
+                                    checkComment.putExtra("likes", String.valueOf(Integer.parseInt(model.getLikes()) + Integer.parseInt(model.getNewLikes())));
                                     checkComment.putExtra("commentCounter", model.getCommentCounter());
                                     checkComment.putExtra("profileImage", model.getProfileimage());
                                     checkComment.putExtra("postImage", model.getPostimage());
