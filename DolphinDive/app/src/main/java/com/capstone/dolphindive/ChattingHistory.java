@@ -98,6 +98,20 @@ public class ChattingHistory extends Fragment{
                        });
                        holder.message.setText(model.getMessage());
 
+                       holder.profileImage.setOnClickListener(new View.OnClickListener() {
+                           @Override
+                           public void onClick(View v) {
+                               String uid = model.getId();
+                               if(!TextUtils.equals(uid, current_user_id)){
+                                   Intent intent = new Intent(getActivity(), Social_Profile.class);
+                                   intent.putExtra("uid", uid);
+                                   startActivity(intent);
+                               }else{
+                                   Toast.makeText(getActivity(), "Click on other's portrait to view profile",Toast.LENGTH_SHORT).show();
+                               }
+                           }
+                       });
+
                        holder.contactContent.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -107,7 +121,7 @@ public class ChattingHistory extends Fragment{
                                     intent.putExtra("userid", uid);
                                     startActivity(intent);
                                 }else{
-                                    Toast.makeText(getActivity(), "Click on other's portait to view their profile",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "Message failed",Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
