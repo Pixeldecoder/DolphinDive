@@ -105,6 +105,10 @@ public class Chatting extends AppCompatActivity {
             fuser = FirebaseAuth.getInstance().getCurrentUser();
         }
 
+
+        userReference = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
+        getUserProfileImg();
+
         userid = getIntent().getExtras().getString("userid");
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +116,7 @@ public class Chatting extends AppCompatActivity {
                 notify = true;
                 String msg = text_send.getText().toString();
                 if (!msg.equals("")){
-                    sendMessage(fuser.getUid(), userid, msg, "", "");
+                    sendMessage(fuser.getUid(), userid, msg, mPhotoUrl, "");
                 } else {
                     Toast.makeText(Chatting.this, "You can't send empty message", Toast.LENGTH_SHORT).show();
                 }
@@ -151,6 +155,7 @@ public class Chatting extends AppCompatActivity {
                 username.setText(profile.get("name"));
                 if (TextUtils.isEmpty(url) || url==null){
                     profile_image.setImageResource(R.mipmap.ic_launcher);
+                    url = "default";
                 } else {
                     //and this
                     Glide.with(getApplicationContext()).load(url).into(profile_image);
@@ -220,7 +225,7 @@ public class Chatting extends AppCompatActivity {
                 if (!dataSnapshot.exists()){
                     chatRef.child("id").setValue(userid);
                 }
-                if(message != null){
+                if(fileUrl == ""){
                     chatRef.child("message").setValue(message);
                 }else{
                     chatRef.child("message").setValue("[image]");
@@ -243,7 +248,6 @@ public class Chatting extends AppCompatActivity {
             chatRefReceiver.child("message").setValue("[image]");
         }
 
-        userReference = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
         userReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -356,7 +360,23 @@ public class Chatting extends AppCompatActivity {
         currentUser("none");
     }
 
+    private void getUserProfileImg() {
+        userReference.child(fuser.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+//                    String userFullName = dataSnapshot.child("username").getValue().toString();
+                    String userProfileImg = dataSnapshot.child("imageURL").getValue().toString();
+                    mPhotoUrl = userProfileImg;
+//                    current_user_name =  userFullName;
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -373,7 +393,7 @@ public class Chatting extends AppCompatActivity {
                     hashMap.put("receiver", userid);
                     hashMap.put("message", null);
                     hashMap.put("isseen", false);
-                    hashMap.put("photoUrl",  fuser.getPhotoUrl());
+                    hashMap.put("photoUrl",  mPhotoUrl);
                     hashMap.put("fileUrl", LOADING_IMAGE_URL);
 
                     reference.child("Chats").push().setValue(hashMap, new DatabaseReference.CompletionListener() {
@@ -406,6 +426,7 @@ public class Chatting extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (!dataSnapshot.exists()){
                                 chatRef.child("id").setValue(userid);
+                                chatRef.child("message").setValue("[Image]");
                             }
                         }
 
@@ -419,6 +440,7 @@ public class Chatting extends AppCompatActivity {
                             .child(userid)
                             .child(fuser.getUid());
                     chatRefReceiver.child("id").setValue(fuser.getUid());
+                    chatRefReceiver.child("message").setValue("[Image]");
 
                     userReference = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
                     userReference.addValueEventListener(new ValueEventListener() {
