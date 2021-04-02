@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -21,6 +22,8 @@ import com.bumptech.glide.Glide;
 import com.capstone.dolphindive.utility.Message;
 import com.capstone.dolphindive.utility.MessageAdapter;
 import com.capstone.dolphindive.utility.User;
+import com.capstone.dolphindive.utility.UserProfile;
+import com.capstone.dolphindive.utility.UserProfileCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -117,27 +120,43 @@ public class Chatting extends AppCompatActivity {
             }
         });
 
-        userReference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
+//        userReference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
+//
+//        userReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                User user = dataSnapshot.getValue(User.class);
+//                username.setText(user.getSearch());
+//                if (user.getImageURL().equals("default")){
+//                    profile_image.setImageResource(R.mipmap.ic_launcher);
+//                } else {
+//                    //and this
+//                    Glide.with(getApplicationContext()).load(user.getImageURL()).into(profile_image);
+//                }
+//                readMessages(fuser.getUid(), userid, user.getImageURL());
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//
+//        });
 
-        userReference.addValueEventListener(new ValueEventListener() {
+        UserProfile profile = new UserProfile(userid);
+        profile.getProfile(new UserProfileCallback() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                username.setText(user.getSearch());
-                if (user.getImageURL().equals("default")){
+            public void onComplete(HashMap<String, String> profile) {
+                String url = profile.get("url");
+                username.setText(profile.get("name"));
+                if (TextUtils.isEmpty(url) || url==null){
                     profile_image.setImageResource(R.mipmap.ic_launcher);
                 } else {
                     //and this
-                    Glide.with(getApplicationContext()).load(user.getImageURL()).into(profile_image);
+                    Glide.with(getApplicationContext()).load(url).into(profile_image);
                 }
-                readMessages(fuser.getUid(), userid, user.getImageURL());
+                readMessages(fuser.getUid(), userid, url);
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-
         });
 
         mAddMessageImageView = (ImageView) findViewById(R.id.addMessageImageView);
