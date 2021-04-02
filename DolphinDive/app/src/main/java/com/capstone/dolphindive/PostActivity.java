@@ -21,6 +21,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.capstone.dolphindive.utility.UserProfile;
+import com.capstone.dolphindive.utility.UserProfileFollowCallback;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -163,7 +165,6 @@ public class PostActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<Uri> task) {
                 if (task.isSuccessful()) {
                     downloadUrl = task.getResult().toString();
-                    Toast.makeText(PostActivity.this, "Post successfully!",  Toast.LENGTH_SHORT).show();
                     SavingPostInformationToDatabase();
                 } else {
                     String message = task.getException().getMessage();
@@ -175,12 +176,12 @@ public class PostActivity extends AppCompatActivity {
     }
 
     private void SavingPostInformationToDatabase() {
-        UserRef.document(current_user_id).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+        UserRef.document(current_user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                if(value.exists()){
-                    String userFullName = value.get("name").toString();
-                    String userProfileImg = value.get("url").toString();
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    String userFullName = task.getResult().getString("name");
+                    String userProfileImg = task.getResult().getString("url");
 
                     HashMap postsMap = new HashMap();
                     postsMap.put("uid", current_user_id);
@@ -205,25 +206,30 @@ public class PostActivity extends AppCompatActivity {
                     userPostsMap.put("postimage", downloadUrl);
 //                    userPostsMap.put("timestamp", FieldValue.serverTimestamp());
 
-                    collectionReference.document(current_user_id + postRandomName).set(userPostsMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            ;
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.w("Error","Error writting document", e);
-                        }
-                    });
-
                     PostsRef.child(current_user_id + postRandomName).updateChildren(postsMap)
                             .addOnCompleteListener(new OnCompleteListener() {
                                 @Override
                                 public void onComplete(@NonNull Task task) {
                                     if(task.isSuccessful()){
+                                        collectionReference.document(current_user_id + postRandomName).set(userPostsMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                UserProfile profile =new UserProfile(current_user_id);
+                                                profile.increasePosts(new UserProfileFollowCallback() {
+                                                    @Override
+                                                    public void onComplete() {
+                                                        return;
+                                                    }
+                                                });
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.w("Error","Error writting document", e);
+                                            }
+                                        });
                                         SendUserToMainActivity();
-                                        Toast.makeText(PostActivity.this,"Post Uploaded Successfully",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(PostActivity.this,"Post Successfully",Toast.LENGTH_SHORT).show();
                                         loadingBar.dismiss();
                                     }
                                     else{
@@ -234,7 +240,7 @@ public class PostActivity extends AppCompatActivity {
                             });
                 }
             }
-        });
+            });
     }
 
     private void OpenGallery() {

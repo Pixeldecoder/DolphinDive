@@ -154,7 +154,7 @@ public class UserProfile {
 
                         //transaction.update(sfDocRef, "population", newPopulation);
                         transaction.update(documentReference, "numPosts",
-                                String.valueOf(Integer.parseInt(numPosts)-1));
+                                String.valueOf(Integer.parseInt(numPosts)+1));
 
                         // Success
                         return null;

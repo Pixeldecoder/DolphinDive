@@ -136,7 +136,7 @@
             android:ems="4"
             android:gravity="center|center_horizontal|center_vertical"
             android:inputType="textPersonName"
-            android:text="posts"
+            android:text="Posts"
             android:textColor="#191A1C"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"

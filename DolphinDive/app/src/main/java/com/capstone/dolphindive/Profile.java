@@ -48,6 +48,7 @@ public class Profile extends Fragment implements View.OnClickListener{
 
     TextView follow;
     TextView following;
+    TextView posts_txt;
 
     @Nullable
     @Override
@@ -84,6 +85,10 @@ public class Profile extends Fragment implements View.OnClickListener{
 
         follow = (TextView) view.findViewById(R.id.follower);
         follow.setOnClickListener((View.OnClickListener) this);
+
+        posts_txt = (TextView) view.findViewById(R.id.txt_posts);
+        posts_txt.setOnClickListener((View.OnClickListener) this);
+
     }
 
     @Override
@@ -113,6 +118,10 @@ public class Profile extends Fragment implements View.OnClickListener{
             case R.id.PostsBtn:
                 Intent intent = new Intent(getActivity(), myPostList.class);
                 startActivity(intent);
+                break;
+            case R.id.txt_posts:
+                Intent intent2 = new Intent(getActivity(), myPostList.class);
+                startActivity(intent2);
                 break;
             case R.id.logoutBtn:
                 showDialog();

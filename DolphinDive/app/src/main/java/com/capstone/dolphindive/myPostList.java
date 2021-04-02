@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.capstone.dolphindive.utility.Comments;
+import com.capstone.dolphindive.utility.UserProfile;
+import com.capstone.dolphindive.utility.UserProfileFollowCallback;
 import com.capstone.dolphindive.utility.myPosts;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -79,6 +82,13 @@ public class myPostList extends AppCompatActivity {
                             public void onClick(View v) {
                                 getSnapshots().getSnapshot(position).getReference().delete();
                                 PostsRef.child(getSnapshots().getSnapshot(position).getId()).removeValue();
+                                UserProfile profile =new UserProfile(current_user_id);
+                                profile.decreasePosts(new UserProfileFollowCallback() {
+                                    @Override
+                                    public void onComplete() {
+                                        Toast.makeText(myPostList.this,"Successfully deleted",Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             }
                         });
                     }
