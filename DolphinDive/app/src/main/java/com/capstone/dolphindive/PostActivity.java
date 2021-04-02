@@ -203,7 +203,7 @@ public class PostActivity extends AppCompatActivity {
                     userPostsMap.put("time", saveCurrentTime);
                     userPostsMap.put("description", Description);
                     userPostsMap.put("postimage", downloadUrl);
-                    userPostsMap.put("timestamp", FieldValue.serverTimestamp());
+//                    userPostsMap.put("timestamp", FieldValue.serverTimestamp());
 
                     collectionReference.document(current_user_id + postRandomName).set(userPostsMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override

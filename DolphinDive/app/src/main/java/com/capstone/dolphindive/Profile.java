@@ -111,6 +111,8 @@ public class Profile extends Fragment implements View.OnClickListener{
                 startActivity(myIntent);
                 break;
             case R.id.PostsBtn:
+                Intent intent = new Intent(getActivity(), myPostList.class);
+                startActivity(intent);
                 break;
             case R.id.logoutBtn:
                 showDialog();

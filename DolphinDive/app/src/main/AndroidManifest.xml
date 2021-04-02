@@ -25,6 +25,7 @@
             android:label="@string/title_activity_profile_management"
             android:theme="@style/Theme.DolphinDive.NoActionBar" />
         <activity android:name=".DiveLogList" />
+        <activity android:name=".myPostList"/>
         <activity android:name=".diveshoplist" />
         <activity android:name=".ShowProfile" />
         <activity android:name=".EditProfile" />
