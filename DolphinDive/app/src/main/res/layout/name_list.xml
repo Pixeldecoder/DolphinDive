@@ -35,15 +35,15 @@
 
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="70dp"
-        android:layout_height="63dp"
-        android:background="#00FFFFFF"
-        app:srcCompat="@drawable/ic_home_black_24dp"
-        tools:ignore="VectorDrawableCompat"
-        tools:layout_editor_absoluteX="325dp"
-        tools:layout_editor_absoluteY="10dp" />
+<!--    <ImageButton-->
+<!--        android:id="@+id/imageButton"-->
+<!--        android:layout_width="70dp"-->
+<!--        android:layout_height="63dp"-->
+<!--        android:background="#00FFFFFF"-->
+<!--        app:srcCompat="@drawable/ic_home_black_24dp"-->
+<!--        tools:ignore="MissingConstraints,VectorDrawableCompat"-->
+<!--        tools:layout_editor_absoluteX="325dp"-->
+<!--        tools:layout_editor_absoluteY="10dp" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
