@@ -18,6 +18,7 @@ import com.capstone.dolphindive.adapter.placesAdapter;
 import com.capstone.dolphindive.model.diveshopdata;
 import com.squareup.timessquare.CalendarPickerView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -38,7 +39,7 @@ public class diveshoplist extends AppCompatActivity {
     private AlertDialog.Builder dialogBuilder,dialogBuildercalendar;
     private TextView Groupsize, num_rooms, num_adults, num_child;
     private ImageButton filtercheck, filtercancel, groupsize_minus, groupsize_plus, room_minus, room_plus, adults_minus, adult_plus, child_minus, child_plus, Calendar_confirm,Calendar_goback;
-    private Integer group_size = 0, num_room = 0, num_adult = 0, num_children = 0;
+    private Integer group_size = 0, num_room = 0, num_adult = 0, num_children = 0,listsize=0;
     private String check_in,check_out,instruction;
     RecyclerView recentRecycler;
     placesAdapter recentsAdapter;
@@ -90,12 +91,12 @@ public class diveshoplist extends AppCompatActivity {
     }
     private void ExampleData(){
         recentsDataList = new ArrayList<>();
-        recentsDataList.add(new diveshopdata("Bali Diveshop","Bali","$175","4.5","Superhot",R.drawable.bali,"+1 456-788-6923","balidive@bali.in","Bali Dive Shop located at the beautiful beach in Bali, Indonesia, providing stunning living environment, shore dive and boat dive service, we aim to give to the best diving experience in your staying with us.",20,10,"123 Street, Bali","Check in after 3.30pm, check out before 11.30 am, all meals included, airport shuttle included, smoke free, any other question please contact our reception!"));
-        recentsDataList.add(new diveshopdata("Cancun Diveshop","Cancun","$603","3.8","Medium",R.drawable.cancun,"+1 134-658-3432","Cancundive@google.com","Cancun Dive Shop located at the beautiful beach in Cancun, Indonesia, providing stunning living environment, shore dive and boat dive service, we aim to give to the best diving experience in your staying with us.",10,3,"123 Street, Bali","Check in after 3.30pm, check out before 11.30 am, all meals included, airport shuttle included, smoke free, any other question please contact our reception!"));
-        recentsDataList.add(new diveshopdata("Raja Ampat Diveshop","Raja Ampat","$200","2.7","Hot",R.drawable.rajaampat,"+1 333-648-2564","Rajaampatdive@rajaampatdive.in","Raja Ampat Dive Shop located at the beautiful beach in Bali, Indonesia, providing stunning living environment, shore dive and boat dive service, we aim to give to the best diving experience in your staying with us.",20,10,"123 Street, Bali","Check in after 3.30pm, check out before 11.30 am, all meals included, airport shuttle included, smoke free, any other question please contact our reception!"));
-        recentsDataList.add(new diveshopdata("Semporna Diveshop","Semporna","$324","3.6","Hot",R.drawable.semporna,"+1 234-647-9283","sempdive@gmail.com","Semporna Dive Shop located at the beautiful beach in Semporna,Indonesia, providing stunning living environment, shore dive and boat dive service, we aim to give to the best diving experience in your staying with us.",15,8,"123 Street, Bali","Check in after 3.30pm, check out before 11.30 am, all meals included, airport shuttle included, smoke free, any other question please contact our reception!"));
-        recentsDataList.add(new diveshopdata("Red Sea Diveshop","Red Sea","$200","5","Superhot",R.drawable.redsea,"+1 365-888-4929","Redseadive@gmail.com","Red Sea Dive Shop located at the beautiful beach in Red Sea,Egypt, providing stunning living environment, shore dive and boat dive service, we aim to give to the best diving experience in your staying with us.",30,15,"123 Street, Bali","Check in after 3.30pm, check out before 11.30 am, all meals included, airport shuttle included, smoke free, any other question please contact our reception!"));
-        recentsDataList.add(new diveshopdata("Lemborna Island Diveshop","Lemborna Island","$260","4.9","Superhot",R.drawable.cancun,"+1 456-788-3215","lemdive@bali.in","Lemborna Dive Shop located at the beautiful beach in Lembongan Island, Indonesia, providing stunning living environment, shore dive and boat dive service, we aim to give to the best diving experience in your staying with us.",10,6,"123 Street, Bali","Check in after 3.30pm, check out before 11.30 am, all meals included, airport shuttle included, smoke free, any other question please contact our reception!"));
+        recentsDataList.add(new diveshopdata("Bali Diveshop","Bali","$175","4.5","Superhot",R.drawable.bali,"+1 456-788-6923","balidive@bali.in","Bali Dive Shop located at the beautiful beach in Bali, Indonesia, providing stunning living environment, shore dive and boat dive service, we aim to give to the best diving experience in your staying with us.",20,10,"123 Street, Bali","We will pick you up when you arrive the airport, and send you to the airport when the trip is done. The price is whole day rate, including whole day meals, scuba service fee, room price, tips and tickets not included. Indoor is smoke free, any other question please contact us!"));
+        recentsDataList.add(new diveshopdata("Cancun Diveshop","Cancun","$603","3.8","Medium",R.drawable.cancun,"+1 134-658-3432","Cancundive@google.com","Cancun Dive Shop located at the beautiful beach in Cancun, Indonesia, providing stunning living environment, shore dive and boat dive service, we aim to give to the best diving experience in your staying with us.",10,3,"2602 Street, Cancun","We will pick you up when you arrive the airport, and send you to the airport when the trip is done. The price is whole day rate, including whole day meals, scuba service fee, room price, tips and tickets not included. Indoor is smoke free, any other question please contact us!"));
+        recentsDataList.add(new diveshopdata("Raja Ampat Diveshop","Raja Ampat","$200","2.7","Hot",R.drawable.rajaampat,"+1 333-648-2564","Rajaampatdive@rajaampatdive.in","Raja Ampat Dive Shop located at the beautiful beach in Bali, Indonesia, providing stunning living environment, shore dive and boat dive service, we aim to give to the best diving experience in your staying with us.",20,10,"Main Street, Raja Ampat","We will pick you up when you arrive the airport, and send you to the airport when the trip is done. The price is whole day rate, including whole day meals, scuba service fee, room price, tips and tickets not included. Indoor is smoke free, any other question please contact us!"));
+        recentsDataList.add(new diveshopdata("Semporna Diveshop","Semporna","$324","3.6","Hot",R.drawable.semporna,"+1 234-647-9283","sempdive@gmail.com","Semporna Dive Shop located at the beautiful beach in Semporna,Indonesia, providing stunning living environment, shore dive and boat dive service, we aim to give to the best diving experience in your staying with us.",15,8,"Hooleen Street, Semporna","We will pick you up when you arrive the airport, and send you to the airport when the trip is done. The price is whole day rate, including whole day meals, scuba service fee, room price, tips and tickets not included. Indoor is smoke free, any other question please contact us!"));
+        recentsDataList.add(new diveshopdata("Red Sea Diveshop","Red Sea","$200","5","Superhot",R.drawable.redsea,"+1 365-888-4929","Redseadive@gmail.com","Red Sea Dive Shop located at the beautiful beach in Red Sea,Egypt, providing stunning living environment, shore dive and boat dive service, we aim to give to the best diving experience in your staying with us.",30,15,"245 Street, Red Sea","We will pick you up when you arrive the airport, and send you to the airport when the trip is done. The price is whole day rate, including whole day meals, scuba service fee, room price, tips and tickets not included. Indoor is smoke free, any other question please contact us!"));
+        recentsDataList.add(new diveshopdata("Lembongan Island Diveshop","Lembongan Island","$260","4.9","Superhot",R.drawable.cancun,"+1 456-788-3215","lemdive@bali.in","Lembongan Dive Shop located at the beautiful beach in Lembongan Island, Indonesia, providing stunning living environment, shore dive and boat dive service, we aim to give to the best diving experience in your staying with us.",10,6,"111 Main Place, Lembongan Island","We will pick you up when you arrive the airport, and send you to the airport when the trip is done. The price is whole day rate, including whole day meals, scuba service fee, room price, tips and tickets not included. Indoor is smoke free, any other question please contact us!"));
     }
     private void sortArrayListRate(ArrayList inputlist){
         Collections.sort(inputlist, new Comparator<diveshopdata>() {
@@ -160,7 +161,7 @@ public class diveshoplist extends AppCompatActivity {
         return false;
     }
     private void buildRecentRecycler(ArrayList liststate){
-        String[] userfilter= {check_in,check_out,num_adult.toString(),num_children.toString(),num_room.toString()};
+        String[] userfilter= {check_in,check_out,num_adult.toString(),num_children.toString(),num_room.toString(),listsize.toString()};
         RecyclerView recyclerView = findViewById(R.id.recent_recycler);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recyclerView.setHasFixedSize(true);
@@ -195,6 +196,7 @@ public class diveshoplist extends AppCompatActivity {
                 String selecteddate = datePicker.getSelectedDates().toString();
                 //Toast.makeText(diveshop_calendar.this, selectedDate, Toast.LENGTH_SHORT).show();
                 ArrayList<String> myList = new ArrayList<String>(Arrays.asList(selecteddate.split(" ")));
+                listsize = (datePicker.getSelectedDates().size()-1);
                 //ArrayList<String> myListcheckout = new ArrayList<String>(Arrays.asList(myList1.split(" ")));
                 String checkindate = myList.get(1).toString()+"-"+myList.get(2).toString()+"-"+myList.get(5).toString();
                 String checkoutdate = myList.get(myList.size()-5).toString()+"-"+myList.get(myList.size()-4).toString()+"-"+myList.get(myList.size()-1).toString();
@@ -202,8 +204,6 @@ public class diveshoplist extends AppCompatActivity {
                 checkoutdate = checkoutdate.replace("]", "");
                 check_out = checkoutdate;
                 check_in = checkindate;
-
-
             }
 
             @Override

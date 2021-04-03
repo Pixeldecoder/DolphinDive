@@ -13,6 +13,7 @@ import android.widget.TextView;
 public class diveshoplistdetail extends AppCompatActivity {
     private TextView diveshopname,area,price,rate,cellphone,email,about;
     private ImageView image;
+    private Integer total_price;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,12 +39,15 @@ public class diveshoplistdetail extends AppCompatActivity {
         email.setText(passingarray[7]);
         about = (TextView) findViewById(R.id.detail_about);
         about.setText(passingarray[8]);
+        String singleprice = passingarray[2].replace("$", "");
+        total_price = Integer.parseInt(userfilter[5])*Integer.parseInt(singleprice)*(Integer.parseInt(userfilter[2])+Integer.parseInt(userfilter[3]));
         book_trip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent booktrip = new Intent(diveshoplistdetail.this, PaymentMethod.class);
                 booktrip.putExtra("Key", passingarray);
                 booktrip.putExtra("userfilter", userfilter);
+                booktrip.putExtra("totalprice",total_price);
                 startActivity(booktrip);
             }
         });

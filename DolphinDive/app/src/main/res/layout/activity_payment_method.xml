@@ -26,7 +26,7 @@
         android:layout_marginStart="118dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="118dp"
-        android:text="Booking Detial Confirmation"
+        android:text="Booking Detail Confirmation"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="138dp"
-        android:layout_marginTop="196dp"
+        android:layout_marginTop="220dp"
         android:layout_marginEnd="138dp"
         android:text="Payment Information"
         android:textStyle="bold"
@@ -69,10 +69,12 @@
         android:id="@+id/textView27"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:text="Check-out:"
-        app:layout_constraintStart_toStartOf="@+id/textView26"
-        app:layout_constraintTop_toBottomOf="@+id/textView26" />
+        app:layout_constraintBottom_toBottomOf="@+id/pay_checkin_date"
+        app:layout_constraintStart_toEndOf="@+id/pay_checkin_date"
+        app:layout_constraintTop_toTopOf="@+id/pay_checkin_date" />
 
     <TextView
         android:id="@+id/pay_checkin_date"
@@ -98,10 +100,9 @@
         android:id="@+id/textView30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:text="Adult:"
-        app:layout_constraintStart_toStartOf="@+id/textView27"
-        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+        app:layout_constraintStart_toStartOf="@+id/textView26"
+        app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
     <TextView
         android:id="@+id/textView31"
@@ -262,17 +263,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView35"
         app:layout_constraintStart_toEndOf="@+id/textView35"
         app:layout_constraintTop_toTopOf="@+id/textView35" />
-
-    <TextView
-        android:id="@+id/pay_policy"
-        android:layout_width="285dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="4dp"
-        android:text="Check in after 3.30pm, check out before 11.30 am, all meals included, airport shuttle included, smoke free, any other question please contact our reception!"
-        android:textSize="10sp"
-        app:layout_constraintStart_toEndOf="@+id/textView36"
-        app:layout_constraintTop_toBottomOf="@+id/textView35" />
 
     <TextView
         android:id="@+id/textView47"
@@ -507,5 +497,68 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView57"
         app:layout_constraintStart_toEndOf="@+id/textView57"
         app:layout_constraintTop_toTopOf="@+id/textView57" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="Total Price:"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/textView36"
+        app:layout_constraintTop_toBottomOf="@+id/textView36" />
+
+    <TextView
+        android:id="@+id/pay_total_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:text="TextView"
+        android:textColor="#2196F3"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textView20"
+        app:layout_constraintStart_toEndOf="@+id/textView20"
+        app:layout_constraintTop_toTopOf="@+id/textView20" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:text="CAD"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/pay_total_price"
+        app:layout_constraintStart_toEndOf="@+id/pay_total_price"
+        app:layout_constraintTop_toTopOf="@+id/pay_total_price" />
+
+    <ScrollView
+        android:layout_width="312dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginLeft="9dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginRight="38dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView36"
+        app:layout_constraintTop_toBottomOf="@+id/pay_email">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/pay_policy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="4dp"
+                android:text="Check in after 3.30pm, check out before 11.30 am, all meals included, airport shuttle included, smoke free, any other question please contact our reception!"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class PaymentMethod extends AppCompatActivity {
-    private TextView diveshopname,address,adults,children,rooms,checkin,checkout,cellphone,email,policy;
+    private TextView diveshopname,address,adults,children,rooms,checkin,checkout,cellphone,email,policy,totalprice;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +18,7 @@ public class PaymentMethod extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         String[] passingarray = extras.getStringArray("Key");
         String[] userfilter = extras.getStringArray("userfilter");
+        Integer total_price =  extras.getInt("totalprice");
         diveshopname = (TextView) findViewById(R.id.pay_diveshop);
         diveshopname.setText(passingarray[0]);
         address = (TextView) findViewById(R.id.pay_address);
@@ -40,8 +41,8 @@ public class PaymentMethod extends AppCompatActivity {
         children.setText(userfilter[3]);
         rooms = (TextView) findViewById(R.id.pay_rooms);
         rooms.setText(userfilter[4]);
-
-
+        totalprice = (TextView) findViewById(R.id.pay_total_price);
+        totalprice.setText(total_price.toString());
 
         Button confirmation = findViewById(R.id.confirm_booking);
         confirmation.setOnClickListener(new View.OnClickListener() {
