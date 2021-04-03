@@ -2,12 +2,14 @@ package com.capstone.dolphindive;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class PaymentMethod extends AppCompatActivity {
     private TextView diveshopname,address,adults,children,rooms,checkin,checkout,cellphone,email,policy,totalprice;
@@ -48,8 +50,18 @@ public class PaymentMethod extends AppCompatActivity {
         confirmation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent confirmmessage = new Intent(PaymentMethod.this, PaymentConfirmation.class);
-                startActivity(confirmmessage);
+                if(total_price == 0){
+                    Context context = getApplicationContext();
+                    CharSequence text = "You didn't select a valid date or group size, please go back to select!";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+                else{
+                    Intent confirmmessage = new Intent(PaymentMethod.this, PaymentConfirmation.class);
+                    startActivity(confirmmessage);
+                }
+
             }
         });
     }

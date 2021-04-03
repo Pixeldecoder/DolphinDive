@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.capstone.dolphindive.model.FollowModel;
+//import com.capstone.dolphindive.model.FollowModel;
 import com.capstone.dolphindive.utility.CircleTransform;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
