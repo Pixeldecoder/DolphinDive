@@ -64,8 +64,6 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
             android:layout_toLeftOf="@id/btn_send"
             android:layout_toEndOf="@+id/addMessageAudioView"
             android:layout_toRightOf="@+id/addMessageAudioView"
@@ -82,24 +80,25 @@
 
         <ImageView
             android:id="@+id/addMessageImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/text_send"
-            android:layout_marginTop="7dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignTop="@+id/addMessageAudioView"
+            android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
-            app:srcCompat="@drawable/ic_add_black_24dp" />
+            app:srcCompat="@drawable/image" />
 
         <ImageView
             android:id="@+id/addMessageAudioView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_alignTop="@+id/text_send"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:layout_marginTop="7dp"
             android:layout_marginBottom="1dp"
             android:layout_toEndOf="@+id/addMessageImageView"
             android:layout_toRightOf="@+id/addMessageImageView"
-            android:layout_marginLeft="3dp"
-            app:srcCompat="@drawable/ic_add_black_24dp"/>
+            app:srcCompat="@drawable/audio" />
 
     </RelativeLayout>
 
