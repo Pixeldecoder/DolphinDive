@@ -5,20 +5,21 @@
     android:padding="8dp"
     android:layout_height="wrap_content">
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/profile_image"
+        android:src="@mipmap/ic_launcher"/>
+
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:id="@+id/message_container">
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:id="@+id/profile_image"
-            android:src="@mipmap/ic_launcher"/>
+        android:id="@+id/message_container"
+        android:layout_toRightOf="@id/profile_image">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/profile_image"
             android:layout_marginLeft="5dp"
             android:id="@+id/show_message"
             android:text="hello"
@@ -29,7 +30,6 @@
             android:id="@+id/messageImageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/profile_image"
             android:layout_marginLeft="5dp"
             android:adjustViewBounds="true"
             android:background="@color/white"
@@ -41,5 +41,5 @@
         android:id="@+id/txt_seen"
         android:visibility="visible"
         android:layout_below="@id/message_container"
-        android:layout_alignParentLeft="true"/>
+        android:layout_alignLeft="@id/message_container"/>
 </RelativeLayout>

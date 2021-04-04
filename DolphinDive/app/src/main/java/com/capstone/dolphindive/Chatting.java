@@ -106,6 +106,7 @@ public class Chatting extends AppCompatActivity {
         }
 
 
+        chatReference = FirebaseDatabase.getInstance().getReference("Chats");
         userReference = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
         getUserProfileImg();
 
@@ -180,7 +181,6 @@ public class Chatting extends AppCompatActivity {
     }
 
     private void seenMessage(final String userid){
-        chatReference = FirebaseDatabase.getInstance().getReference("Chats");
         seenListener = chatReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -306,7 +306,6 @@ public class Chatting extends AppCompatActivity {
 
     private void readMessages(final String myid, final String userid, final String imageurl){
         mchat = new ArrayList<>();
-        chatReference = FirebaseDatabase.getInstance().getReference("Chats");
         chatReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -355,7 +354,7 @@ public class Chatting extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        userReference.removeEventListener(seenListener);
+        chatReference.removeEventListener(seenListener);
         status("offline");
         currentUser("none");
     }

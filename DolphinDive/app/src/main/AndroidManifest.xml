@@ -45,7 +45,8 @@
         <activity android:name=".Login" />
         <activity android:name=".Register" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".Chatting" />
+        <activity android:name=".Chatting"
+            android:noHistory="true"/>
         <activity android:name=".PreStart">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
