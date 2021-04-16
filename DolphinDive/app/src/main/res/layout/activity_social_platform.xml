@@ -9,13 +9,14 @@
     <FrameLayout
         android:id="@+id/post_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="55dp">
+        android:layout_height="691dp"
+        android:layout_below="@+id/update_post_tool_bar"
+        android:layout_marginTop="5dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/post_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="566dp">
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -24,55 +25,60 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/update_post_tool_bar"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="40dp"
         android:background="@drawable/background">
 
 
         <ImageView
             android:id="@+id/appImg"
-            android:layout_width="51dp"
-            android:layout_height="47dp"
+            android:layout_width="49dp"
+            android:layout_height="34dp"
             android:layout_marginTop="4dp"
             android:src="@drawable/logo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/appName"
-            android:layout_width="162dp"
-            android:layout_height="55dp"
-            android:src="@drawable/dolphindive"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/appImg"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
-
         <ImageButton
             android:id="@+id/add_new_post"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginRight="12dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/addbtn"
             android:background="@drawable/background"
+            android:scaleType="centerCrop"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:src="@drawable/addbtn"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.476" />
+            app:layout_constraintStart_toEndOf="@+id/notification"
+            app:layout_constraintTop_toTopOf="@+id/notification"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageButton
             android:id="@+id/notification"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="267dp"
+            android:layout_marginLeft="267dp"
             android:background="@drawable/background"
             android:scaleType="centerCrop"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
             android:src="@drawable/bell_icon_png"
-            app:layout_constraintEnd_toStartOf="@+id/add_new_post"
-            app:layout_constraintHorizontal_bias="0.888"
-            app:layout_constraintStart_toEndOf="@+id/appName"
+            app:layout_constraintStart_toEndOf="@+id/appImg"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/red_dot"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:background="@drawable/background"
+            android:visibility="invisible"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            android:layout_margin="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/notification"
+            app:layout_constraintTop_toTopOf="@+id/notification"
+            android:src="@drawable/red_circle"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

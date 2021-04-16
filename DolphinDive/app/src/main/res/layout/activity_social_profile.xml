@@ -16,20 +16,32 @@
         tools:context=".Profile">
 
 
-
         <Button
             android:id="@+id/followBtn"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorPrimaryDark"
-            android:text="Follow"
             app:layout_constraintBottom_toTopOf="@+id/guideline2"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/chatBtn"
             app:layout_constraintStart_toEndOf="@+id/profile_portrait"
             app:layout_constraintTop_toTopOf="@+id/guideline3"
-            android:layout_width="0dp" />
+            app:layout_constraintVertical_bias="0.533" />
 
+        <Button
+            android:id="@+id/chatBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:text="Message"
+            app:layout_constraintBottom_toTopOf="@+id/guideline2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/followBtn"
+            app:layout_constraintTop_toTopOf="@+id/guideline3"
+            app:layout_constraintVertical_bias="0.533" />
 
-        <EditText
+        <TextView
             android:id="@+id/profile_numFollower"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -45,12 +57,12 @@
             android:inputType="number"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/following"
+            app:layout_constraintBottom_toTopOf="@+id/follower"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/profile_numFol"
             app:layout_constraintTop_toTopOf="@+id/guideline" />
 
-        <EditText
+        <TextView
             android:id="@+id/profile_numFol"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -66,12 +78,12 @@
             android:inputType="number"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/follow"
+            app:layout_constraintBottom_toTopOf="@+id/following"
             app:layout_constraintEnd_toStartOf="@+id/profile_numFollower"
             app:layout_constraintStart_toEndOf="@+id/profile_numPosts"
             app:layout_constraintTop_toTopOf="@+id/guideline" />
 
-        <EditText
+        <TextView
             android:id="@+id/txt_posts"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -85,16 +97,16 @@
             android:ems="4"
             android:gravity="center|center_horizontal|center_vertical"
             android:inputType="textPersonName"
-            android:text="posts"
+            android:text="Posts"
             android:textColor="#191A1C"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
-            app:layout_constraintEnd_toStartOf="@+id/follow"
+            app:layout_constraintEnd_toStartOf="@+id/following"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
             app:layout_constraintTop_toBottomOf="@+id/profile_numPosts" />
 
-        <EditText
-            android:id="@+id/follow"
+        <TextView
+            android:id="@+id/following"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -107,15 +119,16 @@
             android:ems="4"
             android:gravity="center|center_vertical"
             android:inputType="textPersonName"
-            android:text="following"
+            android:text="Following"
+            android:textColor="#191A1C"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
-            app:layout_constraintEnd_toStartOf="@+id/following"
+            app:layout_constraintEnd_toStartOf="@+id/follower"
             app:layout_constraintStart_toEndOf="@+id/txt_posts"
             app:layout_constraintTop_toBottomOf="@+id/profile_numFol" />
 
 
-        <EditText
+        <TextView
             android:id="@+id/profile_numPosts"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -136,8 +149,8 @@
             app:layout_constraintStart_toStartOf="@+id/guideline4"
             app:layout_constraintTop_toTopOf="@+id/guideline" />
 
-        <EditText
-            android:id="@+id/following"
+        <TextView
+            android:id="@+id/follower"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -150,11 +163,12 @@
             android:ems="4"
             android:gravity="center|center_horizontal|center_vertical"
             android:inputType="textPersonName"
-            android:text="followers"
+            android:text="Follower"
+            android:textColor="#191A1C"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/follow"
+            app:layout_constraintStart_toEndOf="@+id/following"
             app:layout_constraintTop_toBottomOf="@+id/profile_numFollower" />
 
 

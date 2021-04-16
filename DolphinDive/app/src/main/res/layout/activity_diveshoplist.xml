@@ -20,50 +20,35 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-        <EditText
-            android:id="@+id/searchdestinput"
-            android:layout_width="237dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="26dp"
-            android:layout_marginBottom="26dp"
-            android:background="#FFFFFF"
-            android:drawableLeft="@drawable/ic_baseline_search_24"
-            android:ems="10"
-            android:fontFamily="@font/aldrich"
-            android:inputType="textPersonName"
-            android:paddingStart="10dp"
-            android:text="Search destination"
-            android:textColor="#8C8C8C"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <ImageButton
-            android:id="@+id/imageButton11"
+            android:id="@+id/date_selector"
             android:layout_width="57dp"
             android:layout_height="54dp"
-            android:layout_marginStart="20dp"
-            android:background="#00FFFFFF"
-            app:layout_constraintBottom_toBottomOf="@+id/searchdestinput"
+            android:layout_marginStart="200dp"
 
-            app:layout_constraintEnd_toStartOf="@+id/imageButton12"
-            app:layout_constraintStart_toEndOf="@+id/searchdestinput"
-            app:layout_constraintTop_toTopOf="@+id/searchdestinput"
-            app:layout_constraintVertical_bias="0.642"
+            android:layout_marginLeft="200dp"
+            android:background="#00FFFFFF"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            app:layout_constraintBottom_toBottomOf="@+id/dest_seach"
+            app:layout_constraintEnd_toStartOf="@+id/con_filter"
+            app:layout_constraintHorizontal_bias="0.788"
+            app:layout_constraintStart_toStartOf="@+id/dest_seach"
+            app:layout_constraintTop_toTopOf="@+id/dest_seach"
             app:srcCompat="@drawable/ic_baseline_calendar_today_24" />
 
         <ImageButton
-            android:id="@+id/imageButton12"
+            android:id="@+id/con_filter"
             android:layout_width="55dp"
             android:layout_height="55dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             android:background="#00FFFFFF"
-            app:layout_constraintBottom_toBottomOf="@+id/imageButton11"
+            android:scaleX="2"
+            android:scaleY="2"
+            app:layout_constraintBottom_toBottomOf="@+id/date_selector"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/imageButton11"
-            app:layout_constraintTop_toTopOf="@+id/imageButton11"
+            app:layout_constraintTop_toTopOf="@+id/date_selector"
             app:layout_constraintVertical_bias="1.0"
             app:srcCompat="@drawable/filter" />
 
@@ -71,12 +56,27 @@
             android:id="@+id/textView29"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="50dp"
             android:text="Filters"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/imageButton12"
-            app:layout_constraintStart_toStartOf="@+id/imageButton12"
-            app:layout_constraintTop_toTopOf="@+id/imageButton12" />
+            app:layout_constraintEnd_toEndOf="@+id/con_filter"
+            app:layout_constraintStart_toStartOf="@+id/con_filter"
+            app:layout_constraintTop_toTopOf="@+id/con_filter" />
+
+        <SearchView
+            android:id="@+id/dest_seach"
+            android:layout_width="236dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:background="#FFFFFF"
+            android:iconifiedByDefault="false"
+            android:queryHint="Search Destinations"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -139,6 +139,39 @@
             app:layout_constraintVertical_bias="1.0" />
 
     </RadioGroup>
+
+    <TextView
+        android:id="@+id/checkindate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginLeft="11dp"
+        android:text="Check in"
+        app:layout_constraintBottom_toTopOf="@+id/recent_recycler"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <TextView
+        android:id="@+id/textView82"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:text="to"
+        app:layout_constraintBottom_toBottomOf="@+id/checkindate"
+        app:layout_constraintStart_toEndOf="@+id/checkindate"
+        app:layout_constraintTop_toTopOf="@+id/checkindate" />
+
+    <TextView
+        android:id="@+id/checkoutdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:text="Check out"
+        app:layout_constraintBottom_toBottomOf="@+id/textView82"
+        app:layout_constraintStart_toEndOf="@+id/textView82"
+        app:layout_constraintTop_toTopOf="@+id/textView82" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

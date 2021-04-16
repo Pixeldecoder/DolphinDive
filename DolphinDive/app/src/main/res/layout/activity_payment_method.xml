@@ -11,13 +11,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="100dp"
-        android:layout_marginBottom="8dp"
         android:text="Confirm Booking"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
 
     <TextView
         android:id="@+id/textView18"
@@ -26,7 +26,7 @@
         android:layout_marginStart="118dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="118dp"
-        android:text="Booking Detial Confirmation"
+        android:text="Booking Detail Confirmation"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,17 +37,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="138dp"
-        android:layout_marginTop="196dp"
+        android:layout_marginTop="220dp"
         android:layout_marginEnd="138dp"
         android:text="Payment Information"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkout_date" />
+        app:layout_constraintTop_toBottomOf="@+id/pay_checkout_date" />
 
     <TextView
-        android:id="@+id/textView25"
+        android:id="@+id/pay_diveshop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
@@ -62,20 +62,22 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="Check-in:"
-        app:layout_constraintStart_toStartOf="@+id/textView25"
-        app:layout_constraintTop_toBottomOf="@+id/textView25" />
+        app:layout_constraintStart_toStartOf="@+id/pay_diveshop"
+        app:layout_constraintTop_toBottomOf="@+id/pay_diveshop" />
 
     <TextView
         android:id="@+id/textView27"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:text="Check-out:"
-        app:layout_constraintStart_toStartOf="@+id/textView26"
-        app:layout_constraintTop_toBottomOf="@+id/textView26" />
+        app:layout_constraintBottom_toBottomOf="@+id/pay_checkin_date"
+        app:layout_constraintStart_toEndOf="@+id/pay_checkin_date"
+        app:layout_constraintTop_toTopOf="@+id/pay_checkin_date" />
 
     <TextView
-        android:id="@+id/checkin_date"
+        android:id="@+id/pay_checkin_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -85,7 +87,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView26" />
 
     <TextView
-        android:id="@+id/checkout_date"
+        android:id="@+id/pay_checkout_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -98,10 +100,9 @@
         android:id="@+id/textView30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:text="Adult:"
-        app:layout_constraintStart_toStartOf="@+id/textView27"
-        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+        app:layout_constraintStart_toStartOf="@+id/textView26"
+        app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
     <TextView
         android:id="@+id/textView31"
@@ -173,15 +174,15 @@
         android:layout_height="33dp"
         android:layout_marginStart="5dp"
         android:ems="10"
+        android:hint="First Name"
         android:inputType="textPersonName"
-        android:text="First Name"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView37"
         app:layout_constraintStart_toEndOf="@+id/textView37"
         app:layout_constraintTop_toTopOf="@+id/textView37" />
 
     <TextView
-        android:id="@+id/adult_number"
+        android:id="@+id/pay_adult_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -191,7 +192,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView30" />
 
     <TextView
-        android:id="@+id/child_number"
+        android:id="@+id/pay_child_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -201,7 +202,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView31" />
 
     <TextView
-        android:id="@+id/room_number"
+        android:id="@+id/pay_rooms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -211,7 +212,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView32" />
 
     <TextView
-        android:id="@+id/diveshop_address"
+        android:id="@+id/pay_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -221,7 +222,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView33" />
 
     <TextView
-        android:id="@+id/diveshop_cell"
+        android:id="@+id/pay_cell"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -246,15 +247,15 @@
         android:layout_height="33dp"
         android:layout_marginStart="5dp"
         android:ems="10"
+        android:hint="Last Name"
         android:inputType="textPersonName"
-        android:text="Last Name"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView44"
         app:layout_constraintStart_toEndOf="@+id/textView44"
         app:layout_constraintTop_toTopOf="@+id/textView44" />
 
     <TextView
-        android:id="@+id/diveshop_email"
+        android:id="@+id/pay_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -262,17 +263,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView35"
         app:layout_constraintStart_toEndOf="@+id/textView35"
         app:layout_constraintTop_toTopOf="@+id/textView35" />
-
-    <TextView
-        android:id="@+id/Diveshop_policy"
-        android:layout_width="285dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="4dp"
-        android:text="Check in after 3.30pm, check out before 11.30 am, all meals included, airport shuttle included, smoke free, any other question please contact our reception!"
-        android:textSize="10sp"
-        app:layout_constraintStart_toEndOf="@+id/textView36"
-        app:layout_constraintTop_toBottomOf="@+id/textView35" />
 
     <TextView
         android:id="@+id/textView47"
@@ -309,8 +299,8 @@
         android:layout_height="34dp"
         android:layout_marginStart="5dp"
         android:ems="10"
+        android:hint="Province"
         android:inputType="textPersonName"
-        android:text="Province"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView48"
         app:layout_constraintStart_toEndOf="@+id/textView48"
@@ -322,8 +312,8 @@
         android:layout_height="36dp"
         android:layout_marginStart="5dp"
         android:ems="10"
+        android:hint="Adress"
         android:inputType="textPersonName"
-        android:text="Adress"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView47"
         app:layout_constraintStart_toEndOf="@+id/textView47"
@@ -335,8 +325,8 @@
         android:layout_height="34dp"
         android:layout_marginStart="8dp"
         android:ems="10"
+        android:hint="Country"
         android:inputType="textPersonName"
-        android:text="Country"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView49"
         app:layout_constraintStart_toEndOf="@+id/textView49"
@@ -358,8 +348,8 @@
         android:layout_height="36dp"
         android:layout_marginStart="5dp"
         android:ems="10"
+        android:hint="Postal Code"
         android:inputType="textPostalAddress"
-        android:text="Postal Code"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView51"
         app:layout_constraintStart_toEndOf="@+id/textView51"
@@ -380,8 +370,8 @@
         android:layout_height="34dp"
         android:layout_marginStart="4dp"
         android:ems="10"
+        android:hint="Cell Phone"
         android:inputType="phone"
-        android:text="Cell Phone"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView52"
         app:layout_constraintStart_toEndOf="@+id/textView52"
@@ -403,8 +393,8 @@
         android:layout_height="34dp"
         android:layout_marginStart="5dp"
         android:ems="10"
+        android:hint="E-mail"
         android:inputType="textEmailAddress"
-        android:text="E-mail"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView53"
         app:layout_constraintStart_toEndOf="@+id/textView53"
@@ -457,8 +447,8 @@
         android:layout_height="34dp"
         android:layout_marginStart="5dp"
         android:ems="10"
+        android:hint="Card Number"
         android:inputType="textPersonName"
-        android:text="Card Number"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView55"
         app:layout_constraintStart_toEndOf="@+id/textView55"
@@ -478,8 +468,8 @@
         android:layout_width="48dp"
         android:layout_height="34dp"
         android:ems="10"
+        android:hint="MM/YY"
         android:inputType="textPersonName"
-        android:text="MM/YY"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView56"
         app:layout_constraintStart_toEndOf="@+id/textView56"
@@ -501,11 +491,74 @@
         android:layout_height="33dp"
         android:layout_marginStart="5dp"
         android:ems="10"
+        android:hint="CCV"
         android:inputType="number"
-        android:text="CCV"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView57"
         app:layout_constraintStart_toEndOf="@+id/textView57"
         app:layout_constraintTop_toTopOf="@+id/textView57" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="Total Price:"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/textView36"
+        app:layout_constraintTop_toBottomOf="@+id/textView36" />
+
+    <TextView
+        android:id="@+id/pay_total_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:text="TextView"
+        android:textColor="#2196F3"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textView20"
+        app:layout_constraintStart_toEndOf="@+id/textView20"
+        app:layout_constraintTop_toTopOf="@+id/textView20" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:text="CAD"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/pay_total_price"
+        app:layout_constraintStart_toEndOf="@+id/pay_total_price"
+        app:layout_constraintTop_toTopOf="@+id/pay_total_price" />
+
+    <ScrollView
+        android:layout_width="312dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginLeft="9dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginRight="38dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView36"
+        app:layout_constraintTop_toBottomOf="@+id/pay_email">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/pay_policy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="4dp"
+                android:text="Check in after 3.30pm, check out before 11.30 am, all meals included, airport shuttle included, smoke free, any other question please contact our reception!"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

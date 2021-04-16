@@ -7,6 +7,11 @@
     android:background="#e6e6e6"
     tools:context=".Chatting">
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/record_image"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/bar_layout"
         android:layout_width="match_parent"
@@ -59,11 +64,9 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="26dp"
-            android:layout_marginLeft="26dp"
             android:layout_toLeftOf="@id/btn_send"
-            android:layout_toEndOf="@+id/addMessageImageView"
-            android:layout_toRightOf="@+id/addMessageImageView"
+            android:layout_toEndOf="@+id/addMessageAudioView"
+            android:layout_toRightOf="@+id/addMessageAudioView"
             android:background="@android:color/transparent"
             android:hint="Type a message..." />
 
@@ -86,9 +89,25 @@
 
         <ImageView
             android:id="@+id/addMessageImageView"
-            android:layout_width="35dp"
-            android:layout_height="46dp"
-            app:srcCompat="@drawable/ic_add_black_24dp" />
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignTop="@+id/addMessageAudioView"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            app:srcCompat="@drawable/image" />
+
+        <ImageView
+            android:id="@+id/addMessageAudioView"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignTop="@+id/text_send"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="1dp"
+            android:layout_toEndOf="@+id/addMessageImageView"
+            android:layout_toRightOf="@+id/addMessageImageView"
+            app:srcCompat="@drawable/audio" />
 
     </RelativeLayout>
 

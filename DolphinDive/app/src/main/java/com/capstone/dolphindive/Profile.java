@@ -3,7 +3,9 @@ package com.capstone.dolphindive;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AlertDialog;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 import com.capstone.dolphindive.utility.CircleTransform;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -45,6 +48,7 @@ public class Profile extends Fragment implements View.OnClickListener{
 
     TextView follow;
     TextView following;
+    TextView posts_txt;
 
     @Nullable
     @Override
@@ -75,15 +79,16 @@ public class Profile extends Fragment implements View.OnClickListener{
         Divelog.setOnClickListener((View.OnClickListener) this);
         posts.setOnClickListener((View.OnClickListener) this);
         logout.setOnClickListener((View.OnClickListener) this);
-        numPosts.setText("0");
-        numFollowing.setText("0");
-        numFollower.setText("0");
-
-        follow = (TextView) view.findViewById(R.id.follow);
-        follow.setOnClickListener((View.OnClickListener) this);
 
         following = (TextView) view.findViewById(R.id.following);
         following.setOnClickListener((View.OnClickListener) this);
+
+        follow = (TextView) view.findViewById(R.id.follower);
+        follow.setOnClickListener((View.OnClickListener) this);
+
+        posts_txt = (TextView) view.findViewById(R.id.txt_posts);
+        posts_txt.setOnClickListener((View.OnClickListener) this);
+
     }
 
     @Override
@@ -111,17 +116,23 @@ public class Profile extends Fragment implements View.OnClickListener{
                 startActivity(myIntent);
                 break;
             case R.id.PostsBtn:
+                Intent intent = new Intent(getActivity(), myPostList.class);
+                startActivity(intent);
+                break;
+            case R.id.txt_posts:
+                Intent intent2 = new Intent(getActivity(), myPostList.class);
+                startActivity(intent2);
                 break;
             case R.id.logoutBtn:
-                logout();
+                showDialog();
                 break;
-            case R.id.follow:
-                Intent myIntent2 = new Intent(getActivity(), Follow_List.class);
+            case R.id.following:
+                Intent myIntent2 = new Intent(getActivity(), Following_List.class);
                 startActivity(myIntent2);
                 break;
 
-            case R.id.following:
-                Intent myIntent3 = new Intent(getActivity(), Following_List.class);
+            case R.id.follower:
+                Intent myIntent3 = new Intent(getActivity(), Follower_List.class);
                 startActivity(myIntent3);
                 break;
         }
@@ -139,6 +150,9 @@ public class Profile extends Fragment implements View.OnClickListener{
                     String name = task.getResult().getString("name");
                     String email = task.getResult().getString("email");
                     String url = task.getResult().getString("url");
+                    String numPosts_txt = task.getResult().getString("numPosts");
+                    String numFollowing_txt = task.getResult().getString("numFollowing");
+                    String numFollower_txt = task.getResult().getString("numFollower");
                     if(!TextUtils.isEmpty(name) ){
                         userName.setText(name);
                     }else{
@@ -147,6 +161,9 @@ public class Profile extends Fragment implements View.OnClickListener{
                     if(!TextUtils.isEmpty(url)){
                         Picasso.get().load(url).transform(new CircleTransform()).centerCrop().fit().into(portrait);
                     }
+                    numPosts.setText(numPosts_txt);
+                    numFollowing.setText(numFollowing_txt);
+                    numFollower.setText(numFollower_txt);
 
                 }else{
                     userName.setText(user.getEmail());
@@ -161,6 +178,28 @@ public class Profile extends Fragment implements View.OnClickListener{
 
                     }
                 });
+    }
+
+    private void showDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Logout");
+        builder.setMessage("Are you sure to logout?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                logout();
+            }
+        });
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     public void logout() {

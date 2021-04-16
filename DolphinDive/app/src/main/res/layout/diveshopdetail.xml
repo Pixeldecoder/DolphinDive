@@ -16,7 +16,7 @@
         app:srcCompat="@drawable/ic_baseline_local_dining_24" />
 
     <TextView
-        android:id="@+id/textView20"
+        android:id="@+id/detail_about"
         android:layout_width="376dp"
         android:layout_height="67dp"
         android:layout_marginTop="5dp"
@@ -42,7 +42,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textView22"
+        android:id="@+id/detail_cellphone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -74,28 +74,30 @@
         app:srcCompat="@drawable/ic_baseline_local_parking_24" />
 
     <TextView
-        android:id="@+id/textView15"
-        android:layout_width="281dp"
-        android:layout_height="31dp"
+        android:id="@+id/detail_diveshopname"
+        android:layout_width="wrap_content"
+        android:layout_height="27dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
         android:fontFamily="sans-serif"
-        android:text="Cancun Mono Dive Shop, Cancun"
+        android:text="Cancun Mono Dive Shop"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hotel_image" />
+        app:layout_constraintTop_toBottomOf="@+id/detail_image" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/detail_rate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginRight="3dp"
         android:text="5"
-        app:layout_constraintBottom_toBottomOf="@+id/textView15"
-        app:layout_constraintStart_toEndOf="@+id/textView15"
-        app:layout_constraintTop_toTopOf="@+id/textView15"
-        app:layout_constraintVertical_bias="0.333" />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/detail_diveshopname"
+        app:layout_constraintEnd_toStartOf="@+id/imageView5"
+        app:layout_constraintTop_toTopOf="@+id/detail_diveshopname"
+        app:layout_constraintVertical_bias="0.25" />
 
     <ImageView
         android:id="@+id/imageView10"
@@ -125,8 +127,8 @@
         android:textColor="#009688"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/textView15"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        app:layout_constraintStart_toStartOf="@+id/detail_diveshopname"
+        app:layout_constraintTop_toBottomOf="@+id/detail_diveshopname" />
 
     <ImageView
         android:id="@+id/imageView9"
@@ -154,29 +156,29 @@
         android:layout_width="47dp"
         android:layout_height="60dp"
         android:layout_marginTop="5dp"
-        app:layout_constraintStart_toStartOf="@+id/textView20"
-        app:layout_constraintTop_toBottomOf="@+id/textView20"
+        app:layout_constraintStart_toStartOf="@+id/detail_about"
+        app:layout_constraintTop_toBottomOf="@+id/detail_about"
         app:srcCompat="@drawable/ic_baseline_king_bed_24" />
 
     <TextView
-        android:id="@+id/textView23"
-        android:layout_width="155dp"
+        android:id="@+id/detail_email"
+        android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_marginStart="10dp"
         android:text="cancun_mono@gmail.com"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView22"
-        app:layout_constraintStart_toEndOf="@+id/textView22"
-        app:layout_constraintTop_toTopOf="@+id/textView22"
+        app:layout_constraintBottom_toBottomOf="@+id/detail_cellphone"
+        app:layout_constraintStart_toEndOf="@+id/detail_cellphone"
+        app:layout_constraintTop_toTopOf="@+id/detail_cellphone"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/price_tag"
+        android:id="@+id/detail_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:includeFontPadding="false"
-        android:text="$ 200 CAD/ Night"
+        android:text="$ 200"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/textView17"
@@ -187,19 +189,22 @@
         android:id="@+id/imageView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/textView16"
-        app:layout_constraintStart_toEndOf="@+id/textView16"
-        app:layout_constraintTop_toTopOf="@+id/textView16"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/detail_rate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/detail_rate"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/star_rate" />
 
     <ImageView
-        android:id="@+id/hotel_image"
+        android:id="@+id/detail_image"
         android:layout_width="wrap_content"
         android:layout_height="361dp"
         android:layout_marginBottom="10dp"
         android:layout_weight="1"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/textView15"
+        app:layout_constraintBottom_toTopOf="@+id/detail_diveshopname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -215,5 +220,44 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/white"
         app:srcCompat="@drawable/go_back_arrow" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:text=","
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/detail_price"
+        app:layout_constraintStart_toEndOf="@+id/detail_diveshopname"
+        app:layout_constraintTop_toTopOf="@+id/detail_diveshopname" />
+
+    <TextView
+        android:id="@+id/detail_area"
+        android:layout_width="wrap_content"
+        android:layout_height="27dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="Cancun"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/detail_price"
+        app:layout_constraintStart_toEndOf="@+id/textView15"
+        app:layout_constraintTop_toTopOf="@+id/detail_diveshopname" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="26dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginLeft="9dp"
+        android:text="CAD/ Person Night"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/detail_price"
+        app:layout_constraintStart_toEndOf="@+id/detail_price"
+        app:layout_constraintTop_toTopOf="@+id/detail_price" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

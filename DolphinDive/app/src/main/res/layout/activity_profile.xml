@@ -47,7 +47,7 @@
                     android:layout_height="200dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:text="Dive Buddy"
                     app:backgroundTint="@color/colorPrimaryDark"
                     app:layout_constraintStart_toStartOf="parent"
@@ -80,7 +80,7 @@
 
         </ScrollView>
 
-        <EditText
+        <TextView
             android:id="@+id/profile_numFollower"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -96,12 +96,12 @@
             android:inputType="number"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/following"
+            app:layout_constraintBottom_toTopOf="@+id/follower"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/profile_numFol"
             app:layout_constraintTop_toTopOf="@+id/guideline" />
 
-        <EditText
+        <TextView
             android:id="@+id/profile_numFol"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -117,12 +117,12 @@
             android:inputType="number"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/follow"
+            app:layout_constraintBottom_toTopOf="@+id/following"
             app:layout_constraintEnd_toStartOf="@+id/profile_numFollower"
             app:layout_constraintStart_toEndOf="@+id/profile_numPosts"
             app:layout_constraintTop_toTopOf="@+id/guideline" />
 
-        <EditText
+        <TextView
             android:id="@+id/txt_posts"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -136,16 +136,16 @@
             android:ems="4"
             android:gravity="center|center_horizontal|center_vertical"
             android:inputType="textPersonName"
-            android:text="posts"
+            android:text="Posts"
             android:textColor="#191A1C"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
-            app:layout_constraintEnd_toStartOf="@+id/follow"
+            app:layout_constraintEnd_toStartOf="@+id/following"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
             app:layout_constraintTop_toBottomOf="@+id/profile_numPosts" />
 
         <TextView
-            android:id="@+id/follow"
+            android:id="@+id/following"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -157,17 +157,17 @@
             android:background="#FFFFFF"
             android:ems="4"
             android:gravity="center|center_horizontal|center_vertical"
-            android:text="Follower"
+            android:text="Following"
             android:textColor="#0B0A0A"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
-            app:layout_constraintEnd_toStartOf="@+id/following"
+            app:layout_constraintEnd_toStartOf="@+id/follower"
             app:layout_constraintStart_toEndOf="@+id/txt_posts"
             app:layout_constraintTop_toBottomOf="@+id/profile_numFol" />
 
 
 
-        <EditText
+        <TextView
             android:id="@+id/profile_numPosts"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -189,7 +189,7 @@
             app:layout_constraintTop_toTopOf="@+id/guideline" />
 
         <TextView
-            android:id="@+id/following"
+            android:id="@+id/follower"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -201,12 +201,12 @@
             android:background="#FFFFFF"
             android:ems="4"
             android:gravity="center|center_horizontal|center_vertical"
-            android:text="Following"
+            android:text="Follower"
             android:textColor="#0C0C0C"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/follow"
+            app:layout_constraintStart_toEndOf="@+id/following"
             app:layout_constraintTop_toBottomOf="@+id/profile_numFollower" />
 
         <ImageButton

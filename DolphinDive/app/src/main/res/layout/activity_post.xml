@@ -30,9 +30,12 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="false"
         android:layout_marginTop="400dp"
-        android:height="40dp"
+        android:height="120dp"
+        android:maxLines="4"
+        android:lines="4"
         android:ems="10"
         android:gravity="start|top"
+        android:maxLength="1000"
         android:hint="Say something about the image..."
         android:inputType="textMultiLine"
         android:textColor="#000000" />
@@ -41,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editText"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         >
         <Button

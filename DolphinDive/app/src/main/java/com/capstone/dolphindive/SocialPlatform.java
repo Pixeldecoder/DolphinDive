@@ -1,65 +1,57 @@
 package com.capstone.dolphindive;
 
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import xyz.hanks.library.bang.SmallBangView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.content.Intent;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.capstone.dolphindive.utility.Posts;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-import java.util.HashMap;
-
 import de.hdodenhof.circleimageview.CircleImageView;
+import xyz.hanks.library.bang.SmallBangView;
 
 public class SocialPlatform extends Fragment {
         @Nullable
 
         private ImageView appName;
         private ImageView appIcon;
+        private ImageView red_dot;
         private RecyclerView postList;
         private ImageButton Notification;
         private ImageButton AddNewPostButton;
         private DatabaseReference PostsRef;
         private FirebaseAuth mAuth;
+        private Query PostsRec;
         private String current_user_id;
         private String current_user_image;
         private DatabaseReference UsersRef;
 
-    View view;
+        View view;
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             mAuth = FirebaseAuth.getInstance();
@@ -78,20 +70,22 @@ public class SocialPlatform extends Fragment {
                 }
             });
 
+            red_dot = (ImageView) view.findViewById(R.id.red_dot);
+            if (current_user_id.equals("Mz459IRSlfgGZMdTVmtMbnnFSUq2")){
+                red_dot.setVisibility(View.VISIBLE);
+            }
+
             Notification = (ImageButton) view.findViewById(R.id.notification);
             Notification.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
-                    getParentFragmentManager().beginTransaction().replace(R.id.post_container,
-                            new NotifyActivity()).commit();
+                    Intent NotifyIntent = new Intent(getActivity(), NotifyActivity.class);
+                    startActivity(NotifyIntent);
                 }
-//                public void onBackPressed(View v){
-//                    getParentFragmentManager().beginTransaction().replace(R.id.post_container,
-//                            new SocialPlatform()).commit();
-//                }
             });
 
             PostsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
+            PostsRec = FirebaseDatabase.getInstance().getReference().child("Posts").orderByChild("timestamp");
 
             postList = (RecyclerView) view.findViewById(R.id.post_list);
             postList.setHasFixedSize(true);
@@ -127,9 +121,8 @@ public class SocialPlatform extends Fragment {
         private void DisplayAllUsersPosts(){
             FirebaseRecyclerOptions<Posts> options =
                     new FirebaseRecyclerOptions.Builder<Posts>()
-                            .setQuery(PostsRef, Posts.class)
+                            .setQuery(PostsRec, Posts.class)
                             .build();
-//            PostsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
 
             FirebaseRecyclerAdapter<Posts, PostsViewHolder> firebaseRecyclerAdapter =
                     new FirebaseRecyclerAdapter<Posts, PostsViewHolder>(options) {
@@ -154,6 +147,20 @@ public class SocialPlatform extends Fragment {
                             final DatabaseReference postRef = getRef(position);
                             DatabaseReference userPostRef = PostsRef.child(postRef.getKey());
 
+                            holder.profileImage.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    String uid = model.getUid();
+                                    if(! TextUtils.equals(uid,current_user_id)){
+                                        Intent intent =new Intent(getActivity(),Social_Profile.class);
+                                        intent.putExtra("uid",uid);
+                                        startActivity(intent);
+                                    }else{
+                                        Toast.makeText(getActivity(), "Click on other's portait to view their profile",Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+
                             holder.comment.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -163,7 +170,7 @@ public class SocialPlatform extends Fragment {
                                     checkComment.putExtra("date", model.getDate());
                                     checkComment.putExtra("description", model.getDescription());
                                     checkComment.putExtra("time", model.getTime());
-                                    checkComment.putExtra("likes", model.getLikes());
+                                    checkComment.putExtra("likes", String.valueOf(Integer.parseInt(model.getLikes()) + Integer.parseInt(model.getNewLikes())));
                                     checkComment.putExtra("commentCounter", model.getCommentCounter());
                                     checkComment.putExtra("profileImage", model.getProfileimage());
                                     checkComment.putExtra("postImage", model.getPostimage());

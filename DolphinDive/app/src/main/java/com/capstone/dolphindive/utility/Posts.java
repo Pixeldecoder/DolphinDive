@@ -4,13 +4,13 @@ import java.util.HashMap;
 
 public class Posts {
     public String uid, time, date, postimage, profileimage, description, fullname, likes, newLikes, liker, newLiker, commentCounter;
-
+    public Long timestamp;
     public Posts(){
 
     }
 
 
-    public Posts(String uid, String time, String date, String postimage, String profileimage, String description, String fullname, String likes, String newLikes, String liker, String newLiker) {
+    public Posts(String uid, String time, String date, String postimage, String profileimage, String description, String fullname, String likes, String newLikes, String liker, String newLiker, Long timestamp) {
         this.uid = uid;
         this.time = time;
         this.date = date;
@@ -23,9 +23,16 @@ public class Posts {
         this.liker = liker;
         this.newLiker = newLiker;
         this.commentCounter = commentCounter;
-
+        this.timestamp = timestamp;
     }
 
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
+    }
 
     public String getNewLikes() { return newLikes; }
 
