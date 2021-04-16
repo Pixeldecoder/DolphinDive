@@ -511,23 +511,6 @@ public class Chatting extends AppCompatActivity {
         });
     }
 
-    private void getUserProfileImg() {
-        userReference.child(fuser.getUid()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-//                    String userFullName = dataSnapshot.child("username").getValue().toString();
-                    String userProfileImg = dataSnapshot.child("imageURL").getValue().toString();
-                    mPhotoUrl = userProfileImg;
-//                    current_user_name =  userFullName;
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

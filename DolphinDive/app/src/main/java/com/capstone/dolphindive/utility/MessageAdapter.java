@@ -76,33 +76,39 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         } else if(chat.getFileUrl() != null) {
             String type = chat.getType();
             String fileUrl = chat.getFileUrl();
-            if (type == "image") {
-                holder.show_message.setVisibility(TextView.GONE);
-                holder.messageImageView.setVisibility(ImageView.VISIBLE);
-                holder.messageAudioView.setVisibility(ImageView.GONE);
-                StorageReference storageReference = FirebaseStorage.getInstance()
-                        .getReferenceFromUrl(fileUrl);
-                storageReference.getDownloadUrl().addOnCompleteListener(
-                        new OnCompleteListener<Uri>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Uri> task) {
-                                if (task.isSuccessful()) {
-                                    String downloadUrl = task.getResult().toString();
-                                    Glide.with(holder.messageImageView.getContext())
-                                            .load(downloadUrl)
-                                            .into(holder.messageImageView);
-                                } else {
-                                    Log.w(TAG, "Getting download url was not successful.",
-                                            task.getException());
+            if (type.equals("image")) {
+                if(fileUrl.startsWith("gs://")) {
+                    holder.show_message.setVisibility(TextView.GONE);
+                    holder.messageImageView.setVisibility(ImageView.VISIBLE);
+                    holder.messageAudioView.setVisibility(ImageView.GONE);
+                    StorageReference storageReference = FirebaseStorage.getInstance()
+                            .getReferenceFromUrl(fileUrl);
+                    storageReference.getDownloadUrl().addOnCompleteListener(
+                            new OnCompleteListener<Uri>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Uri> task) {
+                                    if (task.isSuccessful()) {
+                                        String downloadUrl = task.getResult().toString();
+                                        Glide.with(holder.messageImageView.getContext())
+                                                .load(downloadUrl)
+                                                .into(holder.messageImageView);
+                                    } else {
+                                        Log.w(TAG, "Getting download url was not successful.",
+                                                task.getException());
+                                    }
                                 }
-                            }
-                        });
-            }else if(type == "audio"){
+                            });
+                }else{
+                    Glide.with(holder.messageImageView.getContext())
+                            .load(chat.getFileUrl())
+                            .into(holder.messageImageView);
+                }
+            }else if(type.equals("audio")){
                 holder.show_message.setVisibility(TextView.GONE);
                 holder.messageImageView.setVisibility(ImageView.GONE);
                 holder.messageAudioView.setVisibility(ImageView.VISIBLE);
 
-                if (fileUrl == "audio_default"){
+                if (fileUrl.equals("audio_default")){
                    holder.messageAudioView.setImageResource(R.drawable.audio_uploading);
                 }else {
                     StorageReference storageReference = FirebaseStorage.getInstance()
