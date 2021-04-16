@@ -7,15 +7,17 @@ public class Message {
     private String message;
     private String photoUrl;
     private String fileUrl;
+    private String type;
     private boolean isseen;
 
-    public Message(String sender, String receiver, String message, boolean isseen, String photoUrl, String fileUrl){
+    public Message(String sender, String receiver, String message, boolean isseen, String photoUrl, String fileUrl, String type){
         this.senderid = sender;
         this.receiverid = receiver;
         this.message = message;
         this.isseen = isseen;
         this.photoUrl = photoUrl;
         this.fileUrl = fileUrl;
+        this.type = type;
     }
 
     public Message() {
@@ -68,4 +70,8 @@ public class Message {
     public void setFileUrl(String fileUrl) {
         this.fileUrl = fileUrl;
     }
+
+    public void setType(String type){this.type = type;}
+
+    public String getType(){ return this.type;}
 }

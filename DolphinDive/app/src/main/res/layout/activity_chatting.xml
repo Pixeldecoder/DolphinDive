@@ -75,6 +75,15 @@
             android:layout_alignParentRight="true"
             android:background="@drawable/ic_action_name" />
 
+        <Button
+            android:id="@+id/record_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/addMessageAudioView"
+            android:layout_toRightOf="@+id/addMessageAudioView"
+            android:visibility="gone"
+            android:text="Tap and hold to record"/>
+
         <ImageView
             android:id="@+id/addMessageImageView"
             android:layout_width="35dp"

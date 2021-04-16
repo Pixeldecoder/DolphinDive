@@ -1,6 +1,8 @@
 package com.capstone.dolphindive.utility;
 
 import android.content.Context;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.IOException;
 import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
@@ -69,11 +72,16 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             holder.show_message.setText(chat.getMessage());
             holder.show_message.setVisibility(TextView.VISIBLE);
             holder.messageImageView.setVisibility(ImageView.GONE);
+            holder.messageAudioView.setVisibility(ImageView.GONE);
         } else if(chat.getFileUrl() != null) {
-            String imageUrl = chat.getFileUrl();
-            if (imageUrl.startsWith("gs://")) {
+            String type = chat.getType();
+            String fileUrl = chat.getFileUrl();
+            if (type == "image") {
+                holder.show_message.setVisibility(TextView.GONE);
+                holder.messageImageView.setVisibility(ImageView.VISIBLE);
+                holder.messageAudioView.setVisibility(ImageView.GONE);
                 StorageReference storageReference = FirebaseStorage.getInstance()
-                        .getReferenceFromUrl(imageUrl);
+                        .getReferenceFromUrl(fileUrl);
                 storageReference.getDownloadUrl().addOnCompleteListener(
                         new OnCompleteListener<Uri>() {
                             @Override
@@ -89,14 +97,58 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
                                 }
                             }
                         });
-            }else{
-                    Glide.with(holder.messageImageView.getContext())
-                            .load(chat.getFileUrl())
-                            .into(holder.messageImageView);
-                }
-                holder.messageImageView.setVisibility(ImageView.VISIBLE);
+            }else if(type == "audio"){
                 holder.show_message.setVisibility(TextView.GONE);
+                holder.messageImageView.setVisibility(ImageView.GONE);
+                holder.messageAudioView.setVisibility(ImageView.VISIBLE);
+
+                if (fileUrl == "audio_default"){
+                   holder.messageAudioView.setImageResource(R.drawable.audio_uploading);
+                }else {
+                    StorageReference storageReference = FirebaseStorage.getInstance()
+                            .getReferenceFromUrl(fileUrl);
+                    storageReference.getDownloadUrl().addOnCompleteListener(
+                            new OnCompleteListener<Uri>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Uri> task) {
+                                    if (task.isSuccessful()) {
+                                        String downloadUrl = task.getResult().toString();
+                                        holder.messageAudioView.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                final MediaPlayer mediaplayer = new MediaPlayer();
+                                                mediaplayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                                                try {
+                                                    mediaplayer.setDataSource(downloadUrl);
+                                                } catch (IOException e) {
+                                                    e.printStackTrace();
+                                                }
+                                                mediaplayer.prepareAsync();
+                                                mediaplayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                                                    @Override
+                                                    public void onPrepared(MediaPlayer mp) {
+                                                        mp.start();
+                                                    }
+                                                });
+                                            }
+                                        });
+                                        holder.messageAudioView.setImageResource(R.drawable.audio_message);
+                                    } else {
+                                        Log.w(TAG, "Getting download url was not successful.",
+                                                task.getException());
+                                    }
+                                }
+                            });
+                }
             }
+//            else{
+//                    Glide.with(holder.messageImageView.getContext())
+//                            .load(chat.getFileUrl())
+//                            .into(holder.messageImageView);
+//                }
+//                holder.messageImageView.setVisibility(ImageView.VISIBLE);
+//                holder.show_message.setVisibility(TextView.GONE);
+        }
 
 
         if (position == mChat.size()-1){
@@ -122,6 +174,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         public ImageView profile_image;
         public TextView txt_seen;
         public ImageView messageImageView;
+        public ImageView messageAudioView;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -130,6 +183,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             profile_image = itemView.findViewById(R.id.profile_image);
             txt_seen = itemView.findViewById(R.id.txt_seen);
             messageImageView = itemView.findViewById(R.id.messageImageView);
+            messageAudioView = itemView.findViewById(R.id.messageAudioView);
         }
     }
 
