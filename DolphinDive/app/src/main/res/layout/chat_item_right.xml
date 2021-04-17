@@ -47,7 +47,8 @@
             android:layout_marginLeft="5dp"
             android:adjustViewBounds="true"
             android:background="@color/white"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitCenter"
+            android:contentDescription="uploading_audio"/>
         </RelativeLayout>
         <TextView
             android:layout_width="wrap_content"

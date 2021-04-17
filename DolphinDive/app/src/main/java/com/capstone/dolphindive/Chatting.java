@@ -47,6 +47,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -308,6 +309,8 @@ public class Chatting extends AppCompatActivity {
         Uri uri = Uri.fromFile(new File(fileName));
         Log.d(TAG, "Uri: " + uri.toString());
 
+        StorageReference AudioFileReference = chatsAudioStorageReference.child(uri.toString() + Calendar.getInstance().getTime());
+
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("sender", fuser.getUid());
         hashMap.put("receiver", userid);
@@ -320,7 +323,7 @@ public class Chatting extends AppCompatActivity {
         reference.child("Chats").push().setValue(hashMap, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                chatsAudioStorageReference.putFile(uri).addOnCompleteListener(Chatting.this,
+                AudioFileReference.putFile(uri).addOnCompleteListener(Chatting.this,
                         new OnCompleteListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {

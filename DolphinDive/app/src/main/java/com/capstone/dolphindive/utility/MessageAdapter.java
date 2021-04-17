@@ -111,40 +111,72 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
                 if (fileUrl.equals("audio_default")){
                    holder.messageAudioView.setImageResource(R.drawable.audio_uploading);
                 }else {
-                    StorageReference storageReference = FirebaseStorage.getInstance()
-                            .getReferenceFromUrl(fileUrl);
-                    storageReference.getDownloadUrl().addOnCompleteListener(
-                            new OnCompleteListener<Uri>() {
+                    holder.messageAudioView.setContentDescription(chat.getFileUrl());
+                    holder.messageAudioView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            MediaPlayer mediaplayer = new MediaPlayer();
+                            mediaplayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                            try {
+                                mediaplayer.setDataSource(holder.messageAudioView.getContentDescription().toString());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            mediaplayer.prepareAsync();
+                            mediaplayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                                 @Override
-                                public void onComplete(@NonNull Task<Uri> task) {
-                                    if (task.isSuccessful()) {
-                                        String downloadUrl = task.getResult().toString();
-                                        holder.messageAudioView.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View view) {
-                                                final MediaPlayer mediaplayer = new MediaPlayer();
-                                                mediaplayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                                                try {
-                                                    mediaplayer.setDataSource(downloadUrl);
-                                                } catch (IOException e) {
-                                                    e.printStackTrace();
-                                                }
-                                                mediaplayer.prepareAsync();
-                                                mediaplayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                                                    @Override
-                                                    public void onPrepared(MediaPlayer mp) {
-                                                        mp.start();
-                                                    }
-                                                });
-                                            }
-                                        });
-                                        holder.messageAudioView.setImageResource(R.drawable.audio_message);
-                                    } else {
-                                        Log.w(TAG, "Getting download url was not successful.",
-                                                task.getException());
-                                    }
+                                public void onPrepared(MediaPlayer mp) {
+                                    mp.start();
                                 }
                             });
+
+                            mediaplayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mp) {
+                                    mp.release();
+                                    mp = null;
+                                }
+                            });
+
+                        }
+                    });
+                    holder.messageAudioView.setImageResource(R.drawable.audio_message);
+                }
+//                    StorageReference storageReference = FirebaseStorage.getInstance()
+//                            .getReferenceFromUrl(fileUrl);
+//                    storageReference.getDownloadUrl().addOnCompleteListener(
+//                            new OnCompleteListener<Uri>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<Uri> task) {
+//                                    if (task.isSuccessful()) {
+//                                        String downloadUrl = task.getResult().toString();
+//                                        holder.messageAudioView.setContentDescription(downloadUrl);
+//                                        holder.messageAudioView.setOnClickListener(new View.OnClickListener() {
+//                                            @Override
+//                                            public void onClick(View view) {
+//                                                MediaPlayer mediaplayer = new MediaPlayer();
+//                                                mediaplayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+//                                                try {
+//                                                    mediaplayer.setDataSource(holder.messageAudioView.getContentDescription().toString());
+//                                                } catch (IOException e) {
+//                                                    e.printStackTrace();
+//                                                }
+//                                                mediaplayer.prepareAsync();
+//                                                mediaplayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+//                                                    @Override
+//                                                    public void onPrepared(MediaPlayer mp) {
+//                                                        mp.start();
+//                                                    }
+//                                                });
+//                                            }
+//                                        });
+//                                        holder.messageAudioView.setImageResource(R.drawable.audio_message);
+//                                    } else {
+//                                        Log.w(TAG, "Getting download url was not successful.",
+//                                                task.getException());
+//                                    }
+//                                }
+//                            });
                 }
             }
 //            else{
@@ -154,7 +186,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 //                }
 //                holder.messageImageView.setVisibility(ImageView.VISIBLE);
 //                holder.show_message.setVisibility(TextView.GONE);
-        }
 
 
         if (position == mChat.size()-1){
