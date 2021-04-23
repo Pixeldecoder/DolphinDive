@@ -324,33 +324,50 @@ public class Chatting extends AppCompatActivity {
             @Override
             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
                 AudioFileReference.putFile(uri).addOnCompleteListener(Chatting.this,
-                        new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                                String key = ref.getKey();
-                                if (task.isSuccessful()) {
-                                    task.getResult().getMetadata().getReference().getDownloadUrl()
-                                            .addOnCompleteListener(Chatting.this,
-                                                    new OnCompleteListener<Uri>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<Uri> task) {
-                                                            if (task.isSuccessful()) {
-                                                                Message Message =
-                                                                        new Message(fuser.getUid(), userid, null, false, mPhotoUrl,
-                                                                                task.getResult().toString(), "audio");
-                                                                mFirebaseDatabaseReference.child("Chats").child(key)
-                                                                        .setValue(Message);
-                                                            }
+                    new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                            String key = ref.getKey();
+                            if (task.isSuccessful()) {
+                                task.getResult().getMetadata().getReference().getDownloadUrl()
+                                        .addOnCompleteListener(Chatting.this,
+                                                new OnCompleteListener<Uri>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Uri> task) {
+                                                        if (task.isSuccessful()) {
+                                                            Message Message =
+                                                                    new Message(fuser.getUid(), userid, null, false, mPhotoUrl,
+                                                                            task.getResult().toString(), "audio");
+                                                            mFirebaseDatabaseReference.child("Chats").child(key)
+                                                                    .setValue(Message);
                                                         }
-                                                    });
-                                } else {
-                                    Log.w(TAG, "Image upload task was not successful.",
-                                            task.getException());
-                                }
+                                                    }
+                                                });
+                            } else {
+                                Log.w(TAG, "Image upload task was not successful.",
+                                        task.getException());
                             }
-                        });
+                        }
+                    });
             }
         });
+
+        // add user to chat fragment
+        DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chatlist")
+                .child(fuser.getUid())
+                .child(userid);
+
+
+        chatRef.child("id").setValue(userid);
+        chatRef.child("message").setValue("[Audio]");
+
+
+        DatabaseReference chatRefReceiver = FirebaseDatabase.getInstance().getReference("Chatlist")
+                .child(userid)
+                .child(fuser.getUid());
+
+        chatRefReceiver.child("id").setValue(fuser.getUid());
+        chatRefReceiver.child("message").setValue("[Audio]");
 
         chatsAudioStorageReference.putFile(uri);
     }
@@ -559,20 +576,8 @@ public class Chatting extends AppCompatActivity {
                             .child(fuser.getUid())
                             .child(userid);
 
-                    chatRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if (!dataSnapshot.exists()){
-                                chatRef.child("id").setValue(userid);
-                                chatRef.child("message").setValue("[Image]");
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
+                    chatRef.child("id").setValue(userid);
+                    chatRef.child("message").setValue("[Image]");
 
                     final DatabaseReference chatRefReceiver = FirebaseDatabase.getInstance().getReference("Chatlist")
                             .child(userid)
@@ -617,6 +622,8 @@ public class Chatting extends AppCompatActivity {
                                                                 new Message(fuser.getUid(), userid, null, false, mPhotoUrl,
                                                                         task.getResult().toString(), "image");
                                                         mFirebaseDatabaseReference.child("Chats").child(key)
+                                                                .setValue(Message);
+                                                        mFirebaseDatabaseReference.child("Chatslist").child(key)
                                                                 .setValue(Message);
                                                     }
                                                 }
