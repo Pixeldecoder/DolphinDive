@@ -10,15 +10,22 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-import androidx.activity.ComponentActivity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Register extends AppCompatActivity {
 
@@ -27,6 +34,9 @@ public class Register extends AppCompatActivity {
     TextView navLog;
     ProgressBar progressBar;
     FirebaseAuth fAuth;
+    DatabaseReference reference;
+    DocumentReference documentReference;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,9 +116,11 @@ public class Register extends AppCompatActivity {
 
                 if (password.contentEquals(confirmPassword)) {
                 } else {
-                    Toast.makeText(getApplicationContext(), "Password does not match",
-                            Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), "Password does not match",
+//                            Toast.LENGTH_LONG).show();
+                    regConfirm.setError("Confirmed password does not match!");
                     progressBar.setVisibility(View.INVISIBLE);
+                    return;
                 }
 
                 //register process
@@ -116,10 +128,57 @@ public class Register extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "User Successfully Created!",
-                                    Toast.LENGTH_LONG).show();
-                            Intent regintent = new Intent(Register.this, Login.class);
-                            startActivity(regintent);
+
+                            //Adding new user detail to the Realtime Database for chat purpose
+                            FirebaseUser firebaseUser = fAuth.getCurrentUser();
+                            assert firebaseUser != null;
+                            String userid = firebaseUser.getUid();
+                            String email = firebaseUser.getEmail();
+
+                            reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
+
+                            HashMap<String, String> hashMap = new HashMap<>();
+                            hashMap.put("id", userid);
+                            hashMap.put("username", regEmail.getText().toString());
+                            hashMap.put("imageURL", "default");
+                            hashMap.put("status", "offline");
+                            hashMap.put("search", regUserName.getText().toString().toLowerCase());
+
+                            reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()){
+
+                                        //Adding new user details to the FireStore for Profile Management
+                                        documentReference = db.collection("Users").document(userid);
+                                        Map<String, String> profile = new HashMap<>();
+                                        profile.put("email", email);
+                                        profile.put("numFollower", "0");
+                                        profile.put("numFollowing", "0");
+                                        profile.put("numPosts", "0");
+                                        profile.put("name",regUserName.getText().toString());
+                                        documentReference.set(profile).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                progressBar.setVisibility(View.INVISIBLE);
+                                                Toast.makeText(getApplicationContext(), "User Successfully Created!",
+                                                        Toast.LENGTH_LONG).show();
+
+                                                Intent intent = new Intent(Register.this, MainActivity.class);
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(getApplicationContext(), "Error in Registration",
+                                                        Toast.LENGTH_LONG).show();
+                                            }
+                                        });
+                                    }
+                                }
+                            });
                         } else {
                             progressBar.setVisibility((View.INVISIBLE));
                             Toast.makeText(getApplicationContext(), "Error!" + task.getException().getMessage(),

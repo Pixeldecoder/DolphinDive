@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F7F7"
+    tools:context=".diveshoplist">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="82dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageButton
+            android:id="@+id/date_selector"
+            android:layout_width="57dp"
+            android:layout_height="54dp"
+            android:layout_marginStart="200dp"
+
+            android:layout_marginLeft="200dp"
+            android:background="#00FFFFFF"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            app:layout_constraintBottom_toBottomOf="@+id/dest_seach"
+            app:layout_constraintEnd_toStartOf="@+id/con_filter"
+            app:layout_constraintHorizontal_bias="0.788"
+            app:layout_constraintStart_toStartOf="@+id/dest_seach"
+            app:layout_constraintTop_toTopOf="@+id/dest_seach"
+            app:srcCompat="@drawable/ic_baseline_calendar_today_24" />
+
+        <ImageButton
+            android:id="@+id/con_filter"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="#00FFFFFF"
+            android:scaleX="2"
+            android:scaleY="2"
+            app:layout_constraintBottom_toBottomOf="@+id/date_selector"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/date_selector"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/filter" />
+
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="Filters"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/con_filter"
+            app:layout_constraintStart_toStartOf="@+id/con_filter"
+            app:layout_constraintTop_toTopOf="@+id/con_filter" />
+
+        <SearchView
+            android:id="@+id/dest_seach"
+            android:layout_width="236dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:background="#FFFFFF"
+            android:iconifiedByDefault="false"
+            android:queryHint="Search Destinations"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recent_recycler"
+        android:layout_width="391dp"
+        android:layout_height="519dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/FilterGroup"
+        app:layout_constraintVertical_bias="0.014" />
+
+    <RadioGroup
+        android:id="@+id/FilterGroup"
+        android:layout_width="219dp"
+        android:layout_height="32dp"
+
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <RadioButton
+            android:id="@+id/RateSelector"
+            android:layout_width="66dp"
+            android:layout_height="31dp"
+            android:layout_marginStart="0dp"
+            android:text="Rate"
+            app:layout_constraintBottom_toBottomOf="@+id/Price_Filter"
+            app:layout_constraintStart_toEndOf="@+id/Price_Filter"
+            app:layout_constraintTop_toTopOf="@+id/Price_Filter"
+            app:layout_constraintVertical_bias="0.75" />
+
+        <RadioButton
+            android:id="@+id/PriceSelector"
+            android:layout_width="64dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="0dp"
+            android:text="Price"
+            app:layout_constraintBottom_toBottomOf="@+id/radioButton3"
+            app:layout_constraintStart_toEndOf="@+id/radioButton3"
+            app:layout_constraintTop_toTopOf="@+id/radioButton3"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <RadioButton
+            android:id="@+id/PopularSelector"
+            android:layout_width="94dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="0dp"
+            android:text="Pupular"
+            app:layout_constraintBottom_toBottomOf="@+id/radioButton4"
+            app:layout_constraintStart_toEndOf="@+id/radioButton4"
+            app:layout_constraintTop_toTopOf="@+id/radioButton4"
+            app:layout_constraintVertical_bias="1.0" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/checkindate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginLeft="11dp"
+        android:text="Check in"
+        app:layout_constraintBottom_toTopOf="@+id/recent_recycler"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <TextView
+        android:id="@+id/textView82"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:text="to"
+        app:layout_constraintBottom_toBottomOf="@+id/checkindate"
+        app:layout_constraintStart_toEndOf="@+id/checkindate"
+        app:layout_constraintTop_toTopOf="@+id/checkindate" />
+
+    <TextView
+        android:id="@+id/checkoutdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:text="Check out"
+        app:layout_constraintBottom_toBottomOf="@+id/textView82"
+        app:layout_constraintStart_toEndOf="@+id/textView82"
+        app:layout_constraintTop_toTopOf="@+id/textView82" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:padding="8dp"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/profile_image"
+        android:src="@mipmap/ic_launcher"/>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/message_container"
+        android:layout_toRightOf="@id/profile_image">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/show_message"
+            android:padding="8dp"
+            android:background="@drawable/background_left"/>
+
+        <ImageView
+            android:id="@+id/messageImageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:adjustViewBounds="true"
+            android:background="@color/white"
+            android:scaleType="fitCenter" />
+
+        <ImageView
+            android:id="@+id/messageAudioView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:adjustViewBounds="true"
+            android:background="@color/white"
+            android:scaleType="fitCenter"
+            android:contentDescription="uploading_audio"/>
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_seen"
+        android:visibility="visible"
+        android:layout_below="@id/message_container"
+        android:layout_alignLeft="@id/message_container"/>
+</RelativeLayout>

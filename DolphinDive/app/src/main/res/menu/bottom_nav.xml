@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_diveshop"
+        android:icon="@drawable/ic_baseline_sailing_24"
+        android:title="Destination"/>
+    <item
+        android:id="@+id/nav_community"
+        android:icon="@drawable/ic_baseline_roofing_24"
+        android:title="Community"/>
+    <item
+        android:id="@+id/nav_chat"
+        android:icon="@drawable/chat"
+        android:title="Chat" />
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="My Account"/>
+
+</menu>

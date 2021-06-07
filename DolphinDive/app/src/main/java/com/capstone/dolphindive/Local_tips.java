@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class DiveLog extends AppCompatActivity {
+public class Local_tips extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dive_log);
+        setContentView(R.layout.activity_local_tips);
     }
 }
